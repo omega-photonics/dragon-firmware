@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=Z:\Users\ii\SparkleShare\omega\dragon\7_msi\dragon-firmware\xilinx_pci_exp_ep.ncd
+OUTFILE=Z:\Users\ii\SparkleShare\omega\dragon\7_msi\dragon-firmware\xilinx_pci_exp_ep.bit
+FAMILY=Virtex5
+PART=xc5vlx20t-1ff323
+WORKINGDIR=Z:\Users\ii\SparkleShare\omega\dragon\7_msi\dragon-firmware
+LICENSE=ISE
+USER_INFO=No user information available.

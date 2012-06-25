@@ -1,0 +1,16 @@
+#!/bin/sh
+HOST="192.168.1.144"
+USERNAME="anonymous"
+PASS="123"
+cd /home/ii/projects/omega-dragon-fw/
+ftp -n -v $HOST << EOF
+quote USER $USERNAME 
+quote PASS $PASS
+bin
+hash
+prompt
+put xilinx_pci_exp_ep.bit
+bye
+EOF
+
+

@@ -1,0 +1,82 @@
+#
+# SYS reset (input) signal.  The sys_reset_n signal should be
+# obtained from the PCI Express interface if possible.  For
+# slot based form factors, a system reset signal is usually
+# present on the connector.  For cable based form factors, a
+# system reset signal may not be available.  In this case, the
+# system reset signal must be generated locally by some form of
+# supervisory circuit.  You may change the IOSTANDARD and LOC
+# to suit your requirements and VCCO voltage banking rules.
+#
+NET "sys_reset_n"      LOC = "U1"  |IOSTANDARD = LVCMOS33 |PULLUP |NODELAY |TIG;
+
+#
+# SYS clock 100 MHz (input) signal. The sys_clk_p and sys_clk_n
+# signals are the PCI Express reference clock. Virtex-5 GTP
+# Transceiver architecture requires the use of a dedicated clock
+# resources (FPGA input pins) associated with each GTP Transceiver Tile.
+# To use these pins an IBUFDS primitive (refclk_ibuf) is
+# instantiated in user's design.
+# Please refer to the Virtex-5 GTP Transceiver User Guide
+# (UG196) for guidelines regarding clock resource selection.
+#
+NET  "sys_clk_p"       LOC = "J3"  ;
+NET  "sys_clk_n"       LOC = "J4"  ;
+INST "refclk_ibuf"     DIFF_TERM = "TRUE" ;
+
+#
+# Transceiver instance placement.  This constraint selects the
+# transceivers to be used, which also dictates the pinout for the
+# transmit and receive differential pairs.  Please refer to the
+# Virtex-5 GTP Transceiver User Guide (UG196) for more
+# information.
+#
+
+# PCIe Lane 0
+INST "ep/pcie_ep0/pcie_blk/SIO/.pcie_gt_wrapper_i/GTD[0].GT_i" LOC = GTP_DUAL_X0Y1;
+
+INST "ep/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_retry/generate_sdp.ram_sdp_inst"      LOC = RAMB36_X1Y4 ;
+INST "ep/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_tx/generate_tdp2[1].ram_tdp2_inst" LOC = RAMB36_X1Y3 ;
+INST "ep/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_rx/generate_tdp2[1].ram_tdp2_inst" LOC = RAMB36_X1Y2 ;
+INST "ep/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_tx/generate_tdp2[0].ram_tdp2_inst" LOC = RAMB36_X1Y1 ;
+INST "ep/pcie_ep0/pcie_blk/pcie_mim_wrapper_i/bram_tl_rx/generate_tdp2[0].ram_tdp2_inst" LOC = RAMB36_X1Y0 ;
+
+#
+# Timing requirements and related constraints.
+#
+NET "sys_clk_c" PERIOD = 10ns;
+NET "ep/pcie_ep0/pcie_blk/SIO/.pcie_gt_wrapper_i/gt_refclk_out" TNM_NET = "MGTCLK" ;
+TIMESPEC "TS_MGTCLK"  = PERIOD "MGTCLK" 100.00 MHz HIGH 50 % ;
+
+#
+# LEDs
+#
+#
+NET "LED[0]"  LOC = V2 | IOSTANDARD = LVCMOS33 ;
+NET "LED[1]"  LOC = V3 | IOSTANDARD = LVCMOS33 ;
+NET "LED[2]"  LOC = D8 | IOSTANDARD = LVCMOS33 ; 
+
+NET "S_OUT[0]" LOC = H15 | IOSTANDARD = LVCMOS33;
+NET "S_OUT[1]" LOC = H17 | IOSTANDARD = LVCMOS33;
+
+NET ADC1[0] LOC = F17 | IOSTANDARD = LVCMOS33;
+NET ADC1[1] LOC = F18 | IOSTANDARD = LVCMOS33;
+NET ADC1[2] LOC = E17 | IOSTANDARD = LVCMOS33;
+NET ADC1[3] LOC = D18 | IOSTANDARD = LVCMOS33;
+NET ADC1[4] LOC = E12 | IOSTANDARD = LVCMOS33;
+NET ADC1[5] LOC = D17 | IOSTANDARD = LVCMOS33;
+NET ADC1[6] LOC = C17 | IOSTANDARD = LVCMOS33;
+NET ADC1[7] LOC = C18 | IOSTANDARD = LVCMOS33;
+
+NET ADC2[0] LOC = G15 | IOSTANDARD = LVCMOS33;
+NET ADC2[1] LOC = E14 | IOSTANDARD = LVCMOS33;
+NET ADC2[2] LOC = F13 | IOSTANDARD = LVCMOS33;
+NET ADC2[3] LOC = G16 | IOSTANDARD = LVCMOS33;
+NET ADC2[4] LOC = G14 | IOSTANDARD = LVCMOS33;
+NET ADC2[5] LOC = E16 | IOSTANDARD = LVCMOS33;
+NET ADC2[6] LOC = F14 | IOSTANDARD = LVCMOS33;
+NET ADC2[7] LOC = E15 | IOSTANDARD = LVCMOS33;
+
+NET "ADC_DACCTRL"  LOC = "C16"  | IOSTANDARD = LVCMOS33 ;
+
+NET "ADCclk" CLOCK_DEDICATED_ROUTE=FALSE | LOC=F16 | IOSTANDARD = LVCMOS33;

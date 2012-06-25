@@ -1,0 +1,54 @@
+Welcome to Xilinx CORE Generator.
+Help system initialized.
+Opening project file /home/ii/project4_test_bmd/ipcore_dir/coregen.cgp.
+Project, 'coregen', initialised from file
+'/home/ii/project4_test_bmd/ipcore_dir/coregen.cgp'.
+Recustomize and Generate (Under Current Project Settings)Applying current project options...
+Finished applying current project options.
+Initialising IP model...
+Finished initialising IP model.
+Customizing IP...
+Release 12.1 - Xilinx CORE Generator IP GUI Launcher M.53d (lin)
+Copyright (c) 1995-2010 Xilinx, Inc.  All rights reserved.
+Initialising IP model...
+Finished initialising IP model.
+Finished Customizing.
+Generating IP...
+WARNING:sim:89 - A core named <fifo_generator_v6_1> already exists in the output
+   directory. Output products for this core may be overwritten.
+Initialising IP model...
+Finished initialising IP model.
+Initialising IP model...
+Finished initialising IP model.
+Initialising IP model...
+Finished initialising IP model.
+XST: HDL Compilation
+XST: Design Hierarchy Analysis
+XST: HDL Analysis
+XST: HDL Synthesis
+XST: Advanced HDL Synthesis
+XST: Low Level Synthesis
+XST: Partition Report
+XST: Final Report
+Generating Implementation files.
+Generating ISE symbol file...
+Generating NGC file.
+Finished Generation Stage.
+Generating IP instantiation template...
+Generating the VHDL instantiation template.
+Finished generating IP instantiation template.
+Generating metadata file...
+Finished generating metadata file.
+Generating metadata file...
+Finished generating metadata file.
+Generating ISE file...
+Finished ISE file generation.
+Creating readme './tmp/_cg/fifo_generator_v6_1_readme.txt'.
+Generating FLIST file...
+Finished FLIST file generation.
+Preparing output directory...
+Finished preparing output directory.
+Moving files to output directory...
+Finished moving files to output directory
+Saved options for project 'coregen'.
+Closed project file.
