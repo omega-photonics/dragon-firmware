@@ -27,7 +27,7 @@
 *******************************************************************************/
 
 /*******************************************************************************
-*     Generated from core with identifier: xilinx.com:ip:fifo_generator:8.3    *
+*     Generated from core with identifier: xilinx.com:ip:fifo_generator:9.1    *
 *                                                                              *
 *     The FIFO Generator is a parameterizable first-in/first-out memory        *
 *     queue generator. Use it to generate resource and performance             *

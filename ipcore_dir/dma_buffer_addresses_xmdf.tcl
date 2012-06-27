@@ -35,6 +35,198 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount type logical_library
 utilities_xmdf::xmdfSetData $instance FileSet $fcount logical_library unisim
 incr fcount
 
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/doc/fifo_generator_v9_1_vinfo.html
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/example_design/dma_buffer_addresses_exdes.ucf
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/example_design/dma_buffer_addresses_exdes.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/example_design/dma_buffer_addresses_exdes.xdc
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/fifo_generator_v9_1_readme.txt
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/implement.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/implement.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/implement_synplify.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/implement_synplify.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/planAhead_ise.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/planAhead_ise.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/planAhead_ise.tcl
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/planAhead_rdn.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/planAhead_rdn.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/planAhead_rdn.tcl
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/xst.prj
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/implement/xst.scr
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/dma_buffer_addresses_dgen.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/dma_buffer_addresses_dverif.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/dma_buffer_addresses_pctrl.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/dma_buffer_addresses_pkg.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/dma_buffer_addresses_rng.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/dma_buffer_addresses_synth.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/dma_buffer_addresses_tb.vhd
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/simulate_isim.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/simulate_isim.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/simulate_mti.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/simulate_mti.do
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/simulate_mti.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/simulate_ncsim.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/simulate_vcs.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/ucli_commands.key
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/vcs_session.tcl
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/wave_isim.tcl
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/wave_mti.do
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/functional/wave_ncsim.sv
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/simulate_isim.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/simulate_isim.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/simulate_mti.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/simulate_mti.do
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/simulate_mti.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/simulate_ncsim.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/simulate_vcs.bat
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/ucli_commands.key
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/vcs_session.tcl
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/wave_isim.tcl
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/wave_mti.do
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses/simulation/timing/wave_ncsim.sv
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+incr fcount
+
 utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses.asy
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type asy
 incr fcount
@@ -63,56 +255,12 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_a
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type coregen_ip
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/example_design/dma_buffer_addresses_top.ucf
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/example_design/dma_buffer_addresses_top.vhd
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/example_design/dma_buffer_addresses_top.xdc
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/implement/implement.bat
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/implement/implement.sh
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/implement/planAhead_rdn.bat
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/implement/planAhead_rdn.sh
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/implement/planAhead_rdn.tcl
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/implement/xst.prj
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_ste/implement/xst.scr
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_upgrade.txt
+utilities_xmdf::xmdfSetData $instance FileSet $fcount type text
 incr fcount
 
 utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path dma_buffer_addresses_xmdf.tcl
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type AnyView
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_generator_ug175.pdf
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type AnyView
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_generator_v8_3_readme.txt
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type text
 incr fcount
 
 utilities_xmdf::xmdfSetData $instance FileSet $fcount associated_module dma_buffer_addresses

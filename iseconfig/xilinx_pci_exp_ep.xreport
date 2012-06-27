@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2012-06-25T03:20:40</DateModified>
+  <DateModified>2012-06-27T11:01:49</DateModified>
   <ModuleName>xilinx_pci_exp_ep</ModuleName>
   <SummaryTimeStamp>2010-12-09T14:28:33</SummaryTimeStamp>
-  <SavedFilePath>Z:/Users/ii/SparkleShare/omega/dragon/7_msi/dragon-firmware/iseconfig/xilinx_pci_exp_ep.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>Z:/Users/ii/SparkleShare/omega/dragon/7_msi/dragon-firmware\</ImplementationReportsDirectory>
+  <SavedFilePath>Y:/SparkleShare/omega/dragon/current/dragon-firmware/iseconfig/xilinx_pci_exp_ep.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>Y:/SparkleShare/omega/dragon/current/dragon-firmware\</ImplementationReportsDirectory>
   <DateInitialized>2010-11-10T12:22:48</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

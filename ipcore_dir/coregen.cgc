@@ -6,13 +6,15 @@
    <spirit:version>1.0</spirit:version>
    <spirit:componentInstances>
       <spirit:componentInstance>
-         <spirit:instanceName>fifo_generator_v8_1</spirit:instanceName>
-         <spirit:componentRef spirit:vendor="xilinx.com" spirit:library="ip" spirit:name="fifo_generator" spirit:version="8.3" />
+         <spirit:instanceName>adc_data_fifo</spirit:instanceName>
+         <spirit:componentRef spirit:vendor="xilinx.com" spirit:library="ip" spirit:name="fifo_generator" spirit:version="9.1" />
          <spirit:configurableElementValues>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.COMPONENT_NAME">fifo_generator_v8_1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.COMPONENT_NAME">adc_data_fifo</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION">Independent_Clocks_Builtin_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SYNCHRONIZATION_STAGES">2</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SYNCHRONIZATION_STAGES_AXI">2</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INTERFACE_TYPE">Native</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PERFORMANCE_OPTIONS">Standard_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PERFORMANCE_OPTIONS">First_Word_Fall_Through</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DATA_WIDTH">64</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH">8192</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OUTPUT_DATA_WIDTH">64</spirit:configurableElementValue>
@@ -44,266 +46,15 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_DATA_COUNT_WIDTH">13</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_DATA_COUNT">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_DATA_COUNT_WIDTH">13</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DISABLE_TIMING_VIOLATIONS">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_CLOCK_FREQUENCY">62</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_CLOCK_FREQUENCY">22</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE">No_Programmable_Full_Threshold</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE">8189</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_NEGATE_VALUE">8188</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE">Single_Programmable_Empty_Threshold_Constant</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE">100</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_NEGATE_VALUE">101</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXI_TYPE">AXI4_Stream</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.CLOCK_TYPE_AXI">Common_Clock</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_CLOCK_ENABLE">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.CLOCK_ENABLE_TYPE">Slave_Interface_Clock_Enable</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_WRITE_CHANNEL">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_READ_CHANNEL">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ID_WIDTH">4</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXI_ADDRESS_WIDTH">32</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXI_DATA_WIDTH">64</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_AWUSER">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AWUSER_WIDTH">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_WUSER">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WUSER_WIDTH">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_BUSER">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.BUSER_WIDTH">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ARUSER">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ARUSER_WIDTH">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_RUSER">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RUSER_WIDTH">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TDATA">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TDATA_WIDTH">64</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TID">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TID_WIDTH">8</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TDEST">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TDEST_WIDTH">4</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TUSER">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TUSER_WIDTH">4</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TREADY">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TLAST">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TSTROBE">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TSTRB_WIDTH">4</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TKEEP">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TKEEP_WIDTH">4</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WACH_TYPE">FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WACH">Common_Clock_Block_RAM</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_WACH">Data_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_WACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WACH">16</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_WACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WACH">Full</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WACH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WACH">Empty</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WACH">1022</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WDCH_TYPE">FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WDCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_WDCH">Data_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_WDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WDCH">1024</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_WDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WDCH">Full</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WDCH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WDCH">Empty</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WDCH">1022</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRCH_TYPE">FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WRCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_WRCH">Data_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_WRCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WRCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WRCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WRCH">16</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_WRCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WRCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WRCH">Full</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WRCH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WRCH">Empty</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WRCH">1022</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RACH_TYPE">FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_RACH">Common_Clock_Block_RAM</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_RACH">Data_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_RACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_RACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_RACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_RACH">16</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_RACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_RACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RACH">Full</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_RACH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RACH">Empty</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_RACH">1022</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RDCH_TYPE">FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_RDCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_RDCH">Data_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_RDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_RDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_RDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_RDCH">1024</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_RDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_RDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RDCH">Full</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_RDCH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RDCH">Empty</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_RDCH">1022</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXIS_TYPE">FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_AXIS">Common_Clock_Block_RAM</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_AXIS">Data_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_AXIS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_AXIS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_AXIS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_AXIS">1024</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_AXIS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_AXIS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_AXIS">Full</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_AXIS">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_AXIS">Empty</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_AXIS">1022</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WACH">Fully_Registered</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WDCH">Fully_Registered</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WRCH">Fully_Registered</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_RACH">Fully_Registered</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_RDCH">Fully_Registered</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_AXIS">Fully_Registered</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_FLAG_AXI">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_SENSE_AXI">Active_High</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_FLAG_AXI">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_SENSE_AXI">Active_High</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DISABLE_TIMING_VIOLATIONS_AXI">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ADD_NGC_CONSTRAINT_AXI">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_COMMON_UNDERFLOW">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_COMMON_OVERFLOW">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_READ_POINTER_INCREMENT_BY2">false</spirit:configurableElementValue>
-         </spirit:configurableElementValues>
-         <spirit:vendorExtensions>
-            <xilinx:instanceProperties xmlns:xilinx="http://www.xilinx.com">
-               <xilinx:projectOptions>
-                  <xilinx:projectName>coregen</xilinx:projectName>
-                  <xilinx:outputDirectory>./</xilinx:outputDirectory>
-                  <xilinx:workingDirectory>./tmp/</xilinx:workingDirectory>
-                  <xilinx:subWorkingDirectory>./tmp/_cg/</xilinx:subWorkingDirectory>
-               </xilinx:projectOptions>
-               <xilinx:part>
-                  <xilinx:device>xc5vlx20t</xilinx:device>
-                  <xilinx:deviceFamily>virtex5</xilinx:deviceFamily>
-                  <xilinx:package>ff323</xilinx:package>
-                  <xilinx:speedGrade>-1</xilinx:speedGrade>
-               </xilinx:part>
-               <xilinx:flowOptions>
-                  <xilinx:busFormat>BusFormatAngleBracketNotRipped</xilinx:busFormat>
-                  <xilinx:designEntry>Verilog</xilinx:designEntry>
-                  <xilinx:asySymbol>true</xilinx:asySymbol>
-                  <xilinx:flowVendor>Foundation_ISE</xilinx:flowVendor>
-                  <xilinx:addPads>false</xilinx:addPads>
-                  <xilinx:removeRPMs>false</xilinx:removeRPMs>
-                  <xilinx:createNDF>false</xilinx:createNDF>
-                  <xilinx:implementationFileType>Ngc</xilinx:implementationFileType>
-                  <xilinx:formalVerification>false</xilinx:formalVerification>
-               </xilinx:flowOptions>
-               <xilinx:simulationOptions>
-                  <xilinx:simulationModel>Behavioral</xilinx:simulationModel>
-                  <xilinx:simulationLanguage>VHDL_and_Verilog</xilinx:simulationLanguage>
-                  <xilinx:foundationSym>false</xilinx:foundationSym>
-               </xilinx:simulationOptions>
-               <xilinx:packageInfo>
-                  <xilinx:sourceCoreCreationDate>2011-03-14T07:12:32.000Z</xilinx:sourceCoreCreationDate>
-               </xilinx:packageInfo>
-            </xilinx:instanceProperties>
-         </spirit:vendorExtensions>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-         <spirit:instanceName>clockdoubler</spirit:instanceName>
-         <spirit:componentRef spirit:vendor="xilinx.com" spirit:library="ip" spirit:name="dcmadv" spirit:version="13.1" />
-         <spirit:configurableElementValues>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.COMPONENT_NAME">clockdoubler</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.XAWFILENAME">\\psf\host\Users\ii\SparkleShare\omega\dragon\7_msi\dragon-firmware\ipcore_dir\clockdoubler.xaw</spirit:configurableElementValue>
-         </spirit:configurableElementValues>
-         <spirit:vendorExtensions>
-            <xilinx:instanceProperties xmlns:xilinx="http://www.xilinx.com">
-               <xilinx:projectOptions>
-                  <xilinx:projectName>coregen</xilinx:projectName>
-                  <xilinx:outputDirectory>./</xilinx:outputDirectory>
-                  <xilinx:workingDirectory>./tmp/</xilinx:workingDirectory>
-                  <xilinx:subWorkingDirectory>./tmp/_cg/</xilinx:subWorkingDirectory>
-               </xilinx:projectOptions>
-               <xilinx:part>
-                  <xilinx:device>xc5vlx20t</xilinx:device>
-                  <xilinx:deviceFamily>virtex5</xilinx:deviceFamily>
-                  <xilinx:package>ff323</xilinx:package>
-                  <xilinx:speedGrade>-1</xilinx:speedGrade>
-               </xilinx:part>
-               <xilinx:flowOptions>
-                  <xilinx:busFormat>BusFormatAngleBracketNotRipped</xilinx:busFormat>
-                  <xilinx:designEntry>Verilog</xilinx:designEntry>
-                  <xilinx:asySymbol>true</xilinx:asySymbol>
-                  <xilinx:flowVendor>Foundation_ISE</xilinx:flowVendor>
-                  <xilinx:addPads>false</xilinx:addPads>
-                  <xilinx:removeRPMs>false</xilinx:removeRPMs>
-                  <xilinx:createNDF>false</xilinx:createNDF>
-                  <xilinx:implementationFileType>Ngc</xilinx:implementationFileType>
-                  <xilinx:formalVerification>false</xilinx:formalVerification>
-               </xilinx:flowOptions>
-               <xilinx:simulationOptions>
-                  <xilinx:simulationModel>Behavioral</xilinx:simulationModel>
-                  <xilinx:simulationLanguage>VHDL_and_Verilog</xilinx:simulationLanguage>
-                  <xilinx:foundationSym>false</xilinx:foundationSym>
-               </xilinx:simulationOptions>
-            </xilinx:instanceProperties>
-         </spirit:vendorExtensions>
-      </spirit:componentInstance>
-      <spirit:componentInstance>
-         <spirit:instanceName>dma_buffer_addresses</spirit:instanceName>
-         <spirit:componentRef spirit:vendor="xilinx.com" spirit:library="ip" spirit:name="fifo_generator" spirit:version="8.3" />
-         <spirit:configurableElementValues>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.COMPONENT_NAME">dma_buffer_addresses</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION">Common_Clock_Builtin_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INTERFACE_TYPE">Native</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PERFORMANCE_OPTIONS">Standard_FIFO</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DATA_WIDTH">32</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH">512</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OUTPUT_DATA_WIDTH">32</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OUTPUT_DEPTH">512</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_EMBEDDED_REGISTERS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RESET_PIN">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_RESET_SYNCHRONIZATION">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RESET_TYPE">Asynchronous_Reset</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_FLAGS_RESET_VALUE">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_DOUT_RESET">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DOUT_RESET_VALUE">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ALMOST_FULL_FLAG">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ALMOST_EMPTY_FLAG">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.VALID_FLAG">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.VALID_SENSE">Active_High</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_FLAG">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_SENSE">Active_High</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_ACKNOWLEDGE_FLAG">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_ACKNOWLEDGE_SENSE">Active_High</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_FLAG">true</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_SENSE">Active_High</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_EXTRA_LOGIC">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DATA_COUNT">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_DATA_COUNT">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_DATA_COUNT">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DISABLE_TIMING_VIOLATIONS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_CLOCK_FREQUENCY">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_CLOCK_FREQUENCY">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_CLOCK_FREQUENCY">62</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_CLOCK_FREQUENCY">133</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE">No_Programmable_Full_Threshold</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE">511</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_NEGATE_VALUE">510</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE">2</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_NEGATE_VALUE">3</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE">8190</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_NEGATE_VALUE">8189</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE">Single_Programmable_Empty_Threshold_Constant</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE">64</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_NEGATE_VALUE">65</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXI_TYPE">AXI4_Stream</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.CLOCK_TYPE_AXI">Common_Clock</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_CLOCK_ENABLE">false</spirit:configurableElementValue>
@@ -344,11 +95,10 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WACH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WACH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WACH">16</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_WACH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WACH">Full</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WACH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WACH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WACH">Empty</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WACH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WACH">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WDCH_TYPE">FIFO</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WDCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
@@ -357,11 +107,10 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WDCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WDCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WDCH">1024</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_WDCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WDCH">Full</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WDCH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WDCH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WDCH">Empty</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WDCH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WDCH">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRCH_TYPE">FIFO</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WRCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
@@ -370,11 +119,10 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WRCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WRCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WRCH">16</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_WRCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WRCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WRCH">Full</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WRCH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WRCH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WRCH">Empty</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WRCH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WRCH">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RACH_TYPE">FIFO</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_RACH">Common_Clock_Block_RAM</spirit:configurableElementValue>
@@ -383,11 +131,10 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_RACH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_RACH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_RACH">16</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_RACH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_RACH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RACH">Full</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RACH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_RACH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RACH">Empty</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RACH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_RACH">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RDCH_TYPE">FIFO</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_RDCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
@@ -396,11 +143,10 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_RDCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_RDCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_RDCH">1024</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_RDCH">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_RDCH">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RDCH">Full</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RDCH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_RDCH">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RDCH">Empty</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RDCH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_RDCH">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXIS_TYPE">FIFO</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_AXIS">Common_Clock_Block_RAM</spirit:configurableElementValue>
@@ -409,11 +155,10 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_AXIS">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_AXIS">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_AXIS">1024</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_HANDSHAKE_FLAG_OPTIONS_AXIS">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_AXIS">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_AXIS">Full</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_AXIS">No_Programmable_Full_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_AXIS">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_AXIS">Empty</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_AXIS">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_AXIS">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WACH">Fully_Registered</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WDCH">Fully_Registered</spirit:configurableElementValue>
@@ -430,41 +175,41 @@
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_COMMON_UNDERFLOW">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_COMMON_OVERFLOW">false</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_READ_POINTER_INCREMENT_BY2">false</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_COMMON_CLOCK">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_DIN_WIDTH">32</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_COMMON_CLOCK">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_DATA_COUNT_WIDTH">13</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_DIN_WIDTH">64</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_DOUT_RST_VAL">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_DOUT_WIDTH">32</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_DOUT_WIDTH">64</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_FAMILY">virtex5</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_FULL_FLAGS_RST_VAL">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_ALMOST_EMPTY">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_ALMOST_FULL">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_DATA_COUNT">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_INT_CLK">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_OVERFLOW">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_OVERFLOW">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_RD_DATA_COUNT">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_RST">1</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_SRST">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_UNDERFLOW">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_VALID">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_WR_ACK">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_UNDERFLOW">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_VALID">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_WR_ACK">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_WR_DATA_COUNT">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_IMPLEMENTATION_TYPE">4</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_MEMORY_TYPE">4</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_OVERFLOW_LOW">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PRELOAD_LATENCY">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PRELOAD_REGS">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE">512x36</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL">2</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_NEGATE_VAL">3</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL">511</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_NEGATE_VAL">510</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PRELOAD_LATENCY">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PRELOAD_REGS">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PRIM_FIFO_TYPE">8kx4</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL">64</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_NEGATE_VAL">65</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL">8190</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_NEGATE_VAL">8189</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_DEPTH">512</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_FREQ">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_PNTR_WIDTH">9</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_DATA_COUNT_WIDTH">13</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_DEPTH">8192</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_FREQ">62</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_RD_PNTR_WIDTH">13</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_UNDERFLOW_LOW">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_USE_DOUT_RST">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_USE_ECC">0</spirit:configurableElementValue>
@@ -472,13 +217,14 @@
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_USE_FWFT_DATA_COUNT">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_VALID_LOW">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_ACK_LOW">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_DEPTH">512</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_FREQ">1</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_PNTR_WIDTH">9</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_DATA_COUNT_WIDTH">13</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_DEPTH">8192</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_FREQ">133</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_WR_PNTR_WIDTH">13</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_MSGON_VAL">1</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_ENABLE_RST_SYNC">1</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_ERROR_INJECTION_TYPE">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_SYNCHRONIZER_STAGE">2</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_INTERFACE_TYPE">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_AXI_TYPE">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_AXI_WR_CHANNEL">0</spirit:configurableElementValue>
@@ -569,30 +315,24 @@
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_RACH">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_RDCH">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_DATA_COUNTS_AXIS">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_WACH">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_WDCH">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_WRCH">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_RACH">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_RDCH">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_HAS_PROG_FLAGS_AXIS">0</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WACH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WDCH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WRCH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_RACH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_RDCH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_AXIS">5</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WACH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WDCH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_WRCH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_RACH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_RDCH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_TYPE_AXIS">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_WACH">1023</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_WDCH">1023</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_WRCH">1023</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_RACH">1023</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_RDCH">1023</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_FULL_THRESH_ASSERT_VAL_AXIS">1023</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WACH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WDCH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WRCH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_RACH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_RDCH">5</spirit:configurableElementValue>
-            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_AXIS">5</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WACH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WDCH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_WRCH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_RACH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_RDCH">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_TYPE_AXIS">0</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_WACH">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_WDCH">1022</spirit:configurableElementValue>
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_PROG_EMPTY_THRESH_ASSERT_VAL_WRCH">1022</spirit:configurableElementValue>
@@ -607,7 +347,7 @@
             <spirit:configurableElementValue spirit:referenceId="MODELPARAM_VALUE.C_REG_SLICE_MODE_AXIS">0</spirit:configurableElementValue>
          </spirit:configurableElementValues>
          <spirit:vendorExtensions>
-            <xilinx:instanceProperties>
+            <xilinx:instanceProperties xmlns:xilinx="http://www.xilinx.com">
                <xilinx:projectOptions>
                   <xilinx:projectName>coregen</xilinx:projectName>
                   <xilinx:outputDirectory>./</xilinx:outputDirectory>
@@ -637,7 +377,7 @@
                   <xilinx:foundationSym>false</xilinx:foundationSym>
                </xilinx:simulationOptions>
                <xilinx:packageInfo>
-                  <xilinx:sourceCoreCreationDate>2011-03-14T07:12:32.000Z</xilinx:sourceCoreCreationDate>
+                  <xilinx:sourceCoreCreationDate>2012-04-13+16:13</xilinx:sourceCoreCreationDate>
                </xilinx:packageInfo>
             </xilinx:instanceProperties>
             <xilinx:generationHistory>
@@ -653,121 +393,411 @@
                <xilinx:fileSet>
                   <xilinx:name>ip_xco_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.xco</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.xco</xilinx:name>
                      <xilinx:userFileType>xco</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:51 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x041D5E74</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:13 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x437D68A1</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
                   <xilinx:name>associated_files_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./fifo_generator_ug175.pdf</xilinx:name>
-                     <xilinx:userFileType>pdf</xilinx:userFileType>
-                     <xilinx:timeStamp>Wed Oct 05 00:21:33 GMT 2011</xilinx:timeStamp>
-                     <xilinx:checkSum>0x42070F84</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:name>./adc_data_fifo/doc/fifo_generator_v9_1_vinfo.html</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Tue Apr 24 06:06:43 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xA56467F5</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./fifo_generator_v8_3_readme.txt</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/fifo_generator_v9_1_readme.txt</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>txt</xilinx:userFileType>
-                     <xilinx:timeStamp>Wed Oct 05 00:21:33 GMT 2011</xilinx:timeStamp>
-                     <xilinx:checkSum>0xCD35AB83</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Tue Apr 24 06:06:43 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x472D4F8A</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
                   <xilinx:name>ejava_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/example_design/dma_buffer_addresses_top.ucf</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/example_design/adc_data_fifo_exdes.ucf</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>ucf</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x3C560FD9</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xB0FB4AAF</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/example_design/dma_buffer_addresses_top.vhd</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/example_design/adc_data_fifo_exdes.vhd</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>vhdl</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0xB9FE110F</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x182ACE12</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/example_design/dma_buffer_addresses_top.xdc</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/example_design/adc_data_fifo_exdes.xdc</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>xdc</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0xFA2BDC02</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xA1CB2F49</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/implement/implement.bat</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/implement/implement.bat</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>unknown</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0xDDA55989</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xAECB78DD</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/implement/implement.sh</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/implement/implement.sh</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>unknown</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x54501268</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xF1728000</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/implement/planAhead_rdn.bat</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/implement/implement_synplify.bat</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>unknown</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:53 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x3BD7C5E2</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xE287B281</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/implement/planAhead_rdn.sh</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/implement/implement_synplify.sh</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>unknown</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0xE656F527</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xD9CFCF80</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/implement/planAhead_rdn.tcl</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/implement/planAhead_ise.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x4CD8B18B</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/implement/planAhead_ise.sh</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x7CA2F56C</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/implement/planAhead_ise.tcl</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>tcl</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x8093B519</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x98E1FB69</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/implement/xst.prj</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/implement/planAhead_rdn.bat</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>unknown</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0xB6398E05</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x163401EF</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_ste/implement/xst.scr</xilinx:name>
+                     <xilinx:name>./adc_data_fifo/implement/planAhead_rdn.sh</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>unknown</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 14:59:52 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x78511B84</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x264E4508</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/implement/planAhead_rdn.tcl</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>tcl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x98E1FB69</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/implement/xst.prj</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xFE61AC45</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/implement/xst.scr</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x1C80E5E9</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/adc_data_fifo_dgen.vhd</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>vhdl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x23E2AD22</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/adc_data_fifo_dverif.vhd</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>vhdl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x7F4CF776</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/adc_data_fifo_pctrl.vhd</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>vhdl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xA12E9FFC</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/adc_data_fifo_pkg.vhd</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>vhdl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x1FC3037C</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/adc_data_fifo_rng.vhd</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>vhdl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x14D54934</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/adc_data_fifo_synth.vhd</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>vhdl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x50927B04</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/adc_data_fifo_tb.vhd</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>vhdl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x5CAD6FA9</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/simulate_isim.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x86E581AA</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/simulate_isim.sh</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x79477912</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/simulate_mti.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x0C3CDB0C</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/simulate_mti.do</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x28069809</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/simulate_mti.sh</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x5FDBD750</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/simulate_ncsim.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x8A0F613E</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/simulate_vcs.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x36702397</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/ucli_commands.key</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x665D79C7</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/vcs_session.tcl</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>tcl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x1129BDA1</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/wave_isim.tcl</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>tcl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x948D3B37</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/wave_mti.do</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x6862F976</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/functional/wave_ncsim.sv</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xAA8C9C94</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/simulate_isim.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xC833835C</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/simulate_isim.sh</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xC0E7A3B9</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/simulate_mti.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x0C3CDB0C</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/simulate_mti.do</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x88D2B514</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/simulate_mti.sh</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x5FDBD750</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/simulate_ncsim.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x19BCA47A</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/simulate_vcs.bat</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x10FC06A8</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/ucli_commands.key</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x665D79C7</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/vcs_session.tcl</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>tcl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x8AB90638</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/wave_isim.tcl</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>tcl</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x948D3B37</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/wave_mti.do</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x6862F976</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
+                  </xilinx:file>
+                  <xilinx:file>
+                     <xilinx:name>./adc_data_fifo/simulation/timing/wave_ncsim.sv</xilinx:name>
+                     <xilinx:userFileType>ignore</xilinx:userFileType>
+                     <xilinx:userFileType>unknown</xilinx:userFileType>
+                     <xilinx:timeStamp>Wed Jun 27 19:21:15 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xAA8C9C94</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
                   <xilinx:name>ngc_netlist_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.ngc</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.ngc</xilinx:name>
                      <xilinx:userFileType>ngc</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:01:56 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x0CB10FDA</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:30 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x3785CE4B</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
@@ -779,56 +809,56 @@
                <xilinx:fileSet>
                   <xilinx:name>instantiation_template_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.veo</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.veo</xilinx:name>
                      <xilinx:userFileType>veo</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:01:58 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x4C0D0B86</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:33 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x420A813D</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.vho</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.vho</xilinx:name>
                      <xilinx:userFileType>vho</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:01:58 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0xC8FF9D16</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:33 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x4FA2B9F5</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
                   <xilinx:name>structural_simulation_model_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.v</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.v</xilinx:name>
                      <xilinx:userFileType>verilog</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:01:59 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0xC8B101BA</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:34 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x5E47D8BB</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.vhd</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.vhd</xilinx:name>
                      <xilinx:userFileType>vhdl</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:01:59 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x65704846</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:34 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xCC3F51D4</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
                   <xilinx:name>asy_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.asy</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.asy</xilinx:name>
                      <xilinx:userFileType>asy</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:02:04 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x5F7F6C0A</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:41 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x9849D4D3</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
                   <xilinx:name>xmdf_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_xmdf.tcl</xilinx:name>
+                     <xilinx:name>./adc_data_fifo_xmdf.tcl</xilinx:name>
                      <xilinx:userFileType>tclXmdf</xilinx:userFileType>
                      <xilinx:userFileType>tcl</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:02:04 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x7B04871B</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:41 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x9E0576FB</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
@@ -837,25 +867,25 @@
                      <xilinx:name>./_xmsgs/pn_parser.xmsgs</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>unknown</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:02:08 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x721DD99C</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:45 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x6AE5DA6F</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.gise</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.gise</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>gise</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:02:08 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x07507D20</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:46 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x8F237150</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses.xise</xilinx:name>
+                     <xilinx:name>./adc_data_fifo.xise</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>xise</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:02:08 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x1B4F2D63</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:46 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0xF190EBD4</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
@@ -864,19 +894,266 @@
                <xilinx:fileSet>
                   <xilinx:name>flist_generator</xilinx:name>
                   <xilinx:file>
-                     <xilinx:name>./dma_buffer_addresses_flist.txt</xilinx:name>
+                     <xilinx:name>./adc_data_fifo_flist.txt</xilinx:name>
                      <xilinx:userFileType>ignore</xilinx:userFileType>
                      <xilinx:userFileType>txtFlist</xilinx:userFileType>
                      <xilinx:userFileType>txt</xilinx:userFileType>
-                     <xilinx:timeStamp>Sat Jun 23 15:02:09 GMT 2012</xilinx:timeStamp>
-                     <xilinx:checkSum>0x2E49B7DD</xilinx:checkSum>
-                     <xilinx:generationId>generationid_1796441740</xilinx:generationId>
+                     <xilinx:timeStamp>Wed Jun 27 19:23:47 GMT 2012</xilinx:timeStamp>
+                     <xilinx:checkSum>0x6CC3F140</xilinx:checkSum>
+                     <xilinx:generationId>generationID_4013899584</xilinx:generationId>
                   </xilinx:file>
                </xilinx:fileSet>
                <xilinx:fileSet>
                   <xilinx:name>view_readme_generator</xilinx:name>
                </xilinx:fileSet>
             </xilinx:generationHistory>
+         </spirit:vendorExtensions>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+         <spirit:instanceName>dma_buffer_addresses</spirit:instanceName>
+         <spirit:componentRef spirit:vendor="xilinx.com" spirit:library="ip" spirit:name="fifo_generator" spirit:version="9.1" />
+         <spirit:configurableElementValues>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.COMPONENT_NAME">dma_buffer_addresses</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION">Common_Clock_Builtin_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SYNCHRONIZATION_STAGES">2</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.SYNCHRONIZATION_STAGES_AXI">2</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INTERFACE_TYPE">Native</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PERFORMANCE_OPTIONS">First_Word_Fall_Through</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DATA_WIDTH">32</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH">512</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OUTPUT_DATA_WIDTH">32</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OUTPUT_DEPTH">512</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_EMBEDDED_REGISTERS">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RESET_PIN">true</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_RESET_SYNCHRONIZATION">true</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RESET_TYPE">Asynchronous_Reset</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_FLAGS_RESET_VALUE">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_DOUT_RESET">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DOUT_RESET_VALUE">0</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ALMOST_FULL_FLAG">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ALMOST_EMPTY_FLAG">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.VALID_FLAG">true</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.VALID_SENSE">Active_High</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_FLAG">true</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_SENSE">Active_High</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_ACKNOWLEDGE_FLAG">true</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_ACKNOWLEDGE_SENSE">Active_High</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_FLAG">true</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_SENSE">Active_High</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_EXTRA_LOGIC">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DATA_COUNT">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_DATA_COUNT">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_DATA_COUNT">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_DATA_COUNT_WIDTH">9</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DISABLE_TIMING_VIOLATIONS">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.READ_CLOCK_FREQUENCY">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRITE_CLOCK_FREQUENCY">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE">No_Programmable_Full_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE">512</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_NEGATE_VALUE">511</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE">4</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_NEGATE_VALUE">5</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXI_TYPE">AXI4_Stream</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.CLOCK_TYPE_AXI">Common_Clock</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.USE_CLOCK_ENABLE">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.CLOCK_ENABLE_TYPE">Slave_Interface_Clock_Enable</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_WRITE_CHANNEL">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_READ_CHANNEL">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ID_WIDTH">4</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXI_ADDRESS_WIDTH">32</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXI_DATA_WIDTH">64</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_AWUSER">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AWUSER_WIDTH">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_WUSER">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WUSER_WIDTH">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_BUSER">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.BUSER_WIDTH">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ARUSER">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ARUSER_WIDTH">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_RUSER">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RUSER_WIDTH">1</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TDATA">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TDATA_WIDTH">64</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TID">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TID_WIDTH">8</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TDEST">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TDEST_WIDTH">4</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TUSER">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TUSER_WIDTH">4</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TREADY">true</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TLAST">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TSTROBE">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TSTRB_WIDTH">4</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_TKEEP">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.TKEEP_WIDTH">4</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WACH_TYPE">FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WACH">Common_Clock_Block_RAM</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_WACH">Data_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_WACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WACH">16</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WACH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WACH">1023</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WACH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WACH">1022</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WDCH_TYPE">FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WDCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_WDCH">Data_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_WDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WDCH">1024</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WDCH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WDCH">1023</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WDCH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WDCH">1022</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.WRCH_TYPE">FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_WRCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_WRCH">Data_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_WRCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_WRCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_WRCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_WRCH">16</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_WRCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_WRCH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_WRCH">1023</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_WRCH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_WRCH">1022</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RACH_TYPE">FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_RACH">Common_Clock_Block_RAM</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_RACH">Data_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_RACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_RACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_RACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_RACH">16</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_RACH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RACH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_RACH">1023</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RACH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_RACH">1022</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.RDCH_TYPE">FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_RDCH">Common_Clock_Block_RAM</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_RDCH">Data_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_RDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_RDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_RDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_RDCH">1024</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_RDCH">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_RDCH">No_Programmable_Full_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_RDCH">1023</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_RDCH">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_RDCH">1022</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.AXIS_TYPE">FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_IMPLEMENTATION_AXIS">Common_Clock_Block_RAM</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FIFO_APPLICATION_TYPE_AXIS">Data_FIFO</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_ECC_AXIS">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_SBIT_ERROR_AXIS">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INJECT_DBIT_ERROR_AXIS">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.INPUT_DEPTH_AXIS">1024</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_DATA_COUNTS_AXIS">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_FULL_TYPE_AXIS">No_Programmable_Full_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.FULL_THRESHOLD_ASSERT_VALUE_AXIS">1023</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.PROGRAMMABLE_EMPTY_TYPE_AXIS">No_Programmable_Empty_Threshold</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.EMPTY_THRESHOLD_ASSERT_VALUE_AXIS">1022</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WACH">Fully_Registered</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WDCH">Fully_Registered</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_WRCH">Fully_Registered</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_RACH">Fully_Registered</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_RDCH">Fully_Registered</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.REGISTER_SLICE_MODE_AXIS">Fully_Registered</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_FLAG_AXI">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.UNDERFLOW_SENSE_AXI">Active_High</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_FLAG_AXI">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.OVERFLOW_SENSE_AXI">Active_High</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.DISABLE_TIMING_VIOLATIONS_AXI">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ADD_NGC_CONSTRAINT_AXI">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_COMMON_UNDERFLOW">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_COMMON_OVERFLOW">false</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.ENABLE_READ_POINTER_INCREMENT_BY2">false</spirit:configurableElementValue>
+         </spirit:configurableElementValues>
+         <spirit:vendorExtensions>
+            <xilinx:instanceProperties xmlns:xilinx="http://www.xilinx.com">
+               <xilinx:projectOptions>
+                  <xilinx:projectName>coregen</xilinx:projectName>
+                  <xilinx:outputDirectory>./</xilinx:outputDirectory>
+                  <xilinx:workingDirectory>./tmp/</xilinx:workingDirectory>
+                  <xilinx:subWorkingDirectory>./tmp/_cg/</xilinx:subWorkingDirectory>
+               </xilinx:projectOptions>
+               <xilinx:part>
+                  <xilinx:device>xc5vlx20t</xilinx:device>
+                  <xilinx:deviceFamily>virtex5</xilinx:deviceFamily>
+                  <xilinx:package>ff323</xilinx:package>
+                  <xilinx:speedGrade>-1</xilinx:speedGrade>
+               </xilinx:part>
+               <xilinx:flowOptions>
+                  <xilinx:busFormat>BusFormatAngleBracketNotRipped</xilinx:busFormat>
+                  <xilinx:designEntry>Verilog</xilinx:designEntry>
+                  <xilinx:asySymbol>true</xilinx:asySymbol>
+                  <xilinx:flowVendor>Foundation_ISE</xilinx:flowVendor>
+                  <xilinx:addPads>false</xilinx:addPads>
+                  <xilinx:removeRPMs>false</xilinx:removeRPMs>
+                  <xilinx:createNDF>false</xilinx:createNDF>
+                  <xilinx:implementationFileType>Ngc</xilinx:implementationFileType>
+                  <xilinx:formalVerification>false</xilinx:formalVerification>
+               </xilinx:flowOptions>
+               <xilinx:simulationOptions>
+                  <xilinx:simulationModel>Behavioral</xilinx:simulationModel>
+                  <xilinx:simulationLanguage>VHDL_and_Verilog</xilinx:simulationLanguage>
+                  <xilinx:foundationSym>false</xilinx:foundationSym>
+               </xilinx:simulationOptions>
+               <xilinx:packageInfo>
+                  <xilinx:sourceCoreCreationDate>2012-04-13+16:13</xilinx:sourceCoreCreationDate>
+               </xilinx:packageInfo>
+            </xilinx:instanceProperties>
+         </spirit:vendorExtensions>
+      </spirit:componentInstance>
+      <spirit:componentInstance>
+         <spirit:instanceName>clockdoubler</spirit:instanceName>
+         <spirit:componentRef spirit:vendor="xilinx.com" spirit:library="ip" spirit:name="dcmadv" spirit:version="13.1" />
+         <spirit:configurableElementValues>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.COMPONENT_NAME">clockdoubler</spirit:configurableElementValue>
+            <spirit:configurableElementValue spirit:referenceId="PARAM_VALUE.XAWFILENAME">\\psf\home\SparkleShare\omega\dragon\current\dragon-firmware\ipcore_dir\clockdoubler.xaw</spirit:configurableElementValue>
+         </spirit:configurableElementValues>
+         <spirit:vendorExtensions>
+            <xilinx:instanceProperties xmlns:xilinx="http://www.xilinx.com">
+               <xilinx:projectOptions>
+                  <xilinx:projectName>coregen</xilinx:projectName>
+                  <xilinx:outputDirectory>./</xilinx:outputDirectory>
+                  <xilinx:workingDirectory>./tmp/</xilinx:workingDirectory>
+                  <xilinx:subWorkingDirectory>./tmp/_cg/</xilinx:subWorkingDirectory>
+               </xilinx:projectOptions>
+               <xilinx:part>
+                  <xilinx:device>xc5vlx20t</xilinx:device>
+                  <xilinx:deviceFamily>virtex5</xilinx:deviceFamily>
+                  <xilinx:package>ff323</xilinx:package>
+                  <xilinx:speedGrade>-1</xilinx:speedGrade>
+               </xilinx:part>
+               <xilinx:flowOptions>
+                  <xilinx:busFormat>BusFormatAngleBracketNotRipped</xilinx:busFormat>
+                  <xilinx:designEntry>Verilog</xilinx:designEntry>
+                  <xilinx:asySymbol>true</xilinx:asySymbol>
+                  <xilinx:flowVendor>Foundation_ISE</xilinx:flowVendor>
+                  <xilinx:addPads>false</xilinx:addPads>
+                  <xilinx:removeRPMs>false</xilinx:removeRPMs>
+                  <xilinx:createNDF>false</xilinx:createNDF>
+                  <xilinx:implementationFileType>Ngc</xilinx:implementationFileType>
+                  <xilinx:formalVerification>false</xilinx:formalVerification>
+               </xilinx:flowOptions>
+               <xilinx:simulationOptions>
+                  <xilinx:simulationModel>Behavioral</xilinx:simulationModel>
+                  <xilinx:simulationLanguage>VHDL_and_Verilog</xilinx:simulationLanguage>
+                  <xilinx:foundationSym>false</xilinx:foundationSym>
+               </xilinx:simulationOptions>
+            </xilinx:instanceProperties>
          </spirit:vendorExtensions>
       </spirit:componentInstance>
    </spirit:componentInstances>

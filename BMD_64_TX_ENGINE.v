@@ -67,7 +67,6 @@ module BMD_TX_ENGINE (
                         req_be_i,
                         req_addr_i,     
 
-                        // BMD Read Access
 
                         rd_addr_o,   
                         rd_be_o,    
@@ -78,8 +77,6 @@ module BMD_TX_ENGINE (
           
                         init_rst_i,
 
-                        // Write Initiator
-
                         mwr_start_i,
                         mwr_int_dis_i,
                         mwr_len_i,
@@ -87,7 +84,6 @@ module BMD_TX_ENGINE (
                         mwr_lbe_i,
                         mwr_fbe_i,
                         mwr_addr_i,
-//                        addr_rd_enable_o,
 								addr_empty_i,
                         mwr_data_i,
                         mwr_count_i,
@@ -99,8 +95,6 @@ module BMD_TX_ENGINE (
                         mwr_relaxed_order_i,
                         mwr_nosnoop_i,
                         mwr_wrr_cnt_i,
-
-                        // Read Initiator
 
                         mrd_start_i,
                         mrd_int_dis_i,
@@ -229,7 +223,6 @@ module BMD_TX_ENGINE (
     input [1:0]         cfg_phant_func_supported_i;
 
 
-    // Local registers
 
     reg [63:0]          trn_td;
     reg [7:0]           trn_trem_n;
@@ -246,7 +239,7 @@ module BMD_TX_ENGINE (
     reg [7:0]           bmd_64_tx_state;
 
     reg                 compl_done_o;
-    reg                 mwr_done_o;
+   // reg                 mwr_done_o;
 
     reg                 mrd_done;
 
@@ -256,7 +249,7 @@ module BMD_TX_ENGINE (
     reg [9:0]           cur_mwr_dw_count;
   
     reg [12:0]          mwr_len_byte;
-   reg [12:0]          mrd_len_byte;
+    reg [12:0]          mrd_len_byte;
 
     reg [31:0]          pmwr_addr;
     reg [31:0]          pmrd_addr;
@@ -275,13 +268,8 @@ module BMD_TX_ENGINE (
 
 	 reg [31:0] MyPacketCounter;
 	 
-	 //reg WriteAddressSelector=0;
 
-    // Local wires
-   
-//    wire [15:0]         cur_mrd_count_o = cur_rd_count;
     wire                cfg_bm_en = cfg_bus_mstr_enable_i;
-//    wire [31:0]         mwr_addr  = WriteAddressSelector?mwr_addr2_i:mwr_addr1_i;
     wire [31:0]         mrd_addr  = mrd_addr_i;
     wire [31:0]         mwr_data_i_sw = {mwr_data_i[07:00],
                                          mwr_data_i[15:08],
@@ -304,25 +292,20 @@ module BMD_TX_ENGINE (
 	 wire 		 tmp_clk;
 	 
 	 wire [63:0] FIFO_data;
-	 wire FIFO_readenable = ((bmd_64_tx_state==`BMD_64_TX_MWR_QWN) && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_mwr_dw_count != 1'h1));
+	 wire FIFO_readenable = ((bmd_64_tx_state==`BMD_64_TX_MWR_QWN) && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_mwr_dw_count>2));
 	 wire FIFO_empty;
 	 wire FIFO_full;
 	 wire FIFO_half;
+	 reg FIFO_was_full;
 	 
-    /*
-     * Present address and byte enable to memory module
-     */
+	 //interrupt at start of next buffer write
+	 wire assert_interrupt = ((bmd_64_tx_state==`BMD_64_TX_MWR_QW1)  && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_wr_count == 0));
+	 //read new address at end of buffer write
+	 assign mwr_done_o = ((bmd_64_tx_state==`BMD_64_TX_MWR_QWN) && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_wr_count == rmwr_count) && (cur_mwr_dw_count == 1'h1));
 
     assign rd_addr_o = req_addr_i[10:2];
     assign rd_be_o =   req_be_i[3:0];
 
-	//always @(posedge ADCc) begin
-	//	cx <= cx+1'b1;
-	//end
-
-    /*
-     * Calculate byte count based on byte enable
-     */
 
     always @ (rd_be_o) begin
 
@@ -344,9 +327,6 @@ module BMD_TX_ENGINE (
 
     end
 
-    /*
-     * Calculate lower address based on  byte enable
-     */
 
     always @ (rd_be_o or req_addr_i) begin
 
@@ -376,14 +356,23 @@ module BMD_TX_ENGINE (
 
     end
 
-   b8to64 b8to64_inst(.ADC1_in(ADC1), .ADC2_in(ADC2), .InputClock(ADCc), .DoubleInputClock(ADCc_2x), .OutputData(tmp_data), .OutputDataClock(tmp_clk), .OutputSignals(S_OUT), .CONFIG_REG_1(CONFIG_REG_1), .CONFIG_REG_2(CONFIG_REG_2));
+   wire fifo_rst;
 
-	fifo_generator_v8_1 fg81(.rst(!rst_n), .wr_clk(tmp_clk),.rd_clk(clk),.din(tmp_data),.wr_en(1'b1),
-								.rd_en(FIFO_readenable),.dout(FIFO_data),.full(FIFO_full),.empty(FIFO_empty), .prog_empty(FIFO_half));	
+   b8to64 b8to64_inst(.clk(clk), .fifo_rst(fifo_rst), .fifo_full(FIFO_full), .rst((!rst_n)|init_rst_i), .ADC1_in(ADC1), .ADC2_in(ADC2), .InputClock(ADCc), .DoubleInputClock(ADCc_2x), .OutputData(tmp_data), .OutputDataClock(tmp_clk), .OutputSignals(S_OUT), .CONFIG_REG_1(CONFIG_REG_1), .CONFIG_REG_2(CONFIG_REG_2));
 
-    /*
-     *  Interrupt Controller
-     */
+	adc_data_fifo fifo(.rst(fifo_rst), .wr_clk(ADCc), .rd_clk(clk), .din(tmp_data), .wr_en(tmp_clk),
+								.rd_en(FIFO_readenable), .dout(FIFO_data), .full(FIFO_full), .empty(FIFO_empty), .prog_empty(FIFO_half));	
+
+	reg FIFO_was_full_rst=0;
+
+	always @ (posedge ADCc)
+		if(FIFO_full)
+			FIFO_was_full <= 1;
+		else if(FIFO_was_full_rst)
+			FIFO_was_full <= 0;
+
+
+	assign LED = (!rst_n)|init_rst_i;
 
     BMD_INTR_CTRL BMD_INTR_CTRL  (
 
@@ -392,7 +381,7 @@ module BMD_TX_ENGINE (
 
       .init_rst_i(init_rst_i),                       // I
 
-      .mwr_done_i(mwr_done_o),      // I
+      .mwr_done_i(assert_interrupt),      // I
 
       .msi_on(cfg_msi_enable_i),                     // I
 
@@ -403,10 +392,6 @@ module BMD_TX_ENGINE (
 
     );
 
-
-    /*
-     *  Tx State Machine 
-     */
 
     always @ ( posedge clk ) begin
 
@@ -422,12 +407,11 @@ module BMD_TX_ENGINE (
           cur_mwr_dw_count  <= 10'b0;
 
           compl_done_o      <= 1'b0;
-          mwr_done_o        <= 1'b0;
+          //mwr_done_o        <= 1'b0;
 
           mrd_done          <= 1'b0;
 
           cur_wr_count      <= 16'b0;
-//          cur_rd_count      <= 16'b1;
 
           mwr_len_byte      <= 13'b0;
           mrd_len_byte      <= 13'b0;
@@ -444,7 +428,7 @@ module BMD_TX_ENGINE (
           tmwr_wrr_cnt      <= 8'h00;
           tmrd_wrr_cnt      <= 8'h00;
 			 MyPacketCounter	 <= 32'b0;
-//			 WriteAddressSelector <= 0;
+			 FIFO_was_full_rst   <= 0;
 			 
           bmd_64_tx_state   <= `BMD_64_TX_RST_STATE;
 
@@ -463,7 +447,7 @@ module BMD_TX_ENGINE (
             cur_mwr_dw_count  <= 10'b0;
   
             compl_done_o      <= 1'b0;
-            mwr_done_o        <= 1'b0;
+            //mwr_done_o        <= 1'b0;
 				
             mrd_done          <= 1'b0;
   
@@ -485,7 +469,7 @@ module BMD_TX_ENGINE (
             tmwr_wrr_cnt      <= 8'h00;
             tmrd_wrr_cnt      <= 8'h00;
   			   MyPacketCounter	<= 32'b0;
-//				WriteAddressSelector <= 0;
+				FIFO_was_full_rst	   <= 0;
 				
             bmd_64_tx_state   <= `BMD_64_TX_RST_STATE;
 
@@ -499,10 +483,9 @@ module BMD_TX_ENGINE (
 
             `BMD_64_TX_RST_STATE : begin
 
- 				 mwr_done_o   <= 1'b0;
+				 FIFO_was_full_rst <= 0;
+ 				 //mwr_done_o   <= 1'b0;
              compl_done_o       <= 1'b0;
-
-              // PIO read completions always get highest priority
 
               if (req_compl_q && 
                   !compl_done_o &&
@@ -531,14 +514,14 @@ module BMD_TX_ENGINE (
                 bmd_64_tx_state   <= `BMD_64_TX_CPLD_QW1;
 
               end else if (mwr_start_i && 			//start write operation
-                           //!mwr_done_o &&
-                           //serv_mwr &&
-									!addr_empty_i && /////////////////////
-									!FIFO_half &&
+									!addr_empty_i &&        //if buffer queue is not empty
+									!FIFO_half &&           //and FIFO has enough data
+									!FIFO_full &&		      //and FIFO is not full
                            !trn_tdst_rdy_n &&
                            trn_tdst_dsc_n && 
                            cfg_bm_en) begin
-             
+
+				 
                 trn_tsof_n       <= 1'b0;
                 trn_teof_n       <= 1'b1;
                 trn_tsrc_rdy_n   <= 1'b0;
@@ -551,7 +534,7 @@ module BMD_TX_ENGINE (
                                       {4'b0}, 
                                       1'b0, 
                                       1'b0, 
-                                      {mwr_relaxed_order_i, mwr_nosnoop_i}, // 2'b00, 
+                                      {mwr_relaxed_order_i, mwr_nosnoop_i},
                                       {2'b0}, 
                                       mwr_len_i[9:0],
                                       {completer_id_i[15:3], mwr_func_num}, 
@@ -560,13 +543,9 @@ module BMD_TX_ENGINE (
                                       mwr_fbe_i};
                 trn_trem_n        <= 8'b0;
                 cur_mwr_dw_count  <= mwr_len_i[9:0];
-        			 MyPacketCounter	 <= MyPacketCounter + 1'b1;
                 
                 
-//                if (mwr_64b_en_i)
-//						bmd_64_tx_state   <= `BMD_64_TX_MWR64_QW1;
-//                else
-						bmd_64_tx_state   <= `BMD_64_TX_MWR_QW1;
+					 bmd_64_tx_state   <= `BMD_64_TX_MWR_QW1;
                 
                 
               end else  begin
@@ -582,7 +561,7 @@ module BMD_TX_ENGINE (
 
                   serv_mwr          <= ~serv_mwr;
                   
-						mwr_done_o        <= 1'b0;
+						//mwr_done_o        <= 1'b0;
 
 
                 end
@@ -642,28 +621,26 @@ module BMD_TX_ENGINE (
 
             `BMD_64_TX_MWR_QW1 : begin
 
-              if ((!trn_tdst_rdy_n) && (trn_tdst_dsc_n)) begin
+              if ((!trn_tdst_rdy_n) && (trn_tdst_dsc_n)) begin //start of TLP
                 trn_tsof_n       <= 1'b1;
                 trn_tsrc_rdy_n   <= 1'b0;
-                if (cur_wr_count == 0) begin
-						//WriteAddressSelector <= ~WriteAddressSelector;
-						mwr_done_o   <= 1'b1;
-                  tmwr_addr       = mwr_addr_i;
+                if (cur_wr_count == 0) begin    //first TLP in buffer
+                  tmwr_addr       = mwr_addr_i; //set new write address
                 end else 
-						 tmwr_addr       = pmwr_addr + mwr_len_byte;
-					 trn_td           <= {{tmwr_addr[31:2], 2'b00}, FIFO_readenable, FIFO_empty, FIFO_half, FIFO_full, MyPacketCounter[27:0]};
+						tmwr_addr       = pmwr_addr + mwr_len_byte;
+					 trn_td           <= {{tmwr_addr[31:2], 2'b00}, FIFO_was_full, FIFO_empty, FIFO_half, FIFO_full, MyPacketCounter[27:0]};
+        			 MyPacketCounter	 <= MyPacketCounter + 1'b1;
 					 pmwr_addr        <= tmwr_addr;
 					 cur_wr_count <= cur_wr_count + 1'b1;
-					 if (cur_mwr_dw_count == 1'h1) begin
+					 if (cur_mwr_dw_count == 1'h1) begin //last DW of TLP - never for 32-DW TLP
 						trn_teof_n       <= 1'b0;
 						cur_mwr_dw_count <= cur_mwr_dw_count - 1'h1; 
 						trn_trem_n       <= 8'h00;
 						if (cur_wr_count == (rmwr_count - 1'b1))  begin
 						  cur_wr_count <= 0; 
-						  //mwr_done_o   <= 1'b1;
 						end
 						bmd_64_tx_state  <= `BMD_64_TX_RST_STATE;
-					 end else begin
+					 end else begin 	//at least 1 DW remaining
 						cur_mwr_dw_count <= cur_mwr_dw_count - 1'h1; 
 						trn_trem_n       <= 8'hFF;
 						bmd_64_tx_state  <= `BMD_64_TX_MWR_QWN;
@@ -678,28 +655,25 @@ module BMD_TX_ENGINE (
  
             `BMD_64_TX_MWR_QWN : begin
 
-					mwr_done_o   <= 1'b0;
-
               if ((!trn_tdst_rdy_n) && (trn_tdst_dsc_n)) begin
 
                 trn_tsrc_rdy_n   <= 1'b0;
 
-                if (cur_mwr_dw_count == 1'h1) begin
+                if (cur_mwr_dw_count == 1'h1) begin //last DW - end of TLP
 
                   trn_td           <= {FIFO_readenable, FIFO_empty, FIFO_half, FIFO_full, MyPacketCounter[27:0], 32'hd0_da_d0_da};
+					   FIFO_was_full_rst <= 0;
                   trn_trem_n       <= 8'h0F;
                   trn_teof_n       <= 1'b0;
                   cur_mwr_dw_count <= cur_mwr_dw_count - 1'h1; 
                   bmd_64_tx_state  <= `BMD_64_TX_RST_STATE;
 
-                  if (cur_wr_count == rmwr_count)  begin
-
+                  if (cur_wr_count == rmwr_count)  begin  //end of buffer
+						  //mwr_done_o   <= 1;          //assert interrupt, ask fifo for new address
                     cur_wr_count <= 0; 
-                    //mwr_done_o   <= 1'b1;
-
                   end 
 
-                end else if (cur_mwr_dw_count == 2'h2) begin
+                end else if (cur_mwr_dw_count == 2'h2) begin //last 2 DW: never for 32-DW TLP
 
                   trn_td           <= {mwr_data_i_sw, mwr_data_i_sw};
                   trn_trem_n       <= 8'h00;
@@ -708,15 +682,13 @@ module BMD_TX_ENGINE (
                   bmd_64_tx_state  <= `BMD_64_TX_RST_STATE;
 
                   if (cur_wr_count == rmwr_count)  begin
-
                     cur_wr_count <= 0; 
-                    //mwr_done_o   <= 1'b1;
-
                   end
 
-                end else begin
+                end else begin	//content of TLP
 
                   trn_td           <= FIFO_data;
+					   FIFO_was_full_rst <= 1;
                   trn_trem_n       <= 8'hFF;
                   cur_mwr_dw_count <= cur_mwr_dw_count - 2'h2; 
                   bmd_64_tx_state  <= `BMD_64_TX_MWR_QWN;

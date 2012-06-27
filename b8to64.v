@@ -1,4 +1,8 @@
 module b8to64(
+	clk,
+	rst,
+	fifo_rst,
+	fifo_full,
 	ADC1_in,
 	ADC2_in,
 	InputClock,
@@ -10,6 +14,10 @@ module b8to64(
 	CONFIG_REG_2
 	);
 	
+	input clk;
+	input rst;
+	output fifo_rst;
+	input fifo_full;
 	input [7:0] ADC1_in; 		//input data from ADC
 	input [7:0] ADC2_in;			//input data from ADC
 	input InputClock;					//input clock from ADC
@@ -20,24 +28,41 @@ module b8to64(
 	input [31:0] CONFIG_REG_1;	//input control data from PC
 	input [31:0] CONFIG_REG_2;	//input control data from PC
 			
+	reg rst_local;
+	reg rst_local_2;
+	reg rst_local_3;
+			
+	always @(posedge clk) rst_local_2<=(rst|rst_local_3);
+	always @(posedge InputClock) begin
+		rst_local_3<=fifo_full;
+		rst_local<=rst_local_2;
+	end
+			
+//	reg fifo_rst;
+//	wire rst_local=(rst_local_1 | fifo_full);
+	assign fifo_rst=rst_local;
+			
 	reg [7:0] DataStorage [5:0]; //temporary ADC data storage
 
-	reg [2:0] CounterOfPoints = 3'b0; // counts 0 to 5 - data for single packet
-	reg [12:0] CounterOfSextets = 13'b0; // up to 8192 sextets of bytes in 1 frame
-	reg [23:0] CounterOfFrames = 24'b0; //
+	reg [2:0] CounterOfPoints; // counts 0 to 5 - data for single packet
+	reg [12:0] CounterOfSextets; // up to 8192 sextets of bytes in 1 frame
+	reg [23:0] CounterOfFrames; //
 	
 	reg DelayState = 0; // 1 tick delay for noise cancelling
 	
 	reg DoubleClockState = 0;
 	
 	always @(posedge DoubleInputClock) begin
-		DoubleClockState <= ~DoubleClockState;
+		if(rst_local)
+			DoubleClockState<=0;
+		else
+			DoubleClockState <= ~DoubleClockState;
 	end
 
-	reg StartPulseState = 1'b0; // stores output [0] state
+	reg StartPulseState; // stores output [0] state
 	assign OutputSignals[0] = StartPulseState;
 
-	reg SwitcherState = 1'b0; // stores output [1] state
+	reg SwitcherState; // stores output [1] state
 	assign OutputSignals[1] = SwitcherState;
 	
 	
@@ -55,39 +80,49 @@ module b8to64(
 
 	wire [63:0] OutputData =  {SelectedADC, HalfClockShiftEnable, SwitcherState, CounterOfSextets[12:0], DataStorage[5], DataStorage[4], DataStorage[3], DataStorage[2], DataStorage[1], DataStorage[0]};
 	assign DATA64_out = OutputData;
-	assign OutputDataClock = ~CounterOfPoints[2]; //positive edge on each 6 counts of CounterOfPoints
+	assign OutputDataClock = ((CounterOfPoints==5)&(DelayState==0)); //positive edge on each 6 counts of CounterOfPoints
 	
 	wire SyncPulseCondition = HalfClockShiftEnable ? DoubleClockState : ~DoubleClockState;
 	
+	
 	always @(posedge InputClock) begin
-		if(CounterOfPoints==5) begin
-			if(CounterOfSextets==FrameLength) begin
-				if(DelayState==0) DelayState<=1;
-				else begin
-			   	CounterOfPoints <= 0;
-					CounterOfSextets <= 0;
-					DelayState <= 0;
-					if(CounterOfFrames>=FrameCountToSwitch) begin
-						CounterOfFrames <= 0;
-						SwitcherState <= ~SwitcherState;
+		if(rst_local) begin
+			CounterOfPoints<=0;
+			CounterOfSextets<=0;
+			CounterOfFrames<=0;
+			StartPulseState<=0;
+			SwitcherState<=0;
+			DelayState<=0;
+		end else begin
+			if(CounterOfPoints==5) begin
+				if(CounterOfSextets==FrameLength) begin
+					if(DelayState==0) DelayState<=1;
+					else begin
+						CounterOfPoints <= 0;
+						CounterOfSextets <= 0;
+						DelayState <= 0;
+						if(CounterOfFrames>=FrameCountToSwitch) begin
+							CounterOfFrames <= 0;
+							SwitcherState <= ~SwitcherState;
+						end
+						else
+							CounterOfFrames <= CounterOfFrames+1;
 					end
-					else
-						CounterOfFrames <= CounterOfFrames+1;
 				end
+				
+				else begin
+					CounterOfPoints <= 0;
+					CounterOfSextets <= CounterOfSextets+1;
+				end
+				
+				if(CounterOfSextets==PulseOffset && SyncPulseCondition) StartPulseState <= 1; //start sync pulse
+				if(CounterOfSextets==PulseOffset+PulseWidth && SyncPulseCondition) StartPulseState <= 0; //finish sync pulse
 			end
 			
-			else begin
-				CounterOfPoints <= 0;
-				CounterOfSextets <= CounterOfSextets+1;
-			end
+			else	CounterOfPoints <= CounterOfPoints+1;
 			
-			if(CounterOfSextets==PulseOffset && SyncPulseCondition) StartPulseState <= 1; //start sync pulse
-			if(CounterOfSextets==PulseOffset+PulseWidth && SyncPulseCondition) StartPulseState <= 0; //finish sync pulse
+			DataStorage[CounterOfPoints] <= ActiveADC;
 		end
-		
-		else	CounterOfPoints <= CounterOfPoints+1;
-		
-		DataStorage[CounterOfPoints] <= ActiveADC;
 	end
 	
 endmodule

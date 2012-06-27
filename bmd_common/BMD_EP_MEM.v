@@ -261,7 +261,7 @@ module BMD_EP_MEM# (
     reg [31:0]        mrd_perf;
     reg [31:0]        mwr_perf;
  
-   reg [31:0]        mrd_perf_post;
+    reg [31:0]        mrd_perf_post;
     reg [31:0]        mwr_perf_post;
  
     
@@ -379,7 +379,7 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
           mwr_int_dis_o <= 1'b0;
           mwr_addr_o  <= 32'b0;
           addr_wr_enable_o  <= 0;
-          mwr_len_o   <= 32;   //packet size in dwords = 32   //32'b0;
+          mwr_len_o   <= 32;   //packet size in dwords = 32
           mwr_count_o <= 32768; //default buffer size = 32768 packets = 4096kb
           mwr_data_o  <= 32'b0;
           mwr_tlp_tc_o <= 3'b0;
@@ -454,44 +454,28 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
 
             // 04-07H :  Reg # 1
             // Byte0[0]: Memory Write Start (RW) 0=no start, 1=start
-            // Byte0[7]: Memory Write Inter Disable (RW) 1=disable
-            // Byte1[0]: Memory Write Done  (RO) 0=not done, 1=done
             7'b0000001: begin
-
               if (wr_en_i) begin
-                mwr_start_o  <= wr_d_i[0];
-//                mwr_relaxed_order_o <=  wr_d_i[5];
-//                mwr_nosnoop_o <= wr_d_i[6];
-//                mwr_int_dis_o <= wr_d_i[7];
+				    mwr_start_o  <= wr_d_i[0];
               end 
-
-//              rd_d_o <= {cpld_data_err_i, 6'b0, mrd_done_o,
-//                         mrd_int_dis_o, 4'b0, mrd_nosnoop_o, mrd_relaxed_order_o, mrd_start_o, 
-//                         7'b0, mwr_done_i,
-//                         mwr_int_dis_o, 4'b0, mwr_nosnoop_o, mwr_relaxed_order_o, mwr_start_o};
 
             end
 
             // 08-0BH : Reg # 2
             // Queue buffer
             7'b0000010: begin
-
               if (wr_en_i) begin
                 mwr_addr_o  <= wr_d_i;
 					 addr_wr_enable_o <= 1;
 				  end	 
               
-              //rd_d_o <= mwr_addr1_o;
-
             end
 
             // 0C-0FH : Reg # 3
-            // DAC
+            // set DACs
             7'b0000011: begin
-
-              if (wr_en_i)
-                DacDataReg <= wr_d_i;
-              
+              if (wr_en_i)	
+                DacDataReg <= wr_d_i;      
               rd_d_o <= DacDataReg;
 					
 				end
@@ -499,11 +483,9 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
             // 10-13H : Reg # 4
             // CONFIG REG 1
             7'b0000100: begin
-
               if (wr_en_i)
- 					 CONFIG_REG_1_reg <= wr_d_i;
-              
-				  rd_d_o <= CONFIG_REG_1_reg;              
+ 					 CONFIG_REG_1_reg[31:13] <= wr_d_i[18:0];  
+				  rd_d_o <= CONFIG_REG_1_reg[31:13];              
 
             end
 
@@ -511,48 +493,32 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
             // 14-17H : Reg # 5
             // CONFIG REG 2
             7'b000101: begin
-
               if (wr_en_i)
- 					 CONFIG_REG_2_reg <= wr_d_i;
-              
+ 					 CONFIG_REG_2_reg <= wr_d_i;      
 				  rd_d_o <= CONFIG_REG_2_reg;              
 
             end
 
             // Reg # 6
-            // buffer size in packets
+            // count of TLP packets in buffer
             7'b000110: begin
-
               if (wr_en_i)
-                mwr_count_o  <= wr_d_i;
-              
+                mwr_count_o  <= wr_d_i;         
               rd_d_o <= mwr_count_o; 
 				  
             end
  
-            // 48-4BH : Reg # 18
-            // INTDI (RW)
-            // INTDO
-            // MMEN
-            // MSIEN
 
-//            7'b010010: begin
-//               if (wr_en_i) begin
-//                  INTDI[7:0] <= wr_d_i[7:0];  
-//                  LEGACYCLR <= wr_d_i[8];
-//               end
-//
-//
-//               rd_d_o <= {4'h0, 
-//                          cfg_interrupt_msienable,
-//                          cfg_interrupt_mmenable[2:0],
-//                          cfg_interrupt_do[7:0],
-//                          7'h0,
-//                          LEGACYCLR,
-//                          INTDI[7:0]};
-//            end
+            // Reg # 7
+            // frame length
+            7'b000111: begin
 
-
+              if (wr_en_i) begin
+                CONFIG_REG_1_reg[12:0] <= wr_d_i[12:0];
+				  end              
+              rd_d_o <= CONFIG_REG_1_reg[12:0]; 
+            end
+ 
             // 50-7FH : Reserved
             default: begin
 
