@@ -1,5 +1,0 @@
-Thu May 24 07:33:37 2012
-
-Upgraded fifo_generator_v8_1 from Fifo Generator 8.1 to Fifo Generator 8.3
-
-No changes made to parameter values.
