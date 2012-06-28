@@ -117,6 +117,7 @@ module pcie_blk_ll_credit
        output reg   [7:0]  tx_ch_credits_consumed     = 0,
        // I/O for Tx PD 
        output reg  [11:0]  tx_pd_credits_available    = 0,
+
        output reg  [11:0]  tx_pd_credits_consumed     = 0,
        output reg  [11:0]  tx_npd_credits_available   = 0,
        output reg  [11:0]  tx_npd_credits_consumed    = 0,
@@ -130,6 +131,8 @@ module pcie_blk_ll_credit
 ); 
 //}}}
 //{{{ Functions, Regs, Wires, Parameters
+
+reg  [11:0]  tx_pd_credits_available_tmp = 0;
 
 reg  [11:0] reg_ph_alloc  = 0;
 reg  [11:0] reg_nph_alloc = 0;
@@ -593,7 +596,7 @@ always @(posedge clk) begin
       service_txcon_npd_d          <= #`Tcq 0;
       service_txcon_cd_d           <= #`Tcq 0;
       tx_pd_credits_consumed       <= #`Tcq 0;
-      tx_pd_credits_available      <= #`Tcq 0;
+      tx_pd_credits_available_tmp  <= #`Tcq 0;
       tx_npd_credits_consumed      <= #`Tcq 0;
       tx_npd_credits_available     <= #`Tcq 0;
       tx_cd_credits_consumed_all   <= #`Tcq 0;
@@ -608,7 +611,7 @@ always @(posedge clk) begin
       service_txcon_cd_d           <= #`Tcq service_txcon_cd;
       if (service_txcon_pd_d) begin
         tx_pd_credits_consumed   <= #`Tcq mgmt_stats_credit_d[11:0];
-        tx_pd_credits_available  <= #`Tcq trn_pfc_pd_cl - mgmt_stats_credit_d[11:0];
+        tx_pd_credits_available_tmp  <= #`Tcq trn_pfc_pd_cl - mgmt_stats_credit_d[11:0];
       end
       if (LEGACY_EP && service_txcon_npd_d) begin
         tx_npd_credits_consumed  <= #`Tcq mgmt_stats_credit_d[11:0];
@@ -628,6 +631,13 @@ always @(posedge clk) begin
       else
         l0_stats_cfg_transmitted_cnt <= #`Tcq l0_stats_cfg_transmitted_cnt + l0_stats_cfg_transmitted;
    end
+end
+
+always @(posedge clk) begin
+if (~rst_n)
+tx_pd_credits_available   <= 12'b0;
+else
+tx_pd_credits_available  <= #`Tcq tx_pd_credits_available_tmp[11] ? 12'b0 : tx_pd_credits_available_tmp[11:0];  
 end
 
 assign  tx_cd_credits_consumed     = tx_cd_credits_consumed_all;

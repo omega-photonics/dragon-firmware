@@ -168,6 +168,7 @@ wire       trigger_xfer;
 wire       transaction_init_cpl;
 wire       llk_rx_src_last_req_fell = llk_rx_src_last_req_n_q &&
                                      !llk_rx_src_last_req_n_dly;
+wire       fifo_np_ok_1hdr;
 
 integer    i,j,k,m;
 
@@ -706,21 +707,23 @@ always @(posedge clk) begin
     3'd7: preferred_avail <= #`TCQ preferred_avail_tc[7] && preferred_vld; 
     endcase
     case (next_tc)
-    3'd0: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[0] && !fifo_np_ok && fifo_pcpl_ok; 
-    3'd1: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[1] && !fifo_np_ok && fifo_pcpl_ok; 
-    3'd2: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[2] && !fifo_np_ok && fifo_pcpl_ok; 
-    3'd3: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[3] && !fifo_np_ok && fifo_pcpl_ok; 
-    3'd4: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[4] && !fifo_np_ok && fifo_pcpl_ok; 
-    3'd5: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[5] && !fifo_np_ok && fifo_pcpl_ok; 
-    3'd6: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[6] && !fifo_np_ok && fifo_pcpl_ok; 
-    3'd7: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[7] && !fifo_np_ok && fifo_pcpl_ok; 
+    3'd0: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[0] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
+    3'd1: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[1] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
+    3'd2: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[2] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
+    3'd3: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[3] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
+    3'd4: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[4] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
+    3'd5: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[5] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
+    3'd6: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[6] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
+    3'd7: posted_avail <= #`TCQ !llk_rx_ch_posted_available_n[7] && fifo_np_ok_1hdr && fifo_pcpl_ok; 
     endcase
 
  // It will be assumed that only TC0 will get completions
-   cpl_avail <= #`TCQ  !llk_rx_ch_completion_available_n[0] && !fifo_np_ok && fifo_pcpl_ok;
+   cpl_avail <= #`TCQ  !llk_rx_ch_completion_available_n[0] && fifo_np_ok_1hdr && fifo_pcpl_ok;
 
   end
 end
+
+assign fifo_np_ok_1hdr = (CPL_STREAMING_PRIORITIZE_P_NP ? 1 : !fifo_np_ok);
 
 // Indicate that the PREFERRED packet is also AVAILABLE
 //   for a given TC

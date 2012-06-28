@@ -121,6 +121,7 @@ module pcie_blk_ll_tx
    input  wire        cd_credit_limited,
    input  wire        trn_pfc_cplh_cl_upd,   //used to cause initialization of CPLD fix Margin
    input  wire  [7:0] trn_pfc_cplh_cl,       //CPLD fix Margin value
+   input  wire [2:0]  max_payload_size,
    input  wire        l0_stats_cfg_transmitted
    );
   //}}}
@@ -250,6 +251,11 @@ module pcie_blk_ll_tx
   reg   [8:0]      trn_pfc_cplh_cl_plus1      = 9;
   reg              trn_pfc_cplh_cl_upd_d1     = 0;
   reg              trn_pfc_cplh_cl_upd_d2     = 0;
+
+  reg [11:0]       tx_pd_credits_cc = 0;
+  reg [11:0]       tx_pd_credits_cc_q = 0;
+  reg              tx_pd_credits_returned;
+
   //}}}
 
   //{{{ Shunt Buffer
@@ -723,10 +729,10 @@ module pcie_blk_ll_tx
       llk_tlp_halt <= #`TCQ 
           ((cpls_buffered >= TX_CPL_STALL_THRESHOLD) && fifo_q2[1] && (llk_tlp_halt || (sof_q2 && shift_pipe)))
                                                       ||
-//          (TX_DATACREDIT_FIX_EN &&        
-//           (({6'b000000,td_q2_credits} > cd_space_remaining_int)||cd_space_remaining_int_zero)
-//                                                 &&   fifo_q2[1]   && (llk_tlp_halt || (sof_q2 && shift_pipe)))
-//                                                      ||
+          (TX_DATACREDIT_FIX_EN &&        
+           (({6'b000000,td_q2_credits} > cd_space_remaining_int)||cd_space_remaining_int_zero)
+                                                 &&   fifo_q2[1]   && (llk_tlp_halt || (sof_q2 && shift_pipe)))
+                                                      ||
           (TX_DATACREDIT_FIX_EN && (len_eq1_q2 || !TX_DATACREDIT_FIX_1DWONLY) && (
            (pd_credits_near_gte_far              && ~|fifo_q2[1:0] && (llk_tlp_halt || (sof_q2 && shift_pipe))) ||
            (npd_credits_near_gte_far             &&   fifo_q2[0]   && (llk_tlp_halt || (sof_q2 && shift_pipe)) && LEGACY_EP))
@@ -787,7 +793,7 @@ module pcie_blk_ll_tx
 
   always @(posedge clk) begin
     if (!rst_n) begin
-      user_pd_data_credits_in     <= #`TCQ TX_DATACREDIT_FIX_MARGIN;
+      user_pd_data_credits_in     <= #`TCQ 12'd0;
       user_npd_data_credits_in    <= #`TCQ 'h1; //NPD is different; must account for itself only
       user_cd_data_credits_in     <= #`TCQ TX_DATACREDIT_FIX_MARGIN;
       all_cd_data_credits_in      <= #`TCQ TX_DATACREDIT_FIX_MARGIN;
@@ -848,6 +854,18 @@ module pcie_blk_ll_tx
   end
 
   always @(posedge clk) begin
+    if (!rst_n) begin
+      tx_pd_credits_cc         <= #`TCQ 12'h0;
+      tx_pd_credits_cc_q       <= #`TCQ 12'h0;
+      tx_pd_credits_returned   <= #`TCQ 1'b0;
+    end else begin
+      tx_pd_credits_cc         <= #`TCQ tx_pd_credits_consumed + 12'h1;
+      tx_pd_credits_cc_q       <= #`TCQ tx_pd_credits_cc;
+      tx_pd_credits_returned   <= #`TCQ (tx_pd_credits_available > ((max_payload_size == 3'b000) ? 12'h10 : ((max_payload_size == 3'b001) ? 12'h20 : 12'h30)));
+    end
+  end
+
+  always @(posedge clk) begin
     //SOFq2___|A|_|B|_____ assume "A" is final good packet (first pkt to violate inequality)
     //EOFq2_____|A|_|B|___
     //userpd____(+A (+B
@@ -858,7 +876,7 @@ module pcie_blk_ll_tx
     if (!pd_credit_limited)
       pd_credits_near_gte_far     <= #`TCQ 1'b0;
     else
-      pd_credits_near_gte_far     <= #`TCQ (near_end_pd_credits_buffered  >= tx_pd_credits_available);
+      pd_credits_near_gte_far     <= #`TCQ (user_pd_data_credits_in  != tx_pd_credits_cc_q) ? 1'b1 : !tx_pd_credits_returned;
     if (!npd_credit_limited)
       npd_credits_near_gte_far    <= #`TCQ 1'b0;
     else
@@ -956,85 +974,6 @@ module pcie_blk_ll_tx
   //synthesis translate_on
   //}}}
 
-  //{{{ Assertions
-  `ifdef SV
-  //synthesis translate_off
-     //During SOF, either LLK Tx is inactive, or active transmitting non-Cpl, or active
-     // transmitting a Cpl and is below threshold
-   ASSERT_LLK_TX_NOCPL_BEYOND_THRESHOLD: assert property (@(posedge clk)
-       !llk_tx_sof_n && !llk_tx_src_rdy_n && llk_tx_ch_fifo[1] |->
-              (cpls_buffered <= TX_CPL_STALL_THRESHOLD)  
-                                                         ) else $fatal;
-   ASSERT_SHIFT_PIPE_LUT_EQ_EQUATION:    assert property (@(posedge clk)
-        rst_n  |-> (shift_pipe == shift_pipe_old)
-                                                         ) else $fatal;
-   ASSERT_EOFQ1Q2_REPLACEMENT:           assert property (@(posedge clk)
-        rst_n  |-> (eof_q1_or_eof_q2_only == (eof_q1 || (eof_q2 && !sof_q1)))
-                                                         ) else $fatal;
-   ASSERT_LLKHALT_RISES_ONLY_ON_LLKSOF:  assert property (@(posedge clk)
-        rst_n && llk_tlp_halt |-> !llk_tx_sof_n
-                                                         ) else $fatal;
-   ASSERT_LLK_PD_CREDITCNT_INCONSISTENT: assert property (@(posedge clk)
-        rst_n && !llk_tx_sof_n && !llk_tx_src_rdy_n && !llk_tx_dst_rdy_n |-> (llk_pd_credit_count != user_pd_data_credits_in)
-                                                         ) else $fatal;
-   ASSERT_LLK_NPD_CREDITCNT_INCONSISTENT:assert property (@(posedge clk)
-        rst_n && !llk_tx_sof_n && !llk_tx_src_rdy_n && !llk_tx_dst_rdy_n |-> (llk_npd_credit_count!= user_npd_data_credits_in)
-                                                         ) else $fatal;
-   //ASSERT_LLK_CPL_CREDITCNT_INCONSISTENT:assert property (@(posedge clk)
-   //     rst_n && !llk_tx_sof_n && !llk_tx_src_rdy_n && !llk_tx_dst_rdy_n |-> (llk_cpl_credit_count!= user_cd_data_credits_in)
-   //                                                      ) else $fatal;
-  //synthesis translate_on
-  `else
-  //synthesis translate_off
-     always @(posedge clk) if (rst_n && !llk_tx_sof_n && !llk_tx_src_rdy_n && llk_tx_ch_fifo[1] && (cpls_buffered > TX_CPL_STALL_THRESHOLD)) begin
-        $display("ASSERT_LLK_TX_NOCPL_BEYOND_THRESHOLD");
-        $finish;
-     end
-     always @(posedge clk) if (rst_n && (shift_pipe != shift_pipe_old)) begin
-        $display("ASSERT_SHIFT_PIPE_LUT_EQ_EQUATION");
-        $finish;
-     end
-     always @(posedge clk) if (rst_n && (eof_q1_or_eof_q2_only != (eof_q1 || (eof_q2 && !sof_q1)))) begin
-        $display("ASSERT_EOFQ1Q2_REPLACEMENT");
-        $finish;
-     end
-     always @(posedge clk) if (rst_n && llk_tlp_halt && llk_tx_sof_n) begin
-        $display("ASSERT_LLKHALT_RISES_ONLY_ON_LLKSOF");
-        $finish;
-     end
-     always @(posedge clk) if (rst_n && llk_tlp_halt && llk_tx_sof_n) begin
-        $display("ASSERT_LLKHALT_RISES_ONLY_ON_LLKSOF");
-        $finish;
-     end
-     always @(posedge clk) if (rst_n && !llk_tx_sof_n && !llk_tx_src_rdy_n && !llk_tx_dst_rdy_n && 
-                               (llk_pd_credit_count != user_pd_data_credits_in)) begin
-        $display("ASSERT_LLK_PD_CREDITCNT_INCONSISTENT");
-        $finish;
-     end
-     always @(posedge clk) if (rst_n && !llk_tx_sof_n && !llk_tx_src_rdy_n && !llk_tx_dst_rdy_n && 
-                               (llk_npd_credit_count != user_npd_data_credits_in)) begin
-        $display("ASSERT_LLK_NPD_CREDITCNT_INCONSISTENT");
-        $finish;
-     end
-     reg [9:0] initcnt = 0;
-     always @(posedge clk) begin
-       if (!rst_n)
-         initcnt <= #`TCQ 0;
-       else if (trn_pfc_cplh_cl_upd && !(&initcnt))
-         initcnt <= #`TCQ initcnt + 1;
-     end
-     //Check that Posteds do not go over the limit by more than MPS
-     always @(posedge clk) if (rst_n && pd_credit_limited &&  (near_end_pd_credits_buffered  > (tx_pd_credits_available + 512))) begin
-        $display("ASSERT_TX_TOOMUCH_POSTEDDATA_OUTSTANDING");
-        $finish;
-     end
-     always @(posedge clk) if (rst_n && npd_credit_limited && (near_end_npd_credits_buffered  > (tx_npd_credits_available + 1))) begin
-        $display("ASSERT_TX_TOOMUCH_NONPOSTEDDATA_OUTSTANDING");
-        $finish;
-     end
-  //synthesis translate_on
-  `endif
-  //}}}
 
 
 endmodule // pcie_blk_ll_tx

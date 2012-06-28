@@ -305,6 +305,7 @@ tx_bridge
        .cd_credit_limited        ( cd_credit_limited ),
        .trn_pfc_cplh_cl          ( trn_pfc_cplh_cl),
        .trn_pfc_cplh_cl_upd      ( trn_pfc_cplh_cl_upd),
+       .max_payload_size         ( max_payload_size ),                     // I[2:0]
        .l0_stats_cfg_transmitted ( l0_stats_cfg_transmitted )
 );
 

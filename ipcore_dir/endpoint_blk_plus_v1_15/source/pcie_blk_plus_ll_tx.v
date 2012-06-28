@@ -140,6 +140,7 @@ module pcie_blk_plus_ll_tx #
    output wire        clear_cpl_count,
    input  wire  [7:0] trn_pfc_cplh_cl,
    input  wire        trn_pfc_cplh_cl_upd,
+   input  wire [2:0]  max_payload_size,
    input  wire        l0_stats_cfg_transmitted
    );
 
@@ -244,6 +245,7 @@ module pcie_blk_plus_ll_tx #
      .cd_credit_limited        ( cd_credit_limited ),
      .trn_pfc_cplh_cl          ( trn_pfc_cplh_cl ),
      .trn_pfc_cplh_cl_upd      ( trn_pfc_cplh_cl_upd ),
+     .max_payload_size         ( max_payload_size ),                     // I[2:0]
      .l0_stats_cfg_transmitted ( l0_stats_cfg_transmitted )
     );
 

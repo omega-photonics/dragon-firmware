@@ -875,12 +875,12 @@ module   pcie_top_wrapper #
       localparam [6:0]  VC0TOTALCREDITSPH = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? VC0_CREDITS_PH : VC0_CREDITS_PH;
       localparam [6:0]  VC0TOTALCREDITSNPH = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? VC0_CREDITS_NPH : VC0_CREDITS_NPH;
 
-      localparam [6:0]  VC0TOTALCREDITSCH = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? (INFINITECOMPLETIONS ? 0 : 8) : (INFINITECOMPLETIONS ? 0 : 8); // gui
+      localparam [6:0]  VC0TOTALCREDITSCH = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? ((INFINITECOMPLETIONS == "TRUE") ? 0 : 8) : ((INFINITECOMPLETIONS == "TRUE") ? 0 : 8); // gui
 
       //localparam [6:0]  VC0TOTALCREDITSCH = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? 0 : 0 ; 
       localparam [10:0] VC0TOTALCREDITSPD = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? ((VC0RXFIFOSIZEP_CALC - 192)/16) : ((VC0RXFIFOSIZEP_CALC - 192)/16); 
 
-      localparam [10:0] VC0TOTALCREDITSCD = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? (INFINITECOMPLETIONS ? 0 : 11'h080) : (INFINITECOMPLETIONS ? 0 : 11'h080); // gui
+      localparam [10:0] VC0TOTALCREDITSCD = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? ((INFINITECOMPLETIONS == "TRUE") ? 0 : 11'h080) : ((INFINITECOMPLETIONS == "TRUE") ? 0 : 11'h080); // gui
 
       //localparam [10:0] VC0TOTALCREDITSCD = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? 0 : 0 ; 
       localparam [6:0]  VC1TOTALCREDITSPH = (PORTVCCAPABILITYEXTENDEDVCCOUNT == 0) ? 0 : 8 ; 
@@ -1176,6 +1176,8 @@ wire   [7:0]      pipe_rx_data_k;
 wire   [7:0]      pipe_rx_valid;
 wire   [7:0]      pipe_rx_elec_idle;
 wire   [23:0]     pipe_rx_status;
+reg    [23:0]     pipe_rx_status_q;
+reg    [23:0]     pipe_rx_status_mod;
 wire   [7:0]      pipe_rx_phy_status;
 wire   [7:0]      pipe_rxchanisaligned;
 
@@ -1259,6 +1261,7 @@ wire [3:0] l0_ltssm_state_internal;
    wire [7:0] pipe_rx_data_l7_out;
    reg  [7:0] pipe_lane_present_aligned;
    wire [7:0] pipe_rx_data_k_out;
+   reg  [7:0] pipe_rx_data_k_out_mod;
    wire [7:0] pipe_rx_valid_out;
 
    wire chan_bond_done;
@@ -2113,17 +2116,25 @@ pcie_mim_wrapper_i
       assign   {pipe_rx_status_l7, pipe_rx_status_l6, 
                 pipe_rx_status_l5, pipe_rx_status_l4,                                     
                 pipe_rx_status_l3, pipe_rx_status_l2,                                     
-                pipe_rx_status_l1, pipe_rx_status_l0}               =  pipe_rx_status; 
+//                pipe_rx_status_l1, pipe_rx_status_l0}               =  pipe_rx_status; 
+                pipe_rx_status_l1, pipe_rx_status_l0}               =  pipe_rx_status_mod; 
 
       assign   {pipe_rx_data_k_l7, pipe_rx_data_k_l6,                                                
                 pipe_rx_data_k_l5, pipe_rx_data_k_l4,                                     
                 pipe_rx_data_k_l3, pipe_rx_data_k_l2,                                     
-                pipe_rx_data_k_l1, pipe_rx_data_k_l0}               =  pipe_rx_data_k_out;   
+//                pipe_rx_data_k_l1, pipe_rx_data_k_l0}               =  pipe_rx_data_k_out;   
+                pipe_rx_data_k_l1, pipe_rx_data_k_l0}               =  pipe_rx_data_k_out_mod;   
+reg [7:0] pipe_rx_phy_status_q;
+always @(posedge core_clk)
+begin
+   pipe_rx_phy_status_q = #1 pipe_rx_phy_status;
+end
+
 
       assign   {pipe_rx_phy_status_l7, pipe_rx_phy_status_l6,
                 pipe_rx_phy_status_l5, pipe_rx_phy_status_l4,                                     
                 pipe_rx_phy_status_l3, pipe_rx_phy_status_l2,                                     
-                pipe_rx_phy_status_l1, pipe_rx_phy_status_l0}             =  pipe_rx_phy_status; 
+                pipe_rx_phy_status_l1, pipe_rx_phy_status_l0}             =  pipe_rx_phy_status_q; 
 
       assign   {pipe_rx_data_l7, pipe_rx_data_l6,
                 pipe_rx_data_l5, pipe_rx_data_l4,
@@ -2255,6 +2266,77 @@ pcie_mim_wrapper_i
               .gt_txpreemphesis_0      (gt_txpreemphesis_0),
               .gt_txpreemphesis_1      (gt_txpreemphesis_1)
         );
+
+
+
+always @(posedge core_clk)
+begin
+//if(!trn_reset_n)
+//   pipe_rx_status_q = #1 24'b0;
+//else
+   pipe_rx_status_q = #1 pipe_rx_status;
+end
+
+genvar z;
+generate
+for (z=0; z < NO_OF_LANES; z=z+1)
+begin: masking_rxstatus_charisk
+
+always @(pipe_rx_status_q or pipe_rx_data_k_out) // synthesis parallel_case
+begin
+   case (pipe_rx_status_q[3*z+2:3*z])
+
+
+       3'b000: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b000; //rx not present or normal op
+          pipe_rx_data_k_out_mod[z] = pipe_rx_data_k_out[z];
+       end
+       3'b001: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b001;  //reserved
+          pipe_rx_data_k_out_mod[z] = pipe_rx_data_k_out[z];
+       end
+       3'b010: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b010;  //reserved
+          pipe_rx_data_k_out_mod[z] = pipe_rx_data_k_out[z];
+       end
+       3'b011: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b011; //RX Present
+          pipe_rx_data_k_out_mod[z] = pipe_rx_data_k_out[z];
+       end
+       3'b100: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b000; //8b/10b -- zero out so block does not see
+          pipe_rx_data_k_out_mod[z] = 0;
+       end
+       3'b101: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b101; //overflow
+          pipe_rx_data_k_out_mod[z] = pipe_rx_data_k_out[z];
+       end
+       3'b110: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b110;  //underflow
+          pipe_rx_data_k_out_mod[z] = pipe_rx_data_k_out[z];
+       end
+       3'b111: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b000;  //running disp error -- zero out so block does not see
+          pipe_rx_data_k_out_mod[z] = 0;
+       end
+       default: begin
+          pipe_rx_status_mod[3*z+2:3*z] = 3'b000;
+          pipe_rx_data_k_out_mod[z] = pipe_rx_data_k_out[z];
+       end
+
+
+   endcase
+end
+
+end
+endgenerate
+
+
+
+
+
+
+
 
 assign DEBUG[12:0]  = mim_tx_bwadd;
 assign DEBUG[13]    = mim_tx_bwen;

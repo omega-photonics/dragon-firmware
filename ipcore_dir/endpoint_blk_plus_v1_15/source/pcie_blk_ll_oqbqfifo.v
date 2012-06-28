@@ -113,7 +113,7 @@ wire                oq_wren,        bq_wren;
 wire                oq_rden,        bq_rden;
 wire                oq_full,        bq_full;
 wire                oq_afull,       bq_afull;
-wire                oq_rdy,         bq_rdy;
+wire                oq_rdy,         bq_rdy,  bq_rdy_rnp;
 wire                oq_valid,       bq_valid;
 wire                oq_empty,       bq_empty;
 wire                oq_trn_in_progress, bq_trn_in_progress;
@@ -136,6 +136,7 @@ reg [8:0]           oq_pktcnt       = 0;
 reg [3:0]           bq_pktcnt       = 0;
 reg                 oq_pkt_avail    = 0;
 reg                 bq_pkt_avail    = 0;
+reg                 bq_pkt_avail_rnp = 0;
 reg                 oq_write_pkt_in_progress_reg = 0;
 reg                 new_oq_pkt_wr    =0;
 reg                 new_oq_pkt_wr_d  =0;
@@ -210,7 +211,7 @@ integer             i;
     .WIDTH  (72),
     .DEPTH  (512),
     .STYLE  ("BRAM"),
-    .AFASSERT (512 - 66 - 14), 
+    .AFASSERT (512 - 66 - 14),  // -(512MPS pkt+header)-delay
     .FWFT       (1),
     .SUP_REWIND (1)
    ) oq_fifo (
@@ -269,10 +270,13 @@ integer             i;
   assign trigger_bypass     = (oq_memrd && !bq_afull && !trn_rnp_ok_d);
   assign oq_byp_in_progress = oq_byp_in_progress_reg || trigger_bypass;
 
-  assign bq_rdy = bq_pkt_avail;
+  //assign bq_rdy =             (bq_valid && bq_pkt_avail   && trn_rnp_ok_d);
+  //assign bq_rdy =             (bq_valid && trn_rnp_ok_d);
+  assign bq_rdy     = bq_pkt_avail; //remove rnp
+  assign bq_rdy_rnp = bq_pkt_avail_rnp;
   assign oq_rdy = !bq_rdy && oq_pkt_avail && !oq_byp_in_progress;
 
-  assign trigger_bq_trn     = bq_rdy && !trn_rsrc_rdy && !packet_in_progress;
+  assign trigger_bq_trn     = bq_rdy_rnp && !trn_rsrc_rdy && !packet_in_progress;
   assign bq_trn_in_progress = packet_in_progress_bq || trigger_bq_trn;
 
   assign trigger_oq_trn     = oq_rdy && !trn_rsrc_rdy && !packet_in_progress;
@@ -320,8 +324,8 @@ integer             i;
       else if (bq_trn_in_progress) begin
         // Filling accepted data
         if ((trn_rdst_rdy || !trn_rsrc_rdy) && bq_valid) begin
-           packet_in_progress    <= #`TCQ (!bq_eofout || bq_rdy) || (bq_eofout && oq_rdy);
-           packet_in_progress_bq <= #`TCQ !bq_eofout || bq_rdy;
+           packet_in_progress    <= #`TCQ (!bq_eofout || bq_rdy_rnp) || (bq_eofout && oq_rdy);
+           packet_in_progress_bq <= #`TCQ !bq_eofout || bq_rdy_rnp;
            packet_in_progress_oq <= #`TCQ bq_eofout && oq_rdy && !oq_byp_in_progress;
            trn_rd                <= #`TCQ bq_dataout;
            trn_rsof              <= #`TCQ bq_sofout;
@@ -342,8 +346,8 @@ integer             i;
       else if (oq_trn_in_progress && !oq_byp_in_progress) begin
          //packet_in_progress_oq || (oq_rdy && !trn_rsrc_rdy && !packet_in_progress)) begin
         if ((trn_rdst_rdy || !trn_rsrc_rdy) && oq_valid) begin
-          packet_in_progress    <= #`TCQ (!oq_eofout || oq_rdy) || (oq_eofout && bq_rdy);
-          packet_in_progress_bq <= #`TCQ oq_eofout && bq_rdy;
+          packet_in_progress    <= #`TCQ (!oq_eofout || oq_rdy) || (oq_eofout && bq_rdy_rnp);
+          packet_in_progress_bq <= #`TCQ oq_eofout && bq_rdy_rnp;
           packet_in_progress_oq <= #`TCQ !oq_eofout || oq_rdy;
           trn_rd                <= #`TCQ oq_dataout;
           trn_rsof              <= #`TCQ oq_sofout;
@@ -468,6 +472,7 @@ integer             i;
       oq_pktcnt         <= #`TCQ 'h0;
       bq_pktcnt         <= #`TCQ 'h0;
       oq_pkt_avail      <= #`TCQ 'b0;
+      bq_pkt_avail_rnp  <= #`TCQ 'b0;
       bq_pkt_avail      <= #`TCQ 'b0;
     end else begin
       fifo_np_ok        <= #`TCQ (np_count<8) && !oq_afull;
@@ -506,14 +511,17 @@ integer             i;
       if      ( (bq_wren && oq_eofout) && 
                !(bq_rden && bq_sofout && bq_valid)) begin
         bq_pktcnt         <= #`TCQ bq_pktcnt + 1;
-        bq_pkt_avail      <= #`TCQ trn_rnp_ok_d;
+        bq_pkt_avail_rnp  <= #`TCQ trn_rnp_ok_d;
+        bq_pkt_avail      <= #`TCQ 1'b1;
       end
       else if (!(bq_wren && oq_eofout) &&
                 (bq_rden && bq_sofout && bq_valid)) begin
         bq_pktcnt         <= #`TCQ bq_pktcnt - 1;
-        bq_pkt_avail      <= #`TCQ (bq_pktcnt>1) && trn_rnp_ok_d;
+        bq_pkt_avail_rnp  <= #`TCQ (bq_pktcnt>1) && trn_rnp_ok_d;
+        bq_pkt_avail      <= #`TCQ (bq_pktcnt>1);
       end else begin
-        bq_pkt_avail      <= #`TCQ (bq_pktcnt>0) && trn_rnp_ok_d;
+        bq_pkt_avail_rnp  <= #`TCQ (bq_pktcnt>0) && trn_rnp_ok_d;
+        bq_pkt_avail      <= #`TCQ (bq_pktcnt>0);
       end
     end
   end

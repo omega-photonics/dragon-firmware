@@ -123,6 +123,7 @@ module prod_fixes
    
    parameter [3:0] LT_POLLING  = 4'b0010;
    parameter [3:0] LT_CONFIG   = 4'b0011;
+   parameter [3:0] LT_L0       = 4'b0100;
    parameter [3:0] LT_RECOVERY = 4'b1100;
    
    parameter       IS_D = 1'b0;
@@ -829,27 +830,43 @@ assign upcfgcap_cycle = upcfgcap_cycle_l0;
 
      if (upcfgcap_cycle_l7 == 1'b1) 
         pipe_rx_data_l7_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l7_out <= pipe_rx_data_l7; // CW fix
 
      if (upcfgcap_cycle_l6 == 1'b1)         
         pipe_rx_data_l6_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l6_out <= pipe_rx_data_l6; // CW fix
         
      if (upcfgcap_cycle_l5 == 1'b1)         
         pipe_rx_data_l5_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l5_out <= pipe_rx_data_l5; // CW fix
         
      if (upcfgcap_cycle_l4 == 1'b1)         
         pipe_rx_data_l4_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l4_out <= pipe_rx_data_l4; // CW fix
 
      if (upcfgcap_cycle_l3 == 1'b1)          
         pipe_rx_data_l3_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l3_out <= pipe_rx_data_l3; // CW fix
         
      if (upcfgcap_cycle_l2 == 1'b1)          
         pipe_rx_data_l2_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l2_out <= pipe_rx_data_l2; // CW fix
         
      if (upcfgcap_cycle_l1 == 1'b1)          
         pipe_rx_data_l1_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l1_out <= pipe_rx_data_l1; // CW fix
         
      if (upcfgcap_cycle_l0 == 1'b1)          
         pipe_rx_data_l0_out <= 8'h02;
+     else // CW fix
+        pipe_rx_data_l0_out <= pipe_rx_data_l0; // CW fix
 
         pipe_rx_data_k_out <= pipe_rx_data_k;
         pipe_rx_valid_out  <= pipe_rx_valid;
@@ -911,6 +928,11 @@ assign upcfgcap_cycle = upcfgcap_cycle_l0;
         pipe_rx_data_l0_out <= pipe_rx_data_l0;
         
         pipe_rx_data_k_out <= pipe_rx_data_k;
+        
+        //JA Added work around test for NAK issue
+        if(l0_ltssm_state_d  == LT_L0)
+          pipe_rx_valid_out  <= 8'hff;
+        else
         pipe_rx_valid_out  <= pipe_rx_valid;
         
      end     

@@ -48,13 +48,13 @@
 //
 //-----------------------------------------------------------------------------
 // Project    : V5-Block Plus for PCI Express
-// File       : endpoint_blk_plus_v1_14.v
+// File       : endpoint_blk_plus_v1_15.v
 //--------------------------------------------------------------------------------
 // Description: This is the top-level PCI Express wrapper.
 //--------------------------------------------------------------------------------
 `timescale 1ns/1ns
 
-module endpoint_blk_plus_v1_14 # ( 
+module endpoint_blk_plus_v1_15 # ( 
   parameter        C_XDEVICE = "xc5vlx20t",
   parameter        USE_V5FXT = 0,
   parameter        PCI_EXP_LINK_WIDTH = 1,
@@ -79,9 +79,9 @@ module endpoint_blk_plus_v1_14 # (
   parameter        VEN_ID = VEN_ID_temp[15 : 0],
   parameter        DEV_ID = 16'h0007,
   parameter        REV_ID = 8'h00,
-  parameter        CLASS_CODE = 24'h058000,
-  parameter        BAR0 = 32'hFFFFFC00,
-  parameter        BAR1 = 32'h00000000,
+  parameter        CLASS_CODE = 24'h050000,
+  parameter        BAR0 = 32'hFFFFF804,
+  parameter        BAR1 = 32'hFFFFFFFF,
   parameter        BAR2 = 32'h00000000,
   parameter        BAR3 = 32'h00000000,
   parameter        BAR4 = 32'h00000000,
