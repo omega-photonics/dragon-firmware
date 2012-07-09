@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=Y:\SparkleShare\omega\dragon\current\dragon-firmware\xilinx_pci_exp_ep.ncd
-OUTFILE=Y:\SparkleShare\omega\dragon\current\dragon-firmware\xilinx_pci_exp_ep.bit
+INFILE=Y:\dragon_firmware\xilinx_pci_exp_ep.ncd
+OUTFILE=Y:\dragon_firmware\xilinx_pci_exp_ep.bit
 FAMILY=Virtex5
 PART=xc5vlx20t-1ff323
-WORKINGDIR=Y:\SparkleShare\omega\dragon\current\dragon-firmware
-LICENSE=WebPack
-USER_INFO=210634609_0_0_257
+WORKINGDIR=Y:\dragon_firmware
+LICENSE=ISE
+USER_INFO=No user information available.

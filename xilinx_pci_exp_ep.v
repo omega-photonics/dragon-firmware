@@ -89,7 +89,7 @@ module     xilinx_pci_exp_ep
 	wire ADCc;
 	wire ADCc_2x;
 
-	clockdoubler clockdoubler_inst(.CLKIN_IN(ADCclk), .CLKIN_IBUFG_OUT(ADCc), .CLK2X_OUT(ADCc_2x));
+	clockdoubler clockdoubler_inst(.CLKIN_IN(ADCclk), .CLKIN_IBUFG_OUT(ADCc), .CLK0_OUT(ADCc_2x));
 
 	//133mhz test counter on adc clock
 	reg [23:0] mycnt2;
@@ -339,7 +339,7 @@ pci_exp_64b_app app (
       );
 
 
-endpoint_blk_plus_v1_15 ep  (
+endpoint_blk_plus_v1_14 ep  (
 
 
       //

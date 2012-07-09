@@ -52,13 +52,6 @@ module b8to64(
 	
 	reg DoubleClockState = 0;
 	
-	always @(posedge DoubleInputClock) begin
-		if(rst_local)
-			DoubleClockState<=0;
-		else
-			DoubleClockState <= ~DoubleClockState;
-	end
-
 	reg StartPulseState; // stores output [0] state
 	assign OutputSignals[0] = StartPulseState;
 
@@ -75,14 +68,13 @@ module b8to64(
 	
 	wire [23:0] FrameCountToSwitch = CONFIG_REG_2[23:0];
 
-	wire ADC_AutoSelector = AutoADCSwitching?SelectedADC:CounterOfPoints[0]; //active ADC selector
+	wire ADC_AutoSelector = AutoADCSwitching?CounterOfPoints[0]:SelectedADC; //active ADC selector
 	wire [7:0] ActiveADC = ADC_AutoSelector ? ADC2_in : ADC1_in;
 
 	wire [63:0] OutputData =  {SelectedADC, HalfClockShiftEnable, SwitcherState, CounterOfSextets[12:0], DataStorage[5], DataStorage[4], DataStorage[3], DataStorage[2], DataStorage[1], DataStorage[0]};
 	assign DATA64_out = OutputData;
-	assign OutputDataClock = ((CounterOfPoints==5)&(DelayState==0)); //positive edge on each 6 counts of CounterOfPoints
-	
-	wire SyncPulseCondition = HalfClockShiftEnable ? DoubleClockState : ~DoubleClockState;
+	//assign OutputDataClock = ((CounterOfPoints==5)&(DelayState==0)); //positive edge on each 6 counts of CounterOfPoints
+	reg OutputDataClock = 0;
 	
 	
 	always @(posedge InputClock) begin
@@ -90,14 +82,17 @@ module b8to64(
 			CounterOfPoints<=0;
 			CounterOfSextets<=0;
 			CounterOfFrames<=0;
-			StartPulseState<=0;
 			SwitcherState<=0;
 			DelayState<=0;
+			OutputDataClock<=0;
 		end else begin
-			if(CounterOfPoints==5) begin
+			DataStorage[CounterOfPoints] = ActiveADC; //blocking!
+
+			if(CounterOfPoints==5) begin			
 				if(CounterOfSextets==FrameLength) begin
 					if(DelayState==0) DelayState<=1;
 					else begin
+						OutputDataClock<=1;
 						CounterOfPoints <= 0;
 						CounterOfSextets <= 0;
 						DelayState <= 0;
@@ -111,18 +106,34 @@ module b8to64(
 				end
 				
 				else begin
+					OutputDataClock<=1;
 					CounterOfPoints <= 0;
 					CounterOfSextets <= CounterOfSextets+1;
 				end
 				
-				if(CounterOfSextets==PulseOffset && SyncPulseCondition) StartPulseState <= 1; //start sync pulse
-				if(CounterOfSextets==PulseOffset+PulseWidth && SyncPulseCondition) StartPulseState <= 0; //finish sync pulse
 			end
 			
-			else	CounterOfPoints <= CounterOfPoints+1;
+			else	begin
+				CounterOfPoints <= CounterOfPoints+1;
+				OutputDataClock <= 0;
+			end
 			
-			DataStorage[CounterOfPoints] <= ActiveADC;
 		end
 	end
+	
+	wire SyncPulseCondition = HalfClockShiftEnable ? DoubleClockState : ~DoubleClockState;
+
+	always @(posedge DoubleInputClock) begin
+		if(rst_local) begin
+			DoubleClockState<=0;
+			StartPulseState<=0;			
+		end
+		else begin
+			DoubleClockState <= ~DoubleClockState;
+			if(CounterOfSextets==PulseOffset && SyncPulseCondition) StartPulseState <= 1; //start sync pulse
+			if(CounterOfSextets==PulseOffset+PulseWidth && SyncPulseCondition) StartPulseState <= 0; //finish sync pulse
+		end
+	end
+
 	
 endmodule

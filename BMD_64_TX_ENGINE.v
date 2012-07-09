@@ -298,12 +298,8 @@ module BMD_TX_ENGINE (
 	 wire FIFO_half;
 	 reg FIFO_was_full;
 	 
-	 //interrupt at start of next buffer write
-	 //wire assert_interrupt = ((bmd_64_tx_state==`BMD_64_TX_MWR_QW1)  && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_wr_count == 0));
-	 //read new address at end of buffer write
-	 assign mwr_done_o = ((bmd_64_tx_state==`BMD_64_TX_MWR_QWN) && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_wr_count == rmwr_count) && (cur_mwr_dw_count == 1'h1));
-	 wire assert_interrupt;
-	 assign assert_interrupt=mwr_done_o;
+	 wire mwr_done_o = ((bmd_64_tx_state==`BMD_64_TX_MWR_QW1)  && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_wr_count == 0));
+	 wire assert_interrupt = ((bmd_64_tx_state==`BMD_64_TX_MWR_QWN) && (!trn_tdst_rdy_n) && (trn_tdst_dsc_n) && (cur_wr_count == rmwr_count) && (cur_mwr_dw_count == 1'h1));
 
     assign rd_addr_o = req_addr_i[10:2];
     assign rd_be_o =   req_be_i[3:0];

@@ -4,14 +4,14 @@
 //   ____  ____ 
 //  /   /\/   / 
 // /___/  \  /    Vendor: Xilinx 
-// \   \   \/     Version : 13.3
+// \   \   \/     Version : 13.1
 //  \   \         Application : xaw2verilog
 //  /   /         Filename : clockdoubler.v
-// /___/   /\     Timestamp : 06/08/2012 01:13:58
+// /___/   /\     Timestamp : 07/09/2012 21:38:13
 // \   \  /  \ 
 //  \___\/\___\ 
 //
-//Command: xaw2verilog -st Z:\Users\ii\SparkleShare\omega\dragon\1_DTS_tn_tat_br\dragon_fw-new\ipcore_dir\.\clockdoubler.xaw Z:\Users\ii\SparkleShare\omega\dragon\1_DTS_tn_tat_br\dragon_fw-new\ipcore_dir\.\clockdoubler
+//Command: xaw2verilog -st Y:\dragon_firmware\ipcore_dir\.\clockdoubler.xaw Y:\dragon_firmware\ipcore_dir\.\clockdoubler
 //Design Name: clockdoubler
 //Device: xc5vlx20t-1ff323
 //
@@ -21,19 +21,18 @@
 `timescale 1ns / 1ps
 
 module clockdoubler(CLKIN_IN, 
+                    RST_IN, 
                     CLKIN_IBUFG_OUT, 
-                    CLK0_OUT, 
-                    CLK2X_OUT);
+                    CLK0_OUT);
 
     input CLKIN_IN;
+    input RST_IN;
    output CLKIN_IBUFG_OUT;
    output CLK0_OUT;
-   output CLK2X_OUT;
    
    wire CLKFB_IN;
    wire CLKIN_IBUFG;
    wire CLK0_BUF;
-   wire CLK2X_BUF;
    wire GND_BIT;
    wire [6:0] GND_BUS_7;
    wire [15:0] GND_BUS_16;
@@ -47,14 +46,12 @@ module clockdoubler(CLKIN_IN,
                            .O(CLKIN_IBUFG));
    BUFG  CLK0_BUFG_INST (.I(CLK0_BUF), 
                         .O(CLKFB_IN));
-   BUFG  CLK2X_BUFG_INST (.I(CLK2X_BUF), 
-                         .O(CLK2X_OUT));
    DCM_ADV #( .CLK_FEEDBACK("1X"), .CLKDV_DIVIDE(2.0), .CLKFX_DIVIDE(1), 
-         .CLKFX_MULTIPLY(4), .CLKIN_DIVIDE_BY_2("FALSE"), .CLKIN_PERIOD(7.519), 
-         .CLKOUT_PHASE_SHIFT("NONE"), .DCM_AUTOCALIBRATION("TRUE"), 
-         .DCM_PERFORMANCE_MODE("MAX_SPEED"), 
+         .CLKFX_MULTIPLY(4), .CLKIN_DIVIDE_BY_2("FALSE"), 
+         .CLKIN_PERIOD(10.000), .CLKOUT_PHASE_SHIFT("NONE"), 
+         .DCM_AUTOCALIBRATION("TRUE"), .DCM_PERFORMANCE_MODE("MAX_SPEED"), 
          .DESKEW_ADJUST("SYSTEM_SYNCHRONOUS"), .DFS_FREQUENCY_MODE("LOW"), 
-         .DLL_FREQUENCY_MODE("HIGH"), .DUTY_CYCLE_CORRECTION("TRUE"), 
+         .DLL_FREQUENCY_MODE("LOW"), .DUTY_CYCLE_CORRECTION("TRUE"), 
          .FACTORY_JF(16'hF0F0), .PHASE_SHIFT(0), .STARTUP_WAIT("FALSE"), 
          .SIM_DEVICE("VIRTEX5") ) DCM_ADV_INST (.CLKFB(CLKFB_IN), 
                          .CLKIN(CLKIN_IBUFG), 
@@ -66,12 +63,12 @@ module clockdoubler(CLKIN_IN,
                          .PSCLK(GND_BIT), 
                          .PSEN(GND_BIT), 
                          .PSINCDEC(GND_BIT), 
-                         .RST(GND_BIT), 
+                         .RST(RST_IN), 
                          .CLKDV(), 
                          .CLKFX(), 
                          .CLKFX180(), 
                          .CLK0(CLK0_BUF), 
-                         .CLK2X(CLK2X_BUF), 
+                         .CLK2X(), 
                          .CLK2X180(), 
                          .CLK90(), 
                          .CLK180(), 

@@ -367,9 +367,9 @@ module BMD_EP#
 `endif
 
 
-dma_buffer_addresses DMA_BUFFERS(
+dma_buffers DMA_BUFFERS(
   .clk(clk),
-  .rst(!rst_n),
+  .rst((!rst_n)|init_rst_i),
   .din(mwr_addr_in),
   .wr_en(addr_wr_enable),
   .rd_en(mwr_done),

@@ -443,13 +443,7 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
                 init_rst_o  <= wr_d_i[0];
         
               rd_d_o <= {fpga_family, {4'b0}, interface_type, version_number, {7'b0}, init_rst_o};
-              
-              if (init_rst_o) begin
-               
-                mwr_start_o <= 1'b0;
-
-              end
-             
+                           
             end
 
             // 04-07H :  Reg # 1
