@@ -1,3 +1,0 @@
-xst -intstyle ise -ifn "C:/Xilinx/project4_test_bmd/pci_exp_64b_app.xst" -ofn "C:/Xilinx/project4_test_bmd/pci_exp_64b_app.syr" 
-ngdbuild -intstyle ise -dd _ngo -nt timestamp -uc PCIe.ucf -p xc5vlx20t-ff323-1 pci_exp_64b_app.ngc pci_exp_64b_app.ngd  
-xst -intstyle ise -ifn "C:/Xilinx/project4_test_bmd/pci_exp_64b_app.xst" -ofn "C:/Xilinx/project4_test_bmd/pci_exp_64b_app.syr" 
