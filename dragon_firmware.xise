@@ -15,67 +15,189 @@
   <version xil_pn:ise_version="13.1" xil_pn:schema_version="2"/>
 
   <files>
-    <file xil_pn:name="b8to64.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="BMD_64_RX_ENGINE.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="BMD_64_TX_ENGINE.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="v5_blk_plus_pci_exp_64b_app.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="xilinx_pci_exp_ep.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD_CFG_CTRL.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD_EP.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD_EP_MEM.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD_EP_MEM_ACCESS.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD_INTR_CTRL.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD_RD_THROTTLE.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="bmd_common/BMD_TO_CTRL.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/clockdoubler.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/dma_buffers.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/adc_data_fifo.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/adc_data_fifo.ngc" xil_pn:type="FILE_NGC"/>
-    <file xil_pn:name="ipcore_dir/dma_buffers.ngc" xil_pn:type="FILE_NGC"/>
-    <file xil_pn:name="PCIe.ucf" xil_pn:type="FILE_UCF"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/bram_common.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_decoder.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_cnt_en.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_cor.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_cpl.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_ftl.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_ram4x26.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_ram8x26.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_intr.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/endpoint_blk_plus_v1_14.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/extend_clk.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_arb.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_err.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_mgmt.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_pwr.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_if.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_arb.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_credit.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_oqbqfifo.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_tx.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_tx_arb.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_plus_ll_rx.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_plus_ll_tx.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_clocking.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_ep.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_gt_wrapper.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_gt_wrapper_top.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_gtx_wrapper.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_mim_wrapper.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_reset_logic.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_soft_int.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_top.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/prod_fixes.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/sync_fifo.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk_bar.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk_mal.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk_pwr_mgmt.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tx_sync_gtp.v" xil_pn:type="FILE_VERILOG"/>
-    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tx_sync_gtx.v" xil_pn:type="FILE_VERILOG"/>
+    <file xil_pn:name="b8to64.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="35"/>
+    </file>
+    <file xil_pn:name="BMD_64_RX_ENGINE.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="48"/>
+    </file>
+    <file xil_pn:name="BMD_64_TX_ENGINE.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="47"/>
+    </file>
+    <file xil_pn:name="v5_blk_plus_pci_exp_64b_app.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="57"/>
+    </file>
+    <file xil_pn:name="xilinx_pci_exp_ep.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="60"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="56"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD_CFG_CTRL.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="54"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD_EP.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="53"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD_EP_MEM.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="34"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD_EP_MEM_ACCESS.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="46"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD_INTR_CTRL.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="33"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD_RD_THROTTLE.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="45"/>
+    </file>
+    <file xil_pn:name="bmd_common/BMD_TO_CTRL.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="52"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/clockdoubler.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="59"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/dma_buffers.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="43"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/adc_data_fifo.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="31"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/adc_data_fifo.ngc" xil_pn:type="FILE_NGC">
+      <association xil_pn:name="Implementation" xil_pn:seqID="32"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/dma_buffers.ngc" xil_pn:type="FILE_NGC">
+      <association xil_pn:name="Implementation" xil_pn:seqID="44"/>
+    </file>
+    <file xil_pn:name="PCIe.ucf" xil_pn:type="FILE_UCF">
+      <association xil_pn:name="Implementation" xil_pn:seqID="0"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/bram_common.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="30"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_decoder.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="19"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_cnt_en.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="18"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_cor.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="17"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_cpl.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="16"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_ftl.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="15"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_ram4x26.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="14"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_errman_ram8x26.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="13"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/cmm_intr.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="12"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/endpoint_blk_plus_v1_14.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="58"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/extend_clk.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="51"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="42"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_arb.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="29"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_err.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="28"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_mgmt.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="27"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_cf_pwr.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="26"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_if.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="50"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="41"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_arb.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="11"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_credit.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="25"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_oqbqfifo.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="10"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_tx.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="9"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_ll_tx_arb.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="8"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_plus_ll_rx.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="24"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_blk_plus_ll_tx.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="23"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_clocking.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="40"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_ep.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="55"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_gt_wrapper.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="21"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_gt_wrapper_top.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="39"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_gtx_wrapper.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="22"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_mim_wrapper.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="38"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_reset_logic.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="37"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_soft_int.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="20"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/pcie_top.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="49"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/prod_fixes.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="36"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/sync_fifo.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="4"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="7"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk_bar.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="3"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk_mal.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="2"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tlm_rx_data_snk_pwr_mgmt.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="1"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tx_sync_gtp.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="6"/>
+    </file>
+    <file xil_pn:name="ipcore_dir/endpoint_blk_plus_v1_14/source/tx_sync_gtx.v" xil_pn:type="FILE_VERILOG">
+      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
+    </file>
   </files>
 
   <autoManagedFiles>
@@ -202,9 +324,9 @@
     <property xil_pn:name="ISim UUT Instance Name" xil_pn:value="UUT" xil_pn:valueState="default"/>
     <property xil_pn:name="Ignore User Timing Constraints Map" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Ignore User Timing Constraints Par" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Implementation Top" xil_pn:value="" xil_pn:valueState="default"/>
+    <property xil_pn:name="Implementation Top" xil_pn:value="Module|xilinx_pci_exp_ep" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Implementation Top File" xil_pn:value="xilinx_pci_exp_ep.v" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="Implementation Top Instance Path" xil_pn:value="" xil_pn:valueState="default"/>
+    <property xil_pn:name="Implementation Top Instance Path" xil_pn:value="/xilinx_pci_exp_ep" xil_pn:valueState="non-default"/>
     <property xil_pn:name="Include 'uselib Directive in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Include SIMPRIM Models in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Include UNISIM Models in Verilog File" xil_pn:value="false" xil_pn:valueState="default"/>
@@ -265,7 +387,7 @@
     <property xil_pn:name="Other XPWR Command Line Options" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Other XST Command Line Options" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="Output Extended Identifiers" xil_pn:value="false" xil_pn:valueState="default"/>
-    <property xil_pn:name="Output File Name" xil_pn:value="" xil_pn:valueState="default"/>
+    <property xil_pn:name="Output File Name" xil_pn:value="xilinx_pci_exp_ep" xil_pn:valueState="default"/>
     <property xil_pn:name="Overwrite Compiled Libraries" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Pack I/O Registers into IOBs" xil_pn:value="Auto" xil_pn:valueState="default"/>
     <property xil_pn:name="Pack I/O Registers/Latches into IOBs" xil_pn:value="Off" xil_pn:valueState="default"/>
@@ -278,10 +400,10 @@
     <property xil_pn:name="Placer Effort Level Map" xil_pn:value="High" xil_pn:valueState="default"/>
     <property xil_pn:name="Placer Extra Effort Map" xil_pn:value="None" xil_pn:valueState="default"/>
     <property xil_pn:name="Port to be used" xil_pn:value="Auto - default" xil_pn:valueState="default"/>
-    <property xil_pn:name="Post Map Simulation Model Name" xil_pn:value="_map.v" xil_pn:valueState="default"/>
-    <property xil_pn:name="Post Place &amp; Route Simulation Model Name" xil_pn:value="_timesim.v" xil_pn:valueState="default"/>
-    <property xil_pn:name="Post Synthesis Simulation Model Name" xil_pn:value="_synthesis.v" xil_pn:valueState="default"/>
-    <property xil_pn:name="Post Translate Simulation Model Name" xil_pn:value="_translate.v" xil_pn:valueState="default"/>
+    <property xil_pn:name="Post Map Simulation Model Name" xil_pn:value="xilinx_pci_exp_ep_map.v" xil_pn:valueState="default"/>
+    <property xil_pn:name="Post Place &amp; Route Simulation Model Name" xil_pn:value="xilinx_pci_exp_ep_timesim.v" xil_pn:valueState="default"/>
+    <property xil_pn:name="Post Synthesis Simulation Model Name" xil_pn:value="xilinx_pci_exp_ep_synthesis.v" xil_pn:valueState="default"/>
+    <property xil_pn:name="Post Translate Simulation Model Name" xil_pn:value="xilinx_pci_exp_ep_translate.v" xil_pn:valueState="default"/>
     <property xil_pn:name="Power Down Device if Over Safe Temperature" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Power Reduction Map" xil_pn:value="false" xil_pn:valueState="default"/>
     <property xil_pn:name="Power Reduction Par" xil_pn:value="false" xil_pn:valueState="default"/>

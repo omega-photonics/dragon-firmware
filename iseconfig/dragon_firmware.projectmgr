@@ -8,40 +8,103 @@
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
          <ClosedNode>/endpoint_blk_plus_v1_14 Y:|dragon_firmware|ipcore_dir|endpoint_blk_plus_v1_14|source|endpoint_blk_plus_v1_14.v</ClosedNode>
+         <ClosedNode>/xilinx_pci_exp_ep Y:|work|omega|dragon|current|dragon_firmware|xilinx_pci_exp_ep.v/app - pci_exp_64b_app</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>dma_buffers (Y:/dragon_firmware/ipcore_dir/dma_buffers.v)</SelectedItem>
+         <SelectedItem>xilinx_pci_exp_ep (Y:/work/omega/dragon/current/dragon_firmware/xilinx_pci_exp_ep.v)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >1</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000231000000020000000000000000000000000200000064ffffffff000000810000000300000002000002310000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>dma_buffers (Y:/dragon_firmware/ipcore_dir/dma_buffers.v)</CurrentItem>
+      <CurrentItem>xilinx_pci_exp_ep (Y:/work/omega/dragon/current/dragon_firmware/xilinx_pci_exp_ep.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
-         <ClosedNode>Design Utilities</ClosedNode>
+         <ClosedNode>Design Utilities/Compile HDL Simulation Libraries</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem/>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000016f000000010000000100000000000000000000000064ffffffff0000008100000000000000010000016f0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem/>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView guiview="File" >
       <ClosedNodes>
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
-      <SelectedItems/>
+      <SelectedItems>
+         <SelectedItem>tx_sync_gtx.v</SelectedItem>
+         <SelectedItem>tx_sync_gtp.v</SelectedItem>
+         <SelectedItem>tlm_rx_data_snk_pwr_mgmt.v</SelectedItem>
+         <SelectedItem>tlm_rx_data_snk_mal.v</SelectedItem>
+         <SelectedItem>tlm_rx_data_snk_bar.v</SelectedItem>
+         <SelectedItem>tlm_rx_data_snk.v</SelectedItem>
+         <SelectedItem>sync_fifo.v</SelectedItem>
+         <SelectedItem>prod_fixes.v</SelectedItem>
+         <SelectedItem>pcie_top.v</SelectedItem>
+         <SelectedItem>pcie_soft_int.v</SelectedItem>
+         <SelectedItem>pcie_reset_logic.v</SelectedItem>
+         <SelectedItem>pcie_mim_wrapper.v</SelectedItem>
+         <SelectedItem>pcie_gtx_wrapper.v</SelectedItem>
+         <SelectedItem>pcie_gt_wrapper_top.v</SelectedItem>
+         <SelectedItem>pcie_gt_wrapper.v</SelectedItem>
+         <SelectedItem>pcie_ep.v</SelectedItem>
+         <SelectedItem>pcie_clocking.v</SelectedItem>
+         <SelectedItem>pcie_blk_plus_ll_tx.v</SelectedItem>
+         <SelectedItem>pcie_blk_plus_ll_rx.v</SelectedItem>
+         <SelectedItem>pcie_blk_ll_tx_arb.v</SelectedItem>
+         <SelectedItem>pcie_blk_ll_tx.v</SelectedItem>
+         <SelectedItem>pcie_blk_ll_oqbqfifo.v</SelectedItem>
+         <SelectedItem>pcie_blk_ll_credit.v</SelectedItem>
+         <SelectedItem>pcie_blk_ll_arb.v</SelectedItem>
+         <SelectedItem>pcie_blk_ll.v</SelectedItem>
+         <SelectedItem>pcie_blk_if.v</SelectedItem>
+         <SelectedItem>pcie_blk_cf_pwr.v</SelectedItem>
+         <SelectedItem>pcie_blk_cf_mgmt.v</SelectedItem>
+         <SelectedItem>pcie_blk_cf_err.v</SelectedItem>
+         <SelectedItem>pcie_blk_cf_arb.v</SelectedItem>
+         <SelectedItem>pcie_blk_cf.v</SelectedItem>
+         <SelectedItem>extend_clk.v</SelectedItem>
+         <SelectedItem>endpoint_blk_plus_v1_14.v</SelectedItem>
+         <SelectedItem>cmm_intr.v</SelectedItem>
+         <SelectedItem>cmm_errman_ram8x26.v</SelectedItem>
+         <SelectedItem>cmm_errman_ram4x26.v</SelectedItem>
+         <SelectedItem>cmm_errman_ftl.v</SelectedItem>
+         <SelectedItem>cmm_errman_cpl.v</SelectedItem>
+         <SelectedItem>cmm_errman_cor.v</SelectedItem>
+         <SelectedItem>cmm_errman_cnt_en.v</SelectedItem>
+         <SelectedItem>cmm_decoder.v</SelectedItem>
+         <SelectedItem>bram_common.v</SelectedItem>
+         <SelectedItem>PCIe.ucf</SelectedItem>
+         <SelectedItem>dma_buffers.ngc</SelectedItem>
+         <SelectedItem>adc_data_fifo.ngc</SelectedItem>
+         <SelectedItem>adc_data_fifo.v</SelectedItem>
+         <SelectedItem>dma_buffers.v</SelectedItem>
+         <SelectedItem>clockdoubler.v</SelectedItem>
+         <SelectedItem>BMD_TO_CTRL.v</SelectedItem>
+         <SelectedItem>BMD_RD_THROTTLE.v</SelectedItem>
+         <SelectedItem>BMD_INTR_CTRL.v</SelectedItem>
+         <SelectedItem>BMD_EP_MEM_ACCESS.v</SelectedItem>
+         <SelectedItem>BMD_EP_MEM.v</SelectedItem>
+         <SelectedItem>BMD_EP.v</SelectedItem>
+         <SelectedItem>BMD_CFG_CTRL.v</SelectedItem>
+         <SelectedItem>BMD.v</SelectedItem>
+         <SelectedItem>xilinx_pci_exp_ep.v</SelectedItem>
+         <SelectedItem>v5_blk_plus_pci_exp_64b_app.v</SelectedItem>
+         <SelectedItem>BMD_64_TX_ENGINE.v</SelectedItem>
+         <SelectedItem>BMD_64_RX_ENGINE.v</SelectedItem>
+         <SelectedItem>b8to64.v</SelectedItem>
+      </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000000000000000100000000000000000000000000000000000002a1000000040101000100000000000000000000000064ffffffff000000810000000000000004000000420000000100000000000000240000000100000000000000660000000100000000000001d50000000100000000</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000000000002010000000000000000000000000000000000000190000000040101000100000000000000000000000064ffffffff000000810000000000000004000000a20000000100000000000000240000000100000000000000660000000100000000000000640000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem>b8to64.v</CurrentItem>
+      <CurrentItem>v5_blk_plus_pci_exp_64b_app.v</CurrentItem>
    </ItemView>
    <ItemView guiview="Library" >
       <ClosedNodes>
@@ -61,8 +124,24 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
          <ClosedNode>Configure Target Device</ClosedNode>
          <ClosedNode>Design Utilities</ClosedNode>
-         <ClosedNode>Implement Design</ClosedNode>
+         <ClosedNode>Implement Design/Map</ClosedNode>
+         <ClosedNode>Implement Design/Place &amp; Route</ClosedNode>
+         <ClosedNode>Implement Design/Translate</ClosedNode>
          <ClosedNode>Synthesize - XST</ClosedNode>
+         <ClosedNode>User Constraints</ClosedNode>
+      </ClosedNodes>
+      <SelectedItems>
+         <SelectedItem>Generate Programming File</SelectedItem>
+      </SelectedItems>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
+      <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000015f000000010000000100000000000000000000000064ffffffff0000008100000000000000010000015f0000000100000000</ViewHeaderState>
+      <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
+      <CurrentItem>Generate Programming File</CurrentItem>
+   </ItemView>
+   <ItemView engineview="SynthesisOnly" sourcetype="DESUT_UCF" guiview="Process" >
+      <ClosedNodes>
+         <ClosedNodesVersion>1</ClosedNodesVersion>
          <ClosedNode>User Constraints</ClosedNode>
       </ClosedNodes>
       <SelectedItems>

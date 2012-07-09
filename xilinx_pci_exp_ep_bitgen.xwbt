@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=Y:\dragon_firmware\xilinx_pci_exp_ep.ncd
-OUTFILE=Y:\dragon_firmware\xilinx_pci_exp_ep.bit
+INFILE=Y:\work\omega\dragon\current\dragon_firmware\xilinx_pci_exp_ep.ncd
+OUTFILE=Y:\work\omega\dragon\current\dragon_firmware\xilinx_pci_exp_ep.bit
 FAMILY=Virtex5
 PART=xc5vlx20t-1ff323
-WORKINGDIR=Y:\dragon_firmware
+WORKINGDIR=Y:\work\omega\dragon\current\dragon_firmware
 LICENSE=ISE
 USER_INFO=No user information available.
