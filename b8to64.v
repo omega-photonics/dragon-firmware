@@ -38,8 +38,6 @@ module b8to64(
 		rst_local<=rst_local_2;
 	end
 			
-//	reg fifo_rst;
-//	wire rst_local=(rst_local_1 | fifo_full);
 	assign fifo_rst=rst_local;
 			
 	reg [7:0] DataStorage [5:0]; //temporary ADC data storage
@@ -96,7 +94,7 @@ module b8to64(
 						CounterOfPoints <= 0;
 						CounterOfSextets <= 0;
 						DelayState <= 0;
-						if(CounterOfFrames>=FrameCountToSwitch) begin
+						if(1+CounterOfFrames>=FrameCountToSwitch) begin
 							CounterOfFrames <= 0;
 							SwitcherState <= ~SwitcherState;
 						end
