@@ -1,0 +1,12 @@
+# Output products list for <dma_buffers_std>
+dma_buffers_std.asy
+dma_buffers_std.gise
+dma_buffers_std.ngc
+dma_buffers_std.v
+dma_buffers_std.veo
+dma_buffers_std.xco
+dma_buffers_std.xise
+dma_buffers_std_flist.txt
+dma_buffers_std_xmdf.tcl
+fifo_generator_readme.txt
+fifo_generator_ug175.pdf

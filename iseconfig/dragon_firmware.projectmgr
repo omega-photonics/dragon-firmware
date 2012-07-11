@@ -8,17 +8,16 @@
       <ClosedNodes>
          <ClosedNodesVersion>2</ClosedNodesVersion>
          <ClosedNode>/endpoint_blk_plus_v1_14 Y:|dragon_firmware|ipcore_dir|endpoint_blk_plus_v1_14|source|endpoint_blk_plus_v1_14.v</ClosedNode>
-         <ClosedNode>/xilinx_pci_exp_ep Y:|work|omega|dragon|current|dragon_firmware|xilinx_pci_exp_ep.v/app - pci_exp_64b_app/BMD - BMD/BMD_EP - BMD_EP/EP_MEM - BMD_EP_MEM_ACCESS</ClosedNode>
          <ClosedNode>/xilinx_pci_exp_ep Y:|work|omega|dragon|current|dragon_firmware|xilinx_pci_exp_ep.v/ep - endpoint_blk_plus_v1_14</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>b8to64_inst - b8to64 (Y:/work/omega/dragon/current/dragon_firmware/b8to64.v)</SelectedItem>
+         <SelectedItem>xilinx_pci_exp_ep (Y:/dragonfirmware/xilinx_pci_exp_ep.v)</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >2</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
-      <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000202000000010000000100000064000001bd000000020000000000000000000000000200000064ffffffff000000810000000300000002000001bd0000000100000003000000000000000100000003</ViewHeaderState>
+      <ViewHeaderState orientation="horizontal" >000000ff00000000000000010000000100000000000000000000000000000000020200000001000000010000006400000231000000020000000000000000000000000200000064ffffffff000000810000000300000002000002310000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>b8to64_inst - b8to64 (Y:/work/omega/dragon/current/dragon_firmware/b8to64.v)</CurrentItem>
+      <CurrentItem>xilinx_pci_exp_ep (Y:/dragonfirmware/xilinx_pci_exp_ep.v)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -39,8 +38,6 @@
          <ClosedNodesVersion>1</ClosedNodesVersion>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>xilinx_pci_exp_ep.v</SelectedItem>
-         <SelectedItem>v5_blk_plus_pci_exp_64b_app.v</SelectedItem>
          <SelectedItem>tx_sync_gtx.v</SelectedItem>
          <SelectedItem>tx_sync_gtp.v</SelectedItem>
          <SelectedItem>tlm_rx_data_snk_pwr_mgmt.v</SelectedItem>
@@ -53,9 +50,9 @@
          <SelectedItem>pcie_soft_int.v</SelectedItem>
          <SelectedItem>pcie_reset_logic.v</SelectedItem>
          <SelectedItem>pcie_mim_wrapper.v</SelectedItem>
+         <SelectedItem>pcie_gtx_wrapper.v</SelectedItem>
          <SelectedItem>pcie_gt_wrapper_top.v</SelectedItem>
          <SelectedItem>pcie_gt_wrapper.v</SelectedItem>
-         <SelectedItem>pcie_gtx_wrapper.v</SelectedItem>
          <SelectedItem>pcie_ep.v</SelectedItem>
          <SelectedItem>pcie_clocking.v</SelectedItem>
          <SelectedItem>pcie_blk_plus_ll_tx.v</SelectedItem>
@@ -72,11 +69,8 @@
          <SelectedItem>pcie_blk_cf_err.v</SelectedItem>
          <SelectedItem>pcie_blk_cf_arb.v</SelectedItem>
          <SelectedItem>pcie_blk_cf.v</SelectedItem>
-         <SelectedItem>PCIe.ucf</SelectedItem>
          <SelectedItem>extend_clk.v</SelectedItem>
          <SelectedItem>endpoint_blk_plus_v1_14.v</SelectedItem>
-         <SelectedItem>dma_buffers.v</SelectedItem>
-         <SelectedItem>dma_buffers.ngc</SelectedItem>
          <SelectedItem>cmm_intr.v</SelectedItem>
          <SelectedItem>cmm_errman_ram8x26.v</SelectedItem>
          <SelectedItem>cmm_errman_ram4x26.v</SelectedItem>
@@ -85,8 +79,9 @@
          <SelectedItem>cmm_errman_cor.v</SelectedItem>
          <SelectedItem>cmm_errman_cnt_en.v</SelectedItem>
          <SelectedItem>cmm_decoder.v</SelectedItem>
-         <SelectedItem>clockdoubler.v</SelectedItem>
          <SelectedItem>bram_common.v</SelectedItem>
+         <SelectedItem>PCIe.ucf</SelectedItem>
+         <SelectedItem>clockdoubler.v</SelectedItem>
          <SelectedItem>BMD_TO_CTRL.v</SelectedItem>
          <SelectedItem>BMD_RD_THROTTLE.v</SelectedItem>
          <SelectedItem>BMD_INTR_CTRL.v</SelectedItem>
@@ -94,12 +89,12 @@
          <SelectedItem>BMD_EP_MEM.v</SelectedItem>
          <SelectedItem>BMD_EP.v</SelectedItem>
          <SelectedItem>BMD_CFG_CTRL.v</SelectedItem>
+         <SelectedItem>BMD.v</SelectedItem>
+         <SelectedItem>xilinx_pci_exp_ep.v</SelectedItem>
+         <SelectedItem>v5_blk_plus_pci_exp_64b_app.v</SelectedItem>
          <SelectedItem>BMD_64_TX_ENGINE.v</SelectedItem>
          <SelectedItem>BMD_64_RX_ENGINE.v</SelectedItem>
-         <SelectedItem>BMD.v</SelectedItem>
          <SelectedItem>b8to64.v</SelectedItem>
-         <SelectedItem>adc_data_fifo.v</SelectedItem>
-         <SelectedItem>adc_data_fifo.ngc</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
@@ -132,13 +127,13 @@
          <ClosedNode>User Constraints</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem></SelectedItem>
+         <SelectedItem>Generate Programming File</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000016f000000010000000100000000000000000000000064ffffffff0000008100000000000000010000016f0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem></CurrentItem>
+      <CurrentItem>Generate Programming File</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_UCF" guiview="Process" >
       <ClosedNodes>
@@ -153,5 +148,16 @@
       <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000000000000000000016f000000010000000100000000000000000000000064ffffffff0000008100000000000000010000016f0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
       <CurrentItem/>
+   </ItemView>
+   <ItemView engineview="SynthesisOnly" sourcetype="DESUT_NGC" guiview="Process" >
+      <ClosedNodes>
+         <ClosedNodesVersion>1</ClosedNodesVersion>
+      </ClosedNodes>
+      <SelectedItems/>
+      <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
+      <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
+      <ViewHeaderState orientation="horizontal" ></ViewHeaderState>
+      <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
+      <CurrentItem></CurrentItem>
    </ItemView>
 </Project>

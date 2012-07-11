@@ -422,6 +422,7 @@ dma_buffers DMA_BUFFERS(
                    .mrd_int_dis_o(mrd_int_dis_o),       // O
                    .mrd_done_o(mrd_done),               // O
                    .mrd_addr_o(mrd_addr),               // O [31:0]
+						 .cur_mwr_addr_i(mwr_addr_out),
                    .mrd_len_o(mrd_len),                 // O [31:0]
                    .mrd_count_o(mrd_count),             // O [31:0]
                    .mrd_tlp_tc_o(mrd_tlp_tc_o),         // O [2:0]
@@ -436,7 +437,7 @@ dma_buffers DMA_BUFFERS(
                    .mwr_int_dis_o(mwr_int_dis_o),       // O
                    .mwr_done_i(mwr_done),               // I
                    .mwr_addr_o(mwr_addr_in),               // O [31:0]
-		   .addr_wr_enable_o(addr_wr_enable),
+						 .addr_wr_enable_o(addr_wr_enable),
                    .mwr_len_o(mwr_len),                 // O [31:0]
                    .mwr_count_o(mwr_count),             // O [31:0]
                    .mwr_data_o(mwr_data),               // O [31:0]

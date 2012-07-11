@@ -77,6 +77,7 @@ module BMD_EP_MEM_ACCESS#
                      mrd_int_dis_o, // O
                      mrd_done_o,    // O
                      mrd_addr_o,    // O [31:0]
+							cur_mwr_addr_i,
                      mrd_len_o,     // O [31:0]
                      mrd_count_o,   // O [31:0]
                      mrd_tlp_tc_o,  // O [2:0]
@@ -187,6 +188,7 @@ module BMD_EP_MEM_ACCESS#
     output           mrd_int_dis_o;
     output           mrd_done_o;
     output [31:0]    mrd_addr_o;
+	 input [31:0]		cur_mwr_addr_i;
     output [31:0]    mrd_len_o;
     output [2:0]     mrd_tlp_tc_o;
     output           mrd_64b_en_o;
@@ -397,6 +399,7 @@ module BMD_EP_MEM_ACCESS#
                       .mrd_int_dis_o(mrd_int_dis_o),        // O
                       .mrd_done_o(mrd_done_o),              // O
                       .mrd_addr_o(mrd_addr_o),              // O [31:0]
+							 .cur_mwr_addr_i(cur_mwr_addr_i),
                       .mrd_len_o(mrd_len_o),                // O [31:0]
                       .mrd_count_o(mrd_count_o),            // O [31:0]
                       .mrd_tlp_tc_o(mrd_tlp_tc_o),          // O [2:0]

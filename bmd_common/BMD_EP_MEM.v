@@ -67,6 +67,7 @@ module BMD_EP_MEM# (
                       mwr_int_dis_o,         // O 
                       mwr_done_i,            // I
                       mwr_addr_o,            // O [31:0]
+							 cur_mwr_addr_i,			// I [32:0]
                       addr_wr_enable_o,      // O 
                       mwr_len_o,             // O [31:0]
                       mwr_tlp_tc_o,          // O [2:0]
@@ -159,6 +160,7 @@ module BMD_EP_MEM# (
     output            mwr_int_dis_o;
     input             mwr_done_i;
     output [31:0]     mwr_addr_o;
+	 input  [32:0]		 cur_mwr_addr_i;
     output            addr_wr_enable_o;
     output [31:0]     mwr_len_o;
     output [2:0]      mwr_tlp_tc_o;
@@ -462,7 +464,7 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
                 mwr_addr_o  <= wr_d_i;
 					 addr_wr_enable_o <= 1;
 				  end	 
-              
+              rd_d_o <= cur_mwr_addr_i;
             end
 
             // 0C-0FH : Reg # 3
