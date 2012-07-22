@@ -54,7 +54,6 @@ module b8to64(
 	assign OutputSignals[0] = StartPulseState;
 
 	reg SwitcherState; // stores output [1] state
-	assign OutputSignals[1] = SwitcherState;
 	
 	
 	wire [12:0] FrameLength = CONFIG_REG_1[12:0];  //defines frame length
@@ -65,6 +64,9 @@ module b8to64(
 	wire [8:0] PulseOffset = CONFIG_REG_1[31:23]; //defines sync pulse offset
 	
 	wire [23:0] FrameCountToSwitch = CONFIG_REG_2[23:0];
+	wire AutoPolSwitching = CONFIG_REG_2[24];
+	wire ManualPolState = CONFIG_REG_2[25];
+	assign OutputSignals[1] = AutoPolSwitching?SwitcherState:ManualPolState;
 
 	wire ADC_AutoSelector = AutoADCSwitching?CounterOfPoints[0]:SelectedADC; //active ADC selector
 	wire [7:0] ActiveADC = ADC_AutoSelector ? ADC2_in : ADC1_in;
