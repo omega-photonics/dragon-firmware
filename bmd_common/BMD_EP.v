@@ -369,7 +369,7 @@ module BMD_EP#
 
 dma_buffers DMA_BUFFERS(
   .clk(clk),
-  .rst((!rst_n)|init_rst_i),
+  .rst((!rst_n)|init_rst),
   .din(mwr_addr_in),
   .wr_en(addr_wr_enable),
   .rd_en(mwr_done),
