@@ -251,7 +251,7 @@ module BMD_EP#
 
     wire              mwr_start;
     wire              mwr_int_dis_o; 
-    wire              mwr_done;
+    wire              request_new_buffer_address;
     wire  [31:0]      mwr_len;
     wire  [7:0]       mwr_tag;
     wire  [3:0]       mwr_lbe;
@@ -372,7 +372,7 @@ dma_buffers DMA_BUFFERS(
   .rst((!rst_n)|init_rst),
   .din(mwr_addr_in),
   .wr_en(addr_wr_enable),
-  .rd_en(mwr_done),
+  .rd_en(request_new_buffer_address),
   .dout(mwr_addr_out),
 //  full,
 //  wr_ack,
@@ -435,7 +435,7 @@ dma_buffers DMA_BUFFERS(
 
                    .mwr_start_o(mwr_start),             // O
                    .mwr_int_dis_o(mwr_int_dis_o),       // O
-                   .mwr_done_i(mwr_done),               // I
+                   .mwr_done_i(request_new_buffer_address),               // I
                    .mwr_addr_o(mwr_addr_in),               // O [31:0]
 						 .addr_wr_enable_o(addr_wr_enable),
                    .mwr_len_o(mwr_len),                 // O [31:0]
@@ -644,7 +644,7 @@ dma_buffers DMA_BUFFERS(
 
                    .mwr_start_i(mwr_start),          // I
                    .mwr_int_dis_i(mwr_int_dis_o),    // I
-                   .mwr_done_o(mwr_done),            // O
+                   .request_new_buffer_address(request_new_buffer_address),            // O
                    .mwr_addr_i(mwr_addr_out),            // I [31:0]
 //						 .addr_rd_enable_o(addr_rd_enable), //O
 						 .addr_empty_i(addr_empty),

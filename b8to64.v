@@ -1,8 +1,6 @@
 module b8to64(
 	clk,
 	rst,
-	fifo_rst,
-	fifo_full,
 	ADC1_in,
 	ADC2_in,
 	InputClock,
@@ -16,8 +14,6 @@ module b8to64(
 	
 	input clk;
 	input rst;
-	output fifo_rst;
-	input fifo_full;
 	input [7:0] ADC1_in; 		//input data from ADC
 	input [7:0] ADC2_in;			//input data from ADC
 	input InputClock;					//input clock from ADC
@@ -27,37 +23,25 @@ module b8to64(
 	output [1:0] OutputSignals;	// [0] - output optical pulse start signal, [1] - switcher output
 	input [31:0] CONFIG_REG_1;	//input control data from PC
 	input [31:0] CONFIG_REG_2;	//input control data from PC
-			
-	reg rst_local;
-	reg rst_local_2;
-	reg rst_local_3;
-			
-	always @(posedge clk) rst_local_2<=(rst|rst_local_3);
-	always @(posedge InputClock) begin
-		rst_local_3<=fifo_full;
-		rst_local<=rst_local_2;
-	end
-			
-	assign fifo_rst=rst_local;
-			
+									
 	reg [7:0] DataStorage [5:0]; //temporary ADC data storage
 
 	reg [2:0] CounterOfPoints; // counts 0 to 5 - data for single packet
 	reg [12:0] CounterOfSextets; // up to 8192 sextets of bytes in 1 frame
 	reg [23:0] CounterOfFrames; //
 	
-	reg DelayState = 0; // 1 tick delay for noise cancelling
+	reg DelayState; // 1 tick delay for noise cancelling, also used as frame end signal
 	
-	reg DoubleClockState = 0;
+	reg DoubleClockState;
 	
 	reg StartPulseState; // stores output [0] state
 	assign OutputSignals[0] = StartPulseState;
 
 	reg SwitcherState; // stores output [1] state
+		
 	
-	
-	wire [12:0] FrameLength = CONFIG_REG_1[12:0];  //defines frame length
-	wire [6:0]  PulseWidth = CONFIG_REG_1[19:13]; //defines sync pulse duration
+	wire [12:0] FrameLength = CONFIG_REG_1[12:0];  //defines frame length: up to 8189
+	wire [6:0]  PulseWidth = CONFIG_REG_1[19:13]; //defines sync pulse duration: up to 127
 	wire SelectedADC = CONFIG_REG_1[20];
 	wire AutoADCSwitching = CONFIG_REG_1[21];
 	wire HalfClockShiftEnable = CONFIG_REG_1[22];
@@ -74,11 +58,11 @@ module b8to64(
 	wire [63:0] OutputData =  {SelectedADC, HalfClockShiftEnable, SwitcherState, CounterOfSextets[12:0], DataStorage[5], DataStorage[4], DataStorage[3], DataStorage[2], DataStorage[1], DataStorage[0]};
 	assign DATA64_out = OutputData;
 	//assign OutputDataClock = ((CounterOfPoints==5)&(DelayState==0)); //positive edge on each 6 counts of CounterOfPoints
-	reg OutputDataClock = 0;
+	reg OutputDataClock;
 	
 	
 	always @(posedge InputClock) begin
-		if(rst_local) begin
+		if(rst) begin
 			CounterOfPoints<=0;
 			CounterOfSextets<=0;
 			CounterOfFrames<=0;
@@ -90,8 +74,9 @@ module b8to64(
 
 			if(CounterOfPoints==5) begin			
 				if(CounterOfSextets==FrameLength) begin
-					if(DelayState==0) DelayState<=1;
-					else begin
+					if(DelayState==0) begin
+						DelayState<=1;
+					end else begin
 						OutputDataClock<=1;
 						CounterOfPoints <= 0;
 						CounterOfSextets <= 0;
@@ -103,8 +88,7 @@ module b8to64(
 						else
 							CounterOfFrames <= CounterOfFrames+1;
 					end
-				end
-				
+				end			
 				else begin
 					OutputDataClock<=1;
 					CounterOfPoints <= 0;
@@ -124,7 +108,7 @@ module b8to64(
 	wire SyncPulseCondition = HalfClockShiftEnable ? DoubleClockState : ~DoubleClockState;
 
 	always @(posedge DoubleInputClock) begin
-		if(rst_local) begin
+		if(rst) begin
 			DoubleClockState<=0;
 			StartPulseState<=0;			
 		end
