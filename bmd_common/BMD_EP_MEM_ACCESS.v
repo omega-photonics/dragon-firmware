@@ -77,7 +77,7 @@ module BMD_EP_MEM_ACCESS#
                      mrd_int_dis_o, // O
                      mrd_done_o,    // O
                      mrd_addr_o,    // O [31:0]
-							cur_mwr_addr_i,
+							mwr_addr_i,
                      mrd_len_o,     // O [31:0]
                      mrd_count_o,   // O [31:0]
                      mrd_tlp_tc_o,  // O [2:0]
@@ -93,6 +93,7 @@ module BMD_EP_MEM_ACCESS#
                      mwr_done_i,    // I
                      mwr_addr_o,    // O [31:0]
                      addr_wr_enable_o,    // O
+							addr_rd_enable_o,
                      mwr_len_o,     // O [31:0]
                      mwr_count_o,   // O [31:0]
                      mwr_data_o,    // O [31:0]
@@ -188,7 +189,7 @@ module BMD_EP_MEM_ACCESS#
     output           mrd_int_dis_o;
     output           mrd_done_o;
     output [31:0]    mrd_addr_o;
-	 input [31:0]		cur_mwr_addr_i;
+	 input  [31:0]		mwr_addr_i;
     output [31:0]    mrd_len_o;
     output [2:0]     mrd_tlp_tc_o;
     output           mrd_64b_en_o;
@@ -204,6 +205,7 @@ module BMD_EP_MEM_ACCESS#
     input            mwr_done_i;
     output [31:0]    mwr_addr_o;
     output           addr_wr_enable_o;
+	 output           addr_rd_enable_o;
     output [31:0]    mwr_len_o;
     output [31:0]    mwr_count_o;
     output [31:0]    mwr_data_o;
@@ -399,8 +401,7 @@ module BMD_EP_MEM_ACCESS#
                       .mrd_int_dis_o(mrd_int_dis_o),        // O
                       .mrd_done_o(mrd_done_o),              // O
                       .mrd_addr_o(mrd_addr_o),              // O [31:0]
-							 .cur_mwr_addr_i(cur_mwr_addr_i),
-                      .mrd_len_o(mrd_len_o),                // O [31:0]
+							 .mrd_len_o(mrd_len_o),                // O [31:0]
                       .mrd_count_o(mrd_count_o),            // O [31:0]
                       .mrd_tlp_tc_o(mrd_tlp_tc_o),          // O [2:0]
                       .mrd_64b_en_o(mrd_64b_en_o),          // O
@@ -414,7 +415,9 @@ module BMD_EP_MEM_ACCESS#
                       .mwr_int_dis_o(mwr_int_dis_o),        // O
                       .mwr_done_i(mwr_done_i),              // I
                       .mwr_addr_o(mwr_addr_o),              // O [31:0]
-                      .addr_wr_enable_o(addr_wr_enable_o),              // O [31:0]
+							 .mwr_addr_i(mwr_addr_i),
+                      .addr_wr_enable_o(addr_wr_enable_o),              
+                      .addr_rd_enable_o(addr_rd_enable_o),             
                       .mwr_len_o(mwr_len_o),                // O [31:0]
                       .mwr_count_o(mwr_count_o),            // O [31:0]
                       .mwr_data_o(mwr_data_o),              // O [31:0]

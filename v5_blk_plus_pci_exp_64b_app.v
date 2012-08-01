@@ -26,6 +26,7 @@
 //`include "3gio_defines.v"
 
 module  pci_exp_64b_app (
+								DEBUG,
 								ADC1,
 								ADC2,
 								ADCc,
@@ -106,6 +107,7 @@ module  pci_exp_64b_app (
 
                         );
 
+	output [7:0] DEBUG;
 	input ADCc;
 	input ADCc_2x;
 	input [7:0] ADC1;
@@ -254,6 +256,7 @@ wire        cfg_rd_comp_bound        = cfg_lcommand[3];
         .FPGA_FAMILY(FPGA_FAMILY)
         )
         BMD (
+		.DEBUG(DEBUG),
 		.ADC1(ADC1),
 		.ADC2(ADC2),
 		.ADCc(ADCc),

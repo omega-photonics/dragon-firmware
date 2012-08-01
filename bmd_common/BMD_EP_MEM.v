@@ -67,8 +67,9 @@ module BMD_EP_MEM# (
                       mwr_int_dis_o,         // O 
                       mwr_done_i,            // I
                       mwr_addr_o,            // O [31:0]
-							 cur_mwr_addr_i,			// I [32:0]
+							 mwr_addr_i,			// I [32:0]
                       addr_wr_enable_o,      // O 
+							 addr_rd_enable_o,
                       mwr_len_o,             // O [31:0]
                       mwr_tlp_tc_o,          // O [2:0]
                       mwr_64b_en_o,          // O
@@ -160,8 +161,9 @@ module BMD_EP_MEM# (
     output            mwr_int_dis_o;
     input             mwr_done_i;
     output [31:0]     mwr_addr_o;
-	 input  [32:0]		 cur_mwr_addr_i;
+	 input  [31:0]		 mwr_addr_i;
     output            addr_wr_enable_o;
+    output            addr_rd_enable_o;
     output [31:0]     mwr_len_o;
     output [2:0]      mwr_tlp_tc_o;
     output            mwr_64b_en_o;
@@ -249,6 +251,7 @@ module BMD_EP_MEM# (
     reg               mwr_int_dis_o;
     reg [31:0]        mwr_addr_o;
     reg               addr_wr_enable_o;
+    reg               addr_rd_enable_o;
     reg [31:0]        mwr_len_o;
     reg [31:0]        mwr_count_o;
     reg [31:0]        mwr_data_o;
@@ -381,6 +384,7 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
           mwr_int_dis_o <= 1'b0;
           mwr_addr_o  <= 32'b0;
           addr_wr_enable_o  <= 0;
+          addr_rd_enable_o  <= 0;
           mwr_len_o   <= 32;   //packet size in dwords = 32
           mwr_count_o <= 32768; //default buffer size = 32768 packets = 4096kb
           mwr_data_o  <= 32'b0;
@@ -429,9 +433,24 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
 
 `endif
 
-			//reset write enable bit at next clock after write
-			if(addr_wr_enable_o)
+
+
+         // 08-0BH : Reg # 2
+         // Queue/dequeue buffer
+			if(a_i[6:0]==7'b0000010) begin
+              if (wr_en_i) begin
+                mwr_addr_o  <= wr_d_i;
+					 addr_wr_enable_o <= 1;
+				  end	else begin
+					 rd_d_o <= mwr_addr_i;
+					 addr_rd_enable_o <= 1;
+				  end
+			 end
+			 else begin
 				addr_wr_enable_o <= 0;
+				addr_rd_enable_o <= 0;
+			 end
+
 
           case (a_i[6:0])
         
@@ -455,16 +474,6 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
 				    mwr_start_o  <= wr_d_i[0];
               end 
 
-            end
-
-            // 08-0BH : Reg # 2
-            // Queue buffer
-            7'b0000010: begin
-              if (wr_en_i) begin
-                mwr_addr_o  <= wr_d_i;
-					 addr_wr_enable_o <= 1;
-				  end	 
-              rd_d_o <= cur_mwr_addr_i;
             end
 
             // 0C-0FH : Reg # 3
@@ -518,7 +527,7 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
             // 50-7FH : Reserved
             default: begin
 
-              rd_d_o <= 32'b0;
+              //rd_d_o <= 32'b0;
 
             end
 

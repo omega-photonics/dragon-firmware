@@ -56,6 +56,7 @@
 //------------------------------------------------------------------------------
 module     xilinx_pci_exp_ep 
 (
+								DEBUG,
 								ADC1,
 								ADC2,
 								ADCclk,
@@ -78,7 +79,7 @@ module     xilinx_pci_exp_ep
 			refclkout
 
                         );//synthesis syn_noclockbuf=1
-		
+	output [7:0] DEBUG;
 	input ADCclk;
 	input [7:0] ADC1;
 	input [7:0] ADC2;
@@ -244,6 +245,7 @@ module     xilinx_pci_exp_ep
   // Endpoint Implementation Application
   //-------------------------------------------------------
 pci_exp_64b_app app (
+		.DEBUG(DEBUG),
 		.ADC1(ADC1),
 		.ADC2(ADC2),
 		.ADCc(ADCc),
