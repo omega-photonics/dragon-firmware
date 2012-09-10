@@ -124,7 +124,7 @@ module BMD #
 	input [7:0] ADC2;
 	output [1:0] S_OUT;
 	output [31:0] DacData;
-	output LED;
+	output [2:0] LED;
 
     input         trn_clk;         
     input         trn_reset_n;

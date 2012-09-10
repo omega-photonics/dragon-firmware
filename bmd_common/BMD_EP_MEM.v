@@ -353,6 +353,13 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
                                                 0 : 1;
 `endif
 
+	wire [31:0] USR_ID;
+
+	USR_ACCESS_VIRTEX5 USR_ACCESS_inst 
+	(
+		.DATA(USR_ID)
+	);
+
 
 
     always @(posedge clk ) begin
@@ -386,7 +393,7 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
           addr_wr_enable_o  <= 0;
           addr_rd_enable_o  <= 0;
           mwr_len_o   <= 32;   //packet size in dwords = 32
-          mwr_count_o <= 32768; //default buffer size = 32768 packets = 4096kb
+          mwr_count_o <= 32768; //default buffer size = 32768 packets = 4096kB
           mwr_data_o  <= 32'b0;
           mwr_tlp_tc_o <= 3'b0;
           mwr_64b_en_o <= 1'b0;
@@ -441,9 +448,11 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
               if (wr_en_i) begin
                 mwr_addr_o  <= wr_d_i;
 					 addr_wr_enable_o <= 1;
+					 addr_rd_enable_o <= 0;
 				  end	else begin
 					 rd_d_o <= mwr_addr_i;
 					 addr_rd_enable_o <= 1;
+					 addr_wr_enable_o <= 0;
 				  end
 			 end
 			 else begin
@@ -523,6 +532,16 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
 				  end              
               rd_d_o <= CONFIG_REG_1_reg[12:0]; 
             end
+				
+				//reg 8 - USR_ID
+				7'b001000: begin
+              rd_d_o <= USR_ID; 
+				end
+
+				//reg 9 - test
+				7'b001001: begin
+              rd_d_o <= 32'hAB_D0_FF_CE; 
+				end
  
             // 50-7FH : Reserved
             default: begin

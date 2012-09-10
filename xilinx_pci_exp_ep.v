@@ -93,12 +93,12 @@ module     xilinx_pci_exp_ep
 	clockdoubler clockdoubler_inst(.CLKIN_IN(ADCclk), .CLKIN_IBUFG_OUT(ADCc), .CLK0_OUT(ADCc_2x));
 
 	//133mhz test counter on adc clock
-	reg [23:0] mycnt2;
-	always @(posedge ADCc) begin
-		 mycnt2 <= mycnt2+1'b1;
-	end
-	assign LED[0] = mycnt2[23];
-	assign LED[1] = ~mycnt2[23];
+	//reg [23:0] mycnt2;
+	//always @(posedge ADCc) begin
+	//	 mycnt2 <= mycnt2+1'b1;
+	//end
+	//assign LED[0] = mycnt2[23];
+	//assign LED[1] = ~mycnt2[23];
 	//assign LED[2] = 1'b1;
 	
 	//DAC control
@@ -249,7 +249,7 @@ pci_exp_64b_app app (
 		.ADC1(ADC1),
 		.ADC2(ADC2),
 		.ADCc(ADCc),
-		.LED(LED[2]),
+		.LED(LED),
 		.ADCc_2x(ADCc_2x),
 		.S_OUT(S_OUT),
 		.DacData(DacData),

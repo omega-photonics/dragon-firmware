@@ -82,7 +82,7 @@ module endpoint_blk_plus_v1_14 # (
   parameter        CLASS_CODE = 24'h050000,
   parameter        BAR0 = 32'hFFFFF804,
   parameter        BAR1 = 32'hFFFFFFFF,
-  parameter        BAR2 = 32'hFFFFF800,
+  parameter        BAR2 = 32'h00000000,
   parameter        BAR3 = 32'h00000000,
   parameter        BAR4 = 32'h00000000,
   parameter        BAR5 = 32'h00000000,

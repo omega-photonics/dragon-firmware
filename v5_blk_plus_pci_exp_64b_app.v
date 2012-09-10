@@ -114,7 +114,7 @@ module  pci_exp_64b_app (
 	input [7:0] ADC2;
 	output [1:0] S_OUT;
 	output [31:0] DacData;
-	output LED;
+	output [2:0] LED;
 	
 
  // Common

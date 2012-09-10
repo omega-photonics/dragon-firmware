@@ -132,7 +132,7 @@ module BMD_EP#
 	output [31:0] DacData;
 	output [31:0] CONFIG_REG_1;
 	output [31:0] CONFIG_REG_2;
-	output LED;
+	output [2:0] LED;
 	output [7:0] DEBUG;
 
 
@@ -369,34 +369,49 @@ module BMD_EP#
 
 `endif
 
-dma_buffers DMA_BUFFERS_IN(
+wire addr_ret_empty, addr_full, addr_ret_full, addr_valid;
+
+fifo_buffer_addresses DMA_BUFFERS_IN(
   .clk(clk),
   .rst((!rst_n)|init_rst),
   .din(mwr_addr_in),
   .wr_en(addr_wr_enable),
   .rd_en(request_new_buffer_address),
   .dout(mwr_addr_out),
-  .empty(addr_empty)
+  .empty(addr_empty),
+  .full(addr_full),
+  .valid(addr_valid)
 );
 
-wire addr_ret_empty;
 
-dma_buffers DMA_BUFFERS_OUT(
+fifo_buffer_addresses DMA_BUFFERS_OUT(
   .clk(clk),
   .rst((!rst_n)|init_rst),
   .din(mwr_addr_out),
   .wr_en(request_new_buffer_address),
   .rd_en(addr_rd_enable),
   .dout(mwr_addr_return),
-  .empty(addr_ret_empty)
+  .empty(addr_ret_empty),
+  .full(addr_ret_full)
 );
 
-	assign DEBUG[0] = addr_empty;
-	assign DEBUG[1] = addr_ret_empty;
-	assign DEBUG[2] = addr_rd_enable;
-	assign DEBUG[3] = addr_wr_enable;
-	assign DEBUG[4] = request_new_buffer_address;
-	assign DEBUG[5] = (!rst_n)|init_rst;
+	assign LED[0] = addr_empty;
+	assign LED[1] = addr_full;
+	assign LED[2] = addr_valid;
+
+	assign DEBUG[0] = addr_empty; //M11
+	assign DEBUG[1] = request_new_buffer_address; //P14
+	assign DEBUG[2] = (!rst_n)|init_rst; //N17
+	assign DEBUG[3] = addr_valid; //P17
+	
+//NET DEBUG[0] LOC = M11 | IOSTANDARD = LVCMOS33;
+//NET DEBUG[1] LOC = P14 | IOSTANDARD = LVCMOS33;
+//NET DEBUG[2] LOC = N17 | IOSTANDARD = LVCMOS33;
+//NET DEBUG[3] LOC = P17 | IOSTANDARD = LVCMOS33;
+//NET DEBUG[4] LOC = N18 | IOSTANDARD = LVCMOS33;
+//NET DEBUG[5] LOC = R16 | IOSTANDARD = LVCMOS33;
+//NET DEBUG[6] LOC = U18 | IOSTANDARD = LVCMOS33;
+//NET DEBUG[7] LOC = V18 | IOSTANDARD = LVCMOS33;
 
     //
     // ENDPOINT MEMORY : 
@@ -600,7 +615,8 @@ dma_buffers DMA_BUFFERS_OUT(
     BMD_TX_ENGINE EP_TX (
 						 .ADC1(ADC1), .ADC2(ADC2), .ADCc(ADCc), .ADCc_2x(ADCc_2x), 
 						 .S_OUT(S_OUT), .CONFIG_REG_1(CONFIG_REG_1), .CONFIG_REG_2(CONFIG_REG_2),
-						 .LED(LED),
+						 //.LED(LED),
+						 .DEBUG(DEBUG[7:4]),
                    .clk(clk),                         // I
                    .rst_n(rst_n),                     // I
 
@@ -663,7 +679,7 @@ dma_buffers DMA_BUFFERS_OUT(
                    .mwr_int_dis_i(mwr_int_dis_o),    // I
                    .request_new_buffer_address(request_new_buffer_address),            // O
                    .mwr_addr_i(mwr_addr_out),            // I [31:0]
-						 .addr_empty_i(addr_empty),
+						 .addr_valid(addr_valid),
                    .mwr_len_i(mwr_len),              // I [31:0]
                    .mwr_count_i(mwr_count),          // I [31:0]
                    .mwr_data_i(mwr_data),            // I [31:0] 
