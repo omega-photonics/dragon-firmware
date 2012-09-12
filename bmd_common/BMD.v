@@ -33,7 +33,7 @@ module BMD #
    parameter FPGA_FAMILY = 8'h14
    )
     (
-						DEBUG, ADC1, ADC2, ADCc, ADCc_2x, S_OUT, DacData, LED,
+						DEBUG, ADC1, ADC2, ADCc, ADCc_2x, ADC_type, S_OUT, DacData, LED,
                   trn_clk,
                   trn_reset_n,
                   trn_lnk_up_n,
@@ -120,8 +120,9 @@ module BMD #
 	output [7:0] DEBUG;
 	input ADCc;
 	input ADCc_2x;
-	input [7:0] ADC1;
-	input [7:0] ADC2;
+	output ADC_type;
+	input [11:0] ADC1;
+	input [11:0] ADC2;
 	output [1:0] S_OUT;
 	output [31:0] DacData;
 	output [2:0] LED;
@@ -222,7 +223,7 @@ module BMD #
  
         )
         BMD_EP (
-						.DEBUG(DEBUG), .ADC1(ADC1), .ADC2(ADC2), .ADCc(ADCc), 
+						.DEBUG(DEBUG), .ADC1(ADC1), .ADC2(ADC2), .ADCc(ADCc), .ADC_type(ADC_type),
 						.ADCc_2x(ADCc_2x), .S_OUT(S_OUT), .DacData(DacData), .LED(LED),
                   .clk  ( trn_clk ),                           // I
                   .rst_n ( bmd_reset_n ),                      // I

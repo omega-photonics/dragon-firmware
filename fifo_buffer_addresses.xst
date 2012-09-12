@@ -1,0 +1,5 @@
+set -tmpdir "Y:/work/omega/dragon/current/dragon_firmware/xst/projnav.tmp"
+set -xsthdpdir "Y:/work/omega/dragon/current/dragon_firmware/xst"
+elaborate
+-ifn fifo_buffer_addresses.prj
+-ifmt mixed

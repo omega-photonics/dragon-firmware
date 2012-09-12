@@ -1,0 +1,12 @@
+# Output products list for <fifo_buffer_addresses>
+fifo_buffer_addresses.asy
+fifo_buffer_addresses.gise
+fifo_buffer_addresses.ngc
+fifo_buffer_addresses.v
+fifo_buffer_addresses.veo
+fifo_buffer_addresses.xco
+fifo_buffer_addresses.xise
+fifo_buffer_addresses_flist.txt
+fifo_buffer_addresses_xmdf.tcl
+fifo_generator_readme.txt
+fifo_generator_ug175.pdf

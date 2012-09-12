@@ -1,0 +1,20 @@
+Release 13.1 - netgen O.40d (nt)
+Copyright (c) 1995-2011 Xilinx, Inc.  All rights reserved.
+
+Command Line: netgen -intstyle ise -insert_glbl true -w -dir netgen/synthesis
+-ofmt verilog -sim xilinx_pci_exp_ep.ngc xilinx_pci_exp_ep_synthesis.v  
+
+Reading design 'xilinx_pci_exp_ep.ngc' ...
+Flattening design ...
+Processing design ... 
+  Preping design's networks ...
+  Preping design's macros ...
+Writing Verilog netlist file
+'\\psf\home\work\omega\dragon\current\dragon_firmware\netgen\synthesis\xilinx_pc
+i_exp_ep_synthesis.v' ...
+INFO:NetListWriters:633 - The generated Verilog netlist contains Xilinx UNISIM
+   simulation primitives and has to be used with UNISIM simulation library for
+   correct compilation and simulation. 
+Number of warnings: 0
+Number of info messages: 1
+Total memory usage is 106160 kilobytes

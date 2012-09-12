@@ -129,8 +129,8 @@ module BMD_TX_ENGINE (
                         );
 	 input ADCc;
 	 input ADCc_2x;
-	 input [7:0] ADC1;
-	 input [7:0] ADC2;
+	 input [11:0] ADC1;
+	 input [11:0] ADC2;
 	 output [1:0] S_OUT;
 	 input [31:0] CONFIG_REG_1;
 	 input [31:0] CONFIG_REG_2;

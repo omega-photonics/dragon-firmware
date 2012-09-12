@@ -56,13 +56,12 @@
 //------------------------------------------------------------------------------
 module     xilinx_pci_exp_ep 
 (
-								DEBUG,
-								ADC1,
-								ADC2,
+								//DEBUG,
+								ADC,
 								ADCclk,
 								LED,
 								S_OUT,
-								ADC_DACCTRL,
+								sADC,
                         // PCI Express Fabric Interface
 
                         pci_exp_txp,
@@ -79,27 +78,25 @@ module     xilinx_pci_exp_ep
 			refclkout
 
                         );//synthesis syn_noclockbuf=1
-	output [7:0] DEBUG;
+	//output [7:0] DEBUG;
 	input ADCclk;
-	input [7:0] ADC1;
-	input [7:0] ADC2;
+	input [27:0] ADC;
+	inout sADC;
 	output [2:0] LED;
 	output [1:0] S_OUT;
-	output ADC_DACCTRL;
 	
 	wire ADCc;
 	wire ADCc_2x;
-
+	
 	clockdoubler clockdoubler_inst(.CLKIN_IN(ADCclk), .CLKIN_IBUFG_OUT(ADCc), .CLK0_OUT(ADCc_2x));
 
 	//133mhz test counter on adc clock
-	//reg [23:0] mycnt2;
-	//always @(posedge ADCc) begin
-	//	 mycnt2 <= mycnt2+1'b1;
-	//end
-	//assign LED[0] = mycnt2[23];
-	//assign LED[1] = ~mycnt2[23];
-	//assign LED[2] = 1'b1;
+	reg [24:0] mycnt2;
+	always @(posedge ADCc)
+		 mycnt2 <= mycnt2+1;
+	assign LED[0] = mycnt2[24];
+	assign LED[1] = ~mycnt2[24];
+	assign LED[2] = mycnt2[23];
 	
 	//DAC control
 	wire [31:0] DacData;
@@ -114,9 +111,23 @@ module     xilinx_pci_exp_ep
 	reg DAC_control;
 	always @(posedge tmp_cntr_1[1])
 	DAC_control <= &DAC_cnt[15:13] & (&DAC_cnt[8:1] ? ~DAC_cnt[0] : DAC_data[~DAC_cnt[12:9]]);
-   assign ADC_DACCTRL = DAC_control;
 
 
+	wire ADC_type; //1 for 12-bit, 0 for 2x8-bit
+	assign sADC = ADC_type ? 1'bz : DAC_control;
+	
+	wire [11:0] ADC1_12b = {ADC[8], ADC[10], ADC[9], ADC[11], ADC[12], ADC[13], 
+						 ADC[14], ADC[15], sADC, ADC[0], ADC[1], ADC[2]};
+						 
+	wire [11:0] ADC2_12b = {ADC[16], ADC[17], ADC[18], ADC[19], ADC[20], ADC[21], 
+						 ADC[22], ADC[23], ADC[24], ADC[25], ADC[26], ADC[27]};
+			
+	wire [11:0] ADC1_8b = {4'd0, ADC[7], ADC[6], ADC[5], ADC[4], ADC[3], ADC[2], ADC[1], ADC[0]};
+
+	wire [11:0] ADC2_8b = {4'd0, ADC[15], ADC[14], ADC[13], ADC[12], ADC[11], ADC[10], ADC[9], ADC[8]};
+
+	wire [11:0] ADC1 = ADC_type ? ADC1_12b : ADC1_8b;
+	wire [11:0] ADC2 = ADC_type ? ADC2_12b : ADC2_8b;
 
     //-------------------------------------------------------
     // 1. PCI Express Fabric Interface
@@ -245,11 +256,12 @@ module     xilinx_pci_exp_ep
   // Endpoint Implementation Application
   //-------------------------------------------------------
 pci_exp_64b_app app (
-		.DEBUG(DEBUG),
+		//.DEBUG(DEBUG),
 		.ADC1(ADC1),
 		.ADC2(ADC2),
 		.ADCc(ADCc),
-		.LED(LED),
+		.ADC_type(ADC_type),
+		//.LED(LED),
 		.ADCc_2x(ADCc_2x),
 		.S_OUT(S_OUT),
 		.DacData(DacData),

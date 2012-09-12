@@ -31,6 +31,7 @@ module  pci_exp_64b_app (
 								ADC2,
 								ADCc,
 								ADCc_2x,
+								ADC_type,
 								S_OUT,
 								DacData,
 								LED,
@@ -110,8 +111,9 @@ module  pci_exp_64b_app (
 	output [7:0] DEBUG;
 	input ADCc;
 	input ADCc_2x;
-	input [7:0] ADC1;
-	input [7:0] ADC2;
+	output ADC_type;
+	input [11:0] ADC1;
+	input [11:0] ADC2;
 	output [1:0] S_OUT;
 	output [31:0] DacData;
 	output [2:0] LED;
@@ -261,6 +263,7 @@ wire        cfg_rd_comp_bound        = cfg_lcommand[3];
 		.ADC2(ADC2),
 		.ADCc(ADCc),
 		.ADCc_2x(ADCc_2x),
+		.ADC_type(ADC_type),
 		.S_OUT(S_OUT),
 		.DacData(DacData),
 		.LED(LED),

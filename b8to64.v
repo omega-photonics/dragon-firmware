@@ -15,8 +15,9 @@ module b8to64(
 	);
 	
 	input rst;
-	input [7:0] ADC1_in; 		//input data from ADC
-	input [7:0] ADC2_in;			//input data from ADC
+	input [11:0] ADC1_in; 		//input data from ADC
+	input [11:0] ADC2_in;			//input data from ADC
+
 	input InputClock;					//input clock from ADC
 	input DoubleInputClock;
 	output [63:0] TLPData;  //output data for FIFO
@@ -28,7 +29,8 @@ module b8to64(
 	input [31:0] CONFIG_REG_2;	//input control data from PC
 	input [15:0] BufferLengthTLPs;
 									
-	reg [7:0] DataStorage [7:0]; //temporary ADC data storage
+	reg [7:0] DataStorage_8b [7:0]; //temporary 8-bit ADC data storage
+	reg [11:0] DataStorage_12b [5:0]; //temporary 12-bit ADC data storage
 
 	reg [2:0]  CounterOfPoints; // counts 0 to 7 - bytes for single packet
 	reg [12:0] CounterOfOctets; // up to 8192 octets of bytes in 1 frame
@@ -58,16 +60,28 @@ module b8to64(
 	wire AutoPolSwitching = CONFIG_REG_2[24];
 	wire ManualPolState = CONFIG_REG_2[25];
 	wire TestMode = CONFIG_REG_2[26];
+	//27 - testmode2
+	wire ADC_type = CONFIG_REG_2[28];
+	
 	reg [7:0] TestCounter;
 	
 	assign OutputSignals[1] = AutoPolSwitching?SwitcherState:ManualPolState;
 
 	wire ADC_AutoSelector = AutoADCSwitching?CounterOfPoints[0]:SelectedADC; //active ADC selector
-	wire [7:0] ActiveADC = ADC_AutoSelector ? ADC2_in : ADC1_in;
+	
+	wire [7:0] ActiveADC_8b = ADC_AutoSelector ? ADC2_in[7:0] : ADC1_in[7:0];
+	wire [11:0] ActiveADC_12b = ADC_AutoSelector ? ADC2_in[11:0] : ADC1_in[11:0];
 
-	//reg [63:0] TLPData;
-	assign TLPData = {DataStorage[0], DataStorage[1], DataStorage[2], DataStorage[3], 
-									 DataStorage[4], DataStorage[5], DataStorage[6], DataStorage[7]};
+	wire [63:0] DataOutput_8b = {DataStorage_8b[0], DataStorage_8b[1], DataStorage_8b[2], DataStorage_8b[3], 
+									     DataStorage_8b[4], DataStorage_8b[5], DataStorage_8b[6], DataStorage_8b[7]};
+
+	wire [63:0] DataOutput_12b = {DataStorage_12b[0], DataStorage_12b[1], DataStorage_12b[2], 
+											DataStorage_12b[3], DataStorage_12b[4], DataStorage_12b[5], 4'd0};
+
+	wire [2:0] PointCounterTop = ADC_type ? 3'd4 : 3'd7;
+
+	assign TLPData = ADC_type ? DataOutput_12b : DataOutput_8b;
+		
 	reg [39:0] TLPHeader;
 	reg DataWriteEnable;
 	reg HeaderWriteEnable;
@@ -87,10 +101,11 @@ module b8to64(
 			BufferCounter<=0;
 			TestCounter<=0;
 		end else begin
-			DataStorage[CounterOfPoints] <= TestMode?TestCounter:ActiveADC;
+			DataStorage_8b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_8b;
+			DataStorage_12b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_12b;
 			TestCounter<=TestCounter+1;
 
-			if(CounterOfPoints==7) begin	
+			if(CounterOfPoints>=PointCounterTop) begin	
 			
 				if(CounterOfOctets>=FrameLength) begin
 					if(DelayState==0) begin
@@ -109,8 +124,6 @@ module b8to64(
 				
 				if(DelayState==0) begin
 					DataWriteEnable <= 1;
-	//				TLPData <=  {DataStorage[0], DataStorage[1], DataStorage[2], DataStorage[3], 
-		//							 DataStorage[4], DataStorage[5], DataStorage[6], DataStorage[7]};
 
 					
 						if(DataForTLPCounter>=14) begin

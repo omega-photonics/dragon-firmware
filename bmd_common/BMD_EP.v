@@ -33,7 +33,7 @@ module BMD_EP#
 
 )
     (
-								DEBUG, ADC1, ADC2, ADCc, ADCc_2x, S_OUT, DacData, CONFIG_REG_1, CONFIG_REG_2,
+								DEBUG, ADC1, ADC2, ADCc, ADC_type, ADCc_2x, S_OUT, DacData,
 								LED,
                         clk,                 
                         rst_n,              
@@ -126,12 +126,11 @@ module BMD_EP#
                        );
 	input ADCc;
 	input ADCc_2x;
-	input [7:0] ADC1;
-	input [7:0] ADC2;
+	input [11:0] ADC1;
+	input [11:0] ADC2;
+	output ADC_type;
 	output [1:0] S_OUT;
 	output [31:0] DacData;
-	output [31:0] CONFIG_REG_1;
-	output [31:0] CONFIG_REG_2;
 	output [2:0] LED;
 	output [7:0] DEBUG;
 
@@ -308,6 +307,12 @@ module BMD_EP#
     wire              trn_rnp_ok_n_o;
     wire              trn_tstr_n_o;
     wire              cfg_interrupt_legacyclr;
+
+
+	wire [31:0] CONFIG_REG_1;
+	wire [31:0] CONFIG_REG_2;
+
+	assign ADC_type = CONFIG_REG_2[28];
 
 `ifdef PCIE2_0
 
