@@ -56,12 +56,19 @@
 //------------------------------------------------------------------------------
 module     xilinx_pci_exp_ep 
 (
+	F17, F18, E17, D18, E12, D17, C17, C18,
+	G15, E14, F13, G16, G14, E16, F14, E15,
+	D15, C13, D12, C12, A18, B16, A17, A16, A14, A13, B14, B13,
+	C16, H15, H17, J17,
+	J15, G18, H18, J18, L18, L17, N17, H16, J14, K15, K17, M18, M16, P18,
+	A6, P17,
+	
 								//DEBUG,
-								ADC,
+								//ADC,
 								ADCclk,
 								LED,
-								S_OUT,
-								sADC,
+								//S_OUT,
+								//sADC,
                         // PCI Express Fabric Interface
 
                         pci_exp_txp,
@@ -79,11 +86,61 @@ module     xilinx_pci_exp_ep
 
                         );//synthesis syn_noclockbuf=1
 	//output [7:0] DEBUG;
+	
+	input	F17, F18, E17, D18, E12, D17, C17, C18,
+	G15, E14, F13, G16, G14, E16, F14, E15,
+	D15, C13, D12, C12, A18, B16, A17, A16, A14, A13, B14, B13,
+	J15, G18, H18, J18, L18, L17, N17, H16, J14, K15, K17, M18, M16, P18;
+	
+	inout H15, H17, C16, J17;
+	
+	output A6, P17;
+
 	input ADCclk;
-	input [27:0] ADC;
-	inout sADC;
 	output [2:0] LED;
-	output [1:0] S_OUT;
+		
+	wire Bv; //Board version: 1 for new, 0 for KNJN original Dragon
+
+	wire [1:0] S_OUT;
+	assign H15 = Bv?1'bz:S_OUT[0];
+	assign H17 = Bv?1'bz:S_OUT[1];
+	
+	assign A6 = Bv?S_OUT[0]:1'b0;
+	assign P17 = Bv?S_OUT[1]:1'b0;
+	
+	//wire sADC_ext = Bv?J17:C16;
+
+	wire [27:0] ADC;
+
+	assign ADC[0] = Bv?H17:F17;
+	assign ADC[1] = Bv?H18:F18;
+	assign ADC[2] = Bv?G18:E17;
+	assign ADC[3] = Bv?J15:D18;
+	assign ADC[4] = Bv?K15:E12;
+	assign ADC[5] = Bv?J14:D17;
+	assign ADC[6] = Bv?H15:C17;
+	assign ADC[7] = Bv?H16:C18;
+	assign ADC[8] = Bv?P18:G15;
+	assign ADC[9] = Bv?N17:E14;
+	assign ADC[10] = Bv?M16:F13;
+	assign ADC[11] = Bv?M18:G16;
+	assign ADC[12] = Bv?L17:G14;
+	assign ADC[13] = Bv?K17:E16;
+	assign ADC[14] = Bv?L18:F14;
+	assign ADC[15] = Bv?J18:E15;
+	assign ADC[16] = D15;
+	assign ADC[17] = C13;
+	assign ADC[18] = D12;
+	assign ADC[19] = C12;
+	assign ADC[20] = A18;
+	assign ADC[21] = B16;
+	assign ADC[22] = A17;
+	assign ADC[23] = A16;
+	assign ADC[24] = A14;
+	assign ADC[25] = A13;
+	assign ADC[26] = B14;
+	assign ADC[27] = B13;
+	
 	
 	wire ADCc;
 	wire ADCc_2x;
@@ -113,8 +170,16 @@ module     xilinx_pci_exp_ep
 	DAC_control <= &DAC_cnt[15:13] & (&DAC_cnt[8:1] ? ~DAC_cnt[0] : DAC_data[~DAC_cnt[12:9]]);
 
 
+	
+	
+
+
 	wire ADC_type; //1 for 12-bit, 0 for 2x8-bit
-	assign sADC = ADC_type ? 1'bz : DAC_control;
+	wire sADC = ADC_type ? 1'bz : DAC_control;
+	//assign sADC_ext = sADC_int;
+	assign J17 = Bv?sADC:1'b0;
+	assign C16 = Bv?1'b0:sADC;
+	
 	
 	wire [11:0] ADC1_12b = {ADC[8], ADC[10], ADC[9], ADC[11], ADC[12], ADC[13], 
 						 ADC[14], ADC[15], sADC, ADC[0], ADC[1], ADC[2]};
@@ -261,6 +326,7 @@ pci_exp_64b_app app (
 		.ADC2(ADC2),
 		.ADCc(ADCc),
 		.ADC_type(ADC_type),
+		.Bv(Bv),
 		//.LED(LED),
 		.ADCc_2x(ADCc_2x),
 		.S_OUT(S_OUT),
