@@ -81,7 +81,8 @@ module     xilinx_pci_exp_ep
                         sys_clk_p,
                         sys_clk_n,
 
-                        sys_reset_n,
+                        sys_reset1_n,
+                        sys_reset2_n,
 			refclkout
 
                         );//synthesis syn_noclockbuf=1
@@ -213,7 +214,8 @@ module     xilinx_pci_exp_ep
 
     input                                             sys_clk_p;
     input                                             sys_clk_n;
-    input                                             sys_reset_n;
+    input                                             sys_reset1_n;
+    input                                             sys_reset2_n;
 
     output					      refclkout;
 
@@ -226,7 +228,8 @@ module     xilinx_pci_exp_ep
 
     wire                                              sys_clk_c;
 
-    wire                                              sys_reset_n_c; 
+    wire                                              sys_reset1_n_c; 
+    wire                                              sys_reset2_n_c; 
     wire                                              trn_clk_c;//synthesis attribute max_fanout of trn_clk_c is "100000"
     wire                                              trn_reset_n_c;
     wire                                              trn_lnk_up_n_c;
@@ -313,9 +316,10 @@ module     xilinx_pci_exp_ep
   // System Reset Input Pad Instance
   //-------------------------------------------------------
 
-  IBUF sys_reset_n_ibuf (.O(sys_reset_n_c), .I(sys_reset_n));
+  IBUF sys_reset1_n_ibuf (.O(sys_reset1_n_c), .I(sys_reset1_n));
+  IBUF sys_reset2_n_ibuf (.O(sys_reset2_n_c), .I(sys_reset2_n));
 
-
+  wire sys_reset_n_c = (sys_reset1_n_c & sys_reset2_n_c);
 
   //-------------------------------------------------------
   // Endpoint Implementation Application
