@@ -173,7 +173,8 @@ module b8to64(
 				CounterOfOctets<=PulseOffset+PulseWidth &&
 				SyncPulseCondition) 
 					StartPulseState <= 1; //start sync pulse
-			else  StartPulseState <= 0; //finish sync pulse
+			else if(CounterOfOctets>PulseOffset+PulseWidth)
+					StartPulseState <= 0; //finish sync pulse
 		end
 	end
 
