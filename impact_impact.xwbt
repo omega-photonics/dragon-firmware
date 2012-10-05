@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=/home/ii/code/omega/dragon-firmware/impact.xsl
+OUTFILE=/home/ii/code/omega/dragon-firmware/impact.xsl
+FAMILY=Multiple
+PART=Multiple
+WORKINGDIR=/home/ii/code/omega/dragon-firmware
+LICENSE=iMPACT
+USER_INFO=iMPACT

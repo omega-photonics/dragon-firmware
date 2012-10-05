@@ -1,27 +1,26 @@
 /*******************************************************************************
-*     This file is owned and controlled by Xilinx and must be used             *
-*     solely for design, simulation, implementation and creation of            *
-*     design files limited to Xilinx devices or technologies. Use              *
-*     with non-Xilinx devices or technologies is expressly prohibited          *
-*     and immediately terminates your license.                                 *
+*     This file is owned and controlled by Xilinx and must be used solely      *
+*     for design, simulation, implementation and creation of design files      *
+*     limited to Xilinx devices or technologies. Use with non-Xilinx           *
+*     devices or technologies is expressly prohibited and immediately          *
+*     terminates your license.                                                 *
 *                                                                              *
-*     XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION "AS IS"            *
-*     SOLELY FOR USE IN DEVELOPING PROGRAMS AND SOLUTIONS FOR                  *
-*     XILINX DEVICES.  BY PROVIDING THIS DESIGN, CODE, OR INFORMATION          *
-*     AS ONE POSSIBLE IMPLEMENTATION OF THIS FEATURE, APPLICATION              *
-*     OR STANDARD, XILINX IS MAKING NO REPRESENTATION THAT THIS                *
-*     IMPLEMENTATION IS FREE FROM ANY CLAIMS OF INFRINGEMENT,                  *
-*     AND YOU ARE RESPONSIBLE FOR OBTAINING ANY RIGHTS YOU MAY REQUIRE         *
-*     FOR YOUR IMPLEMENTATION.  XILINX EXPRESSLY DISCLAIMS ANY                 *
-*     WARRANTY WHATSOEVER WITH RESPECT TO THE ADEQUACY OF THE                  *
+*     XILINX IS PROVIDING THIS DESIGN, CODE, OR INFORMATION "AS IS" SOLELY     *
+*     FOR USE IN DEVELOPING PROGRAMS AND SOLUTIONS FOR XILINX DEVICES.  BY     *
+*     PROVIDING THIS DESIGN, CODE, OR INFORMATION AS ONE POSSIBLE              *
+*     IMPLEMENTATION OF THIS FEATURE, APPLICATION OR STANDARD, XILINX IS       *
+*     MAKING NO REPRESENTATION THAT THIS IMPLEMENTATION IS FREE FROM ANY       *
+*     CLAIMS OF INFRINGEMENT, AND YOU ARE RESPONSIBLE FOR OBTAINING ANY        *
+*     RIGHTS YOU MAY REQUIRE FOR YOUR IMPLEMENTATION.  XILINX EXPRESSLY        *
+*     DISCLAIMS ANY WARRANTY WHATSOEVER WITH RESPECT TO THE ADEQUACY OF THE    *
 *     IMPLEMENTATION, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OR           *
 *     REPRESENTATIONS THAT THIS IMPLEMENTATION IS FREE FROM CLAIMS OF          *
-*     INFRINGEMENT, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS          *
-*     FOR A PARTICULAR PURPOSE.                                                *
+*     INFRINGEMENT, IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A    *
+*     PARTICULAR PURPOSE.                                                      *
 *                                                                              *
-*     Xilinx products are not intended for use in life support                 *
-*     appliances, devices, or systems. Use in such applications are            *
-*     expressly prohibited.                                                    *
+*     Xilinx products are not intended for use in life support appliances,     *
+*     devices, or systems.  Use in such applications are expressly             *
+*     prohibited.                                                              *
 *                                                                              *
 *     (c) Copyright 1995-2012 Xilinx, Inc.                                     *
 *     All rights reserved.                                                     *
@@ -61,7 +60,7 @@ output valid;
 
 // synthesis translate_off
 
-  FIFO_GENERATOR_V8_1 #(
+  FIFO_GENERATOR_V9_2 #(
     .C_ADD_NGC_CONSTRAINT(0),
     .C_APPLICATION_TYPE_AXIS(0),
     .C_APPLICATION_TYPE_RACH(0),
@@ -180,12 +179,12 @@ output valid;
     .C_PROG_EMPTY_THRESH_ASSERT_VAL_WRCH(1022),
     .C_PROG_EMPTY_THRESH_NEGATE_VAL(5),
     .C_PROG_EMPTY_TYPE(0),
-    .C_PROG_EMPTY_TYPE_AXIS(5),
-    .C_PROG_EMPTY_TYPE_RACH(5),
-    .C_PROG_EMPTY_TYPE_RDCH(5),
-    .C_PROG_EMPTY_TYPE_WACH(5),
-    .C_PROG_EMPTY_TYPE_WDCH(5),
-    .C_PROG_EMPTY_TYPE_WRCH(5),
+    .C_PROG_EMPTY_TYPE_AXIS(0),
+    .C_PROG_EMPTY_TYPE_RACH(0),
+    .C_PROG_EMPTY_TYPE_RDCH(0),
+    .C_PROG_EMPTY_TYPE_WACH(0),
+    .C_PROG_EMPTY_TYPE_WDCH(0),
+    .C_PROG_EMPTY_TYPE_WRCH(0),
     .C_PROG_FULL_THRESH_ASSERT_VAL(512),
     .C_PROG_FULL_THRESH_ASSERT_VAL_AXIS(1023),
     .C_PROG_FULL_THRESH_ASSERT_VAL_RACH(1023),
@@ -195,12 +194,12 @@ output valid;
     .C_PROG_FULL_THRESH_ASSERT_VAL_WRCH(1023),
     .C_PROG_FULL_THRESH_NEGATE_VAL(511),
     .C_PROG_FULL_TYPE(0),
-    .C_PROG_FULL_TYPE_AXIS(5),
-    .C_PROG_FULL_TYPE_RACH(5),
-    .C_PROG_FULL_TYPE_RDCH(5),
-    .C_PROG_FULL_TYPE_WACH(5),
-    .C_PROG_FULL_TYPE_WDCH(5),
-    .C_PROG_FULL_TYPE_WRCH(5),
+    .C_PROG_FULL_TYPE_AXIS(0),
+    .C_PROG_FULL_TYPE_RACH(0),
+    .C_PROG_FULL_TYPE_RDCH(0),
+    .C_PROG_FULL_TYPE_WACH(0),
+    .C_PROG_FULL_TYPE_WDCH(0),
+    .C_PROG_FULL_TYPE_WRCH(0),
     .C_RACH_TYPE(0),
     .C_RD_DATA_COUNT_WIDTH(9),
     .C_RD_DEPTH(512),
@@ -213,6 +212,7 @@ output valid;
     .C_REG_SLICE_MODE_WACH(0),
     .C_REG_SLICE_MODE_WDCH(0),
     .C_REG_SLICE_MODE_WRCH(0),
+    .C_SYNCHRONIZER_STAGE(2),
     .C_UNDERFLOW_LOW(0),
     .C_USE_COMMON_OVERFLOW(0),
     .C_USE_COMMON_UNDERFLOW(0),
@@ -413,6 +413,8 @@ output valid;
     .AXI_AW_DBITERR(),
     .AXI_AW_OVERFLOW(),
     .AXI_AW_UNDERFLOW(),
+    .AXI_AW_PROG_FULL(),
+    .AXI_AW_PROG_EMPTY(),
     .AXI_W_INJECTSBITERR(),
     .AXI_W_INJECTDBITERR(),
     .AXI_W_PROG_FULL_THRESH(),
@@ -425,6 +427,8 @@ output valid;
     .AXI_W_OVERFLOW(),
     .AXI_W_UNDERFLOW(),
     .AXI_B_INJECTSBITERR(),
+    .AXI_W_PROG_FULL(),
+    .AXI_W_PROG_EMPTY(),
     .AXI_B_INJECTDBITERR(),
     .AXI_B_PROG_FULL_THRESH(),
     .AXI_B_PROG_EMPTY_THRESH(),
@@ -436,6 +440,8 @@ output valid;
     .AXI_B_OVERFLOW(),
     .AXI_B_UNDERFLOW(),
     .AXI_AR_INJECTSBITERR(),
+    .AXI_B_PROG_FULL(),
+    .AXI_B_PROG_EMPTY(),
     .AXI_AR_INJECTDBITERR(),
     .AXI_AR_PROG_FULL_THRESH(),
     .AXI_AR_PROG_EMPTY_THRESH(),
@@ -446,6 +452,8 @@ output valid;
     .AXI_AR_DBITERR(),
     .AXI_AR_OVERFLOW(),
     .AXI_AR_UNDERFLOW(),
+    .AXI_AR_PROG_FULL(),
+    .AXI_AR_PROG_EMPTY(),
     .AXI_R_INJECTSBITERR(),
     .AXI_R_INJECTDBITERR(),
     .AXI_R_PROG_FULL_THRESH(),
@@ -458,6 +466,8 @@ output valid;
     .AXI_R_OVERFLOW(),
     .AXI_R_UNDERFLOW(),
     .AXIS_INJECTSBITERR(),
+    .AXI_R_PROG_FULL(),
+    .AXI_R_PROG_EMPTY(),
     .AXIS_INJECTDBITERR(),
     .AXIS_PROG_FULL_THRESH(),
     .AXIS_PROG_EMPTY_THRESH(),
@@ -467,7 +477,9 @@ output valid;
     .AXIS_SBITERR(),
     .AXIS_DBITERR(),
     .AXIS_OVERFLOW(),
-    .AXIS_UNDERFLOW()
+    .AXIS_UNDERFLOW(),
+    .AXIS_PROG_FULL(),
+    .AXIS_PROG_EMPTY()
   );
 
 // synthesis translate_on

@@ -1,7 +1,7 @@
 Version 4
 SymbolType BLOCK
 TEXT 32 32 LEFT 4 fifo_buffer_addresses
-RECTANGLE Normal 32 32 800 3680
+RECTANGLE Normal 32 32 800 4064
 LINE Normal 0 80 32 80
 PIN 0 80 LEFT 36
 PINATTR PinName clk
