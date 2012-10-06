@@ -129,7 +129,7 @@ module BMD_EP#
 	input [11:0] ADC1;
 	input [11:0] ADC2;
 	output ADC_type, Bv;
-	output [1:0] S_OUT;
+	output [3:0] S_OUT;
 	output [31:0] DacData;
 	output [2:0] LED;
 	output [7:0] DEBUG;

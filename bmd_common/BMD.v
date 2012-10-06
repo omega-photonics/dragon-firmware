@@ -123,7 +123,7 @@ module BMD #
 	output ADC_type, Bv;
 	input [11:0] ADC1;
 	input [11:0] ADC2;
-	output [1:0] S_OUT;
+	output [3:0] S_OUT;
 	output [31:0] DacData;
 	output [2:0] LED;
 

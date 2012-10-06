@@ -24,7 +24,8 @@ module b8to64(
 	output [39:0] TLPHeader;
 	output DataWriteEnable;				//output clock for FIFO
 	output HeaderWriteEnable;
-	output [1:0] OutputSignals;	// [0] - output optical pulse start signal, [1] - switcher output
+	output [3:0] OutputSignals;	// [0] - output optical pulse start signal, [1] - switcher output,
+											// [2], [3] - phase mixing outputs
 	input [31:0] CONFIG_REG_1;	//input control data from PC
 	input [31:0] CONFIG_REG_2;	//input control data from PC
 	input [15:0] BufferLengthTLPs;
@@ -86,6 +87,9 @@ module b8to64(
 	reg DataWriteEnable;
 	reg HeaderWriteEnable;
 	
+	reg [1:0] PhaseSwitchCounter; //counts 0-1-2 each frame
+	assign OutputSignals[2] = PhaseSwitchCounter[0];
+	assign OutputSignals[3] = PhaseSwitchCounter[1];
 	
 	always @(posedge InputClock) begin
 		if(rst) begin
@@ -100,6 +104,7 @@ module b8to64(
 			DataForTLPCounter<=0;
 			BufferCounter<=0;
 			TestCounter<=0;
+			PhaseSwitchCounter<=0;
 		end else begin
 			DataStorage_8b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_8b;
 			DataStorage_12b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_12b;
@@ -113,6 +118,10 @@ module b8to64(
 					end else begin
 						DelayState <= 0;
 						CounterOfOctets <= 0;
+						if(PhaseSwitchCounter==2)
+							PhaseSwitchCounter<=0;
+						else
+							PhaseSwitchCounter<=PhaseSwitchCounter+1;						
 						if(CounterOfFrames>=FrameCountToSwitch) begin
 							CounterOfFrames <= 0;
 							SwitcherState <= ~SwitcherState;

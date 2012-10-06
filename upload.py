@@ -11,8 +11,10 @@ import os
 import commands
 
 comment = ''.join(commands.getoutput("git log -1").splitlines()[4:])
-datename = str(datetime.datetime.now()).replace(':', '-').replace(' ', '_') + '.bit'
-os.rename('xilinx_pci_exp_ep.bit', datename)
+datename = str(datetime.datetime.now()).replace(':', '-').replace(' ', '_')
+os.rename('xilinx_pci_exp_ep.bit', datename + '.bit')
+os.rename('dragon_spi.mcs', datename + '.mcs')
 os.system('scp "{}" upload@fs2.us.to:/home/upload/public_html/'.format(datename))
 
-os.system("""ssh upload@fs2.us.to 'echo AddDescription \\"{}\\" \\"{}\\">>public_html/.htaccess' """.format(comment, datename))
+os.system("""ssh upload@fs2.us.to 'echo AddDescription \\"{}\\" \\"{}\\">>public_html/.htaccess' """.format(comment, datename+ '.bit'))
+os.system("""ssh upload@fs2.us.to 'echo AddDescription \\"{}\\" \\"{}\\">>public_html/.htaccess' """.format(comment, datename+ '.mcs'))

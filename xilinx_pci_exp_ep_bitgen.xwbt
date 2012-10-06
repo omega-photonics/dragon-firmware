@@ -1,8 +1,8 @@
 INTSTYLE=ise
-INFILE=/home/ii/code/omega/dragon-firmware/xilinx_pci_exp_ep.ncd
-OUTFILE=/home/ii/code/omega/dragon-firmware/xilinx_pci_exp_ep.bit
+INFILE=Y:\work\omega\dragon\current\dragon_firmware\xilinx_pci_exp_ep.ncd
+OUTFILE=Y:\work\omega\dragon\current\dragon_firmware\xilinx_pci_exp_ep.bit
 FAMILY=Virtex5
 PART=xc5vlx20t-1ff323
-WORKINGDIR=/home/ii/code/omega/dragon-firmware
+WORKINGDIR=Y:\work\omega\dragon\current\dragon_firmware
 LICENSE=WebPack
-USER_INFO=210634609_0_0_257
+USER_INFO=210634609_0_0_172
