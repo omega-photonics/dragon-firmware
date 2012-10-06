@@ -5,6 +5,7 @@ webtalk.log
 webtalk_pn.xml
 xilinx_pci_exp_ep.bgn
 *.bit
+*.mcs
 xilinx_pci_exp_ep.bld
 xilinx_pci_exp_ep.cmd_log
 xilinx_pci_exp_ep.drc

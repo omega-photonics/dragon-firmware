@@ -1,7 +1,11 @@
 Storage Target: SPI Flash Single FPGA
-Auto Select Storage Device
+8M
 FF
-dragon
-/home/ii/code/omega/dragon-firmware/
+dragon_spi
+Y:\work\omega\dragon\current\dragon_firmware/
+
+MCS
+No
+e/
 
 MCS
