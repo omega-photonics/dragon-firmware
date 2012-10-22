@@ -62,11 +62,12 @@ module     xilinx_pci_exp_ep
 	C16, H15, H17, J17,
 	J15, G18, H18, J18, L18, L17, N17, H16, J14, K15, K17, M18, M16, P18,
 	A6, P17, R16, R17,
+	V1, V2, V3, D8,
 	
 								//DEBUG,
 								//ADC,
 								ADCclk,
-								LED,
+								
 								//S_OUT,
 								//sADC,
                         // PCI Express Fabric Interface
@@ -98,7 +99,7 @@ module     xilinx_pci_exp_ep
 	output A6, P17, R16, R17;
 
 	input ADCclk;
-	output [2:0] LED;
+	output V1, V2, V3, D8;
 		
 	wire Bv; //Board version: 1 for new, 0 for KNJN original Dragon
 	wire ADC_type; //1 for 12-bit, 0 for 2x8-bit
@@ -111,6 +112,12 @@ module     xilinx_pci_exp_ep
 	assign P17 = Bv?S_OUT[1]:1'b0;
 	assign R16 = S_OUT[2];
 	assign R17 = S_OUT[3];
+	
+	wire [2:0] LED;
+	assign V2 = LED[0];
+	assign V1 = Bv?LED[1]:1'bz;
+	assign V3 = Bv?1'bz:LED[1];
+	assign D8 = Bv?1'bz:1'b1;
 	
 	//wire sADC_ext = Bv?J17:C16;
 
@@ -157,7 +164,6 @@ module     xilinx_pci_exp_ep
 		 mycnt2 <= mycnt2+1;
 	assign LED[0] = mycnt2[24];
 	assign LED[1] = ~mycnt2[24];
-	assign LED[2] = mycnt2[23];
 	
 	//DAC control
 	wire [31:0] DacData;

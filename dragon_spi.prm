@@ -1,9 +1,9 @@
 PROMGEN: Xilinx Prom Generator P.28xd
 Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved.
 
-promgen -w -p mcs -c FF -o Y:\work\omega\dragon\current\dragon_firmware\//dragon_spi -s 1024 -u 0 xilinx_pci_exp_ep.bit -spi 
+promgen -w -p mcs -c FF -o Y:\work\omega\dragon\current\dragon_firmware\//dragon_spi -s 1024 -u 0 \\psf\home\work\omega\dragon\current\dragon_firmware\xilinx_pci_exp_ep.bit -spi 
 
-PROM \\psf\home\work\omega\dragon\current\dragon_firmware\dragon_spi.prm map: Sat Oct 06 20:44:27 2012
+PROM \\psf\home\work\omega\dragon\current\dragon_firmware\dragon_spi.prm map: Mon Oct 22 00:17:33 2012
 
 Calculating PROM checksum with fill value ff
 
@@ -14,4 +14,4 @@ PROM end      000f:ffff
 PROM checksum 046a0176
 
         Addr1        Addr2                     Date File(s)
-    0000:0000    000b:ec57     Oct 06 20:13:44 2012 xilinx_pci_exp_ep.bit
+    0000:0000    000b:ec57     Oct 21 23:33:42 2012 //psf/home/work/omega/dragon/current/dragon_firmware/xilinx_pci_exp_ep.bit

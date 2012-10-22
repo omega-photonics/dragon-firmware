@@ -169,7 +169,7 @@
       <outfile xil_pn:name="xilinx_pci_exp_ep_pad.txt"/>
       <outfile xil_pn:name="xilinx_pci_exp_ep_par.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1349540046" xil_pn:in_ck="-148161276340313094" xil_pn:name="TRANEXT_bitFile_virtex5" xil_pn:prop_ck="-9134117905513052593" xil_pn:start_ts="1349539999">
+    <transform xil_pn:end_ts="1350848058" xil_pn:in_ck="-148161276340313094" xil_pn:name="TRANEXT_bitFile_virtex5" xil_pn:prop_ck="-9134117905513052593" xil_pn:start_ts="1350848001">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -185,25 +185,25 @@
     <transform xil_pn:end_ts="1349541844" xil_pn:in_ck="-148161276340325948" xil_pn:name="TRAN_impactProgrammingTool" xil_pn:prop_ck="-8942141093490334899" xil_pn:start_ts="1349541843">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <outfile xil_pn:name="_impactbatch.log"/>
-      <outfile xil_pn:name="ise_impact.cmd"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
-    <transform xil_pn:end_ts="1349541325" xil_pn:in_ck="-148161276340325948" xil_pn:name="TRAN_configureTargetDevice" xil_pn:prop_ck="-4593421189551363569" xil_pn:start_ts="1349541323">
+    <transform xil_pn:end_ts="1350848072" xil_pn:in_ck="-148161276340325948" xil_pn:name="TRAN_configureTargetDevice" xil_pn:prop_ck="6142422267306751713" xil_pn:start_ts="1350848058">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
-      <status xil_pn:value="OutOfDateForProperties"/>
-      <status xil_pn:value="OutOfDateForOutputs"/>
-      <status xil_pn:value="OutputChanged"/>
       <outfile xil_pn:name="_impactbatch.log"/>
       <outfile xil_pn:name="ise_impact.cmd"/>
     </transform>
     <transform xil_pn:end_ts="1349541835" xil_pn:in_ck="-148161276340325948" xil_pn:name="TRAN_genImpactFile" xil_pn:prop_ck="-2788059501609014666" xil_pn:start_ts="1349541834">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="_impactbatch.log"/>
-      <outfile xil_pn:name="ise_impact.cmd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1349539727" xil_pn:in_ck="-3675976856219254777" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416183" xil_pn:start_ts="1349539709">
       <status xil_pn:value="SuccessfullyRun"/>
