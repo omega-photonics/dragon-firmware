@@ -115,9 +115,9 @@ module     xilinx_pci_exp_ep
 	
 	wire [2:0] LED;
 	assign V2 = LED[0];
-	assign V1 = Bv?LED[1]:1'bz;
-	assign V3 = Bv?1'bz:LED[1];
-	assign D8 = Bv?1'bz:1'b1;
+	assign V1 = Bv?LED[1]:1'b0;
+	assign V3 = Bv?1'b0:LED[1];
+	assign D8 = Bv?1'b0:1'b1; //third led on red dragon
 	
 	//wire sADC_ext = Bv?J17:C16;
 

@@ -31,7 +31,7 @@ module b8to64(
 	input [15:0] BufferLengthTLPs;
 									
 	reg [7:0] DataStorage_8b [7:0]; //temporary 8-bit ADC data storage
-	reg [11:0] DataStorage_12b [5:0]; //temporary 12-bit ADC data storage
+	reg [11:0] DataStorage_12b [4:0]; //temporary 12-bit ADC data storage
 
 	reg [2:0]  CounterOfPoints; // counts 0 to 7 - bytes for single packet
 	reg [12:0] CounterOfOctets; // up to 8192 octets of bytes in 1 frame
@@ -77,7 +77,7 @@ module b8to64(
 									     DataStorage_8b[4], DataStorage_8b[5], DataStorage_8b[6], DataStorage_8b[7]};
 
 	wire [63:0] DataOutput_12b = {DataStorage_12b[0], DataStorage_12b[1], DataStorage_12b[2], 
-											DataStorage_12b[3], DataStorage_12b[4], DataStorage_12b[5], 4'd0};
+											DataStorage_12b[3], DataStorage_12b[4], 4'd0};
 
 	wire [2:0] PointCounterTop = ADC_type ? 3'd4 : 3'd7;
 
