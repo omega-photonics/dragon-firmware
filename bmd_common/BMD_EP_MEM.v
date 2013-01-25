@@ -367,6 +367,7 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
         if ( !rst_n ) begin
 
           init_rst_o  <= 1'b0;
+			 rd_d_o <= 0;
 			 
 			 DacDataReg <= 32'b10000000_10000000_10000000_10000000;
 			 

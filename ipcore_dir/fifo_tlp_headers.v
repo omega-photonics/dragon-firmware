@@ -22,7 +22,7 @@
 *     devices, or systems.  Use in such applications are expressly             *
 *     prohibited.                                                              *
 *                                                                              *
-*     (c) Copyright 1995-2012 Xilinx, Inc.                                     *
+*     (c) Copyright 1995-2013 Xilinx, Inc.                                     *
 *     All rights reserved.                                                     *
 *******************************************************************************/
 // You must compile the wrapper file fifo_tlp_headers.v when simulating
@@ -62,7 +62,7 @@ output prog_empty;
 
 // synthesis translate_off
 
-  FIFO_GENERATOR_V9_2 #(
+  FIFO_GENERATOR_V9_3 #(
     .C_ADD_NGC_CONSTRAINT(0),
     .C_APPLICATION_TYPE_AXIS(0),
     .C_APPLICATION_TYPE_RACH(0),

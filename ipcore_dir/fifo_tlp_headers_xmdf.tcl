@@ -35,11 +35,11 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount type logical_library
 utilities_xmdf::xmdfSetData $instance FileSet $fcount logical_library unisim
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/doc/fifo_generator_v9_2_readme.txt
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/doc/fifo_generator_v9_3_readme.txt
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/doc/fifo_generator_v9_2_vinfo.html
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/doc/fifo_generator_v9_3_vinfo.html
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
@@ -55,11 +55,7 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_hea
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/example_design/fifo_tlp_headers_exdes.xdc
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/fifo_generator_v9_2_readme.txt
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/fifo_generator_v9_3_readme.txt
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
@@ -147,11 +143,11 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_hea
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/functional/simulate_ncsim.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/functional/simulate_ncsim.bat
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/functional/simulate_vcs.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/functional/simulate_vcs.bat
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
@@ -195,11 +191,11 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_hea
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/timing/simulate_ncsim.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/timing/simulate_ncsim.bat
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/timing/simulate_vcs.sh
+utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers/simulation/timing/simulate_vcs.bat
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type Ignore
 incr fcount
 
@@ -241,10 +237,6 @@ incr fcount
 
 utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers.xco
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type coregen_ip
-incr fcount
-
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers_synth.v
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type verilog
 incr fcount
 
 utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers_upgrade.txt

@@ -22,15 +22,15 @@
 *     devices, or systems.  Use in such applications are expressly             *
 *     prohibited.                                                              *
 *                                                                              *
-*     (c) Copyright 1995-2012 Xilinx, Inc.                                     *
+*     (c) Copyright 1995-2013 Xilinx, Inc.                                     *
 *     All rights reserved.                                                     *
 *******************************************************************************/
 
 /*******************************************************************************
-*     Generated from core with identifier: xilinx.com:ip:fifo_generator:9.2    *
+*     Generated from core with identifier: xilinx.com:ip:fifo_generator:9.3    *
 *                                                                              *
-*     The FIFO Generator is a parameterizable first-in/first-out memory        *
-*     queue generator. Use it to generate resource and performance             *
+*     Rev 1. The FIFO Generator is a parameterizable first-in/first-out        *
+*     memory queue generator. Use it to generate resource and performance      *
 *     optimized FIFOs with common or independent read/write clock domains,     *
 *     and optional fixed or programmable full and empty flags and              *
 *     handshaking signals.  Choose from a selection of memory resource         *
@@ -48,6 +48,9 @@
 //    AXI4_SLAVE_S_AXI
 //    AXI4Lite_MASTER_M_AXI
 //    AXI4Lite_SLAVE_S_AXI
+//    master_aclk
+//    slave_aclk
+//    slave_aresetn
 
 // The following must be inserted into your Verilog file for this
 // core to be instantiated. Change the instance name and port connections

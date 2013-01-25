@@ -98,6 +98,7 @@ module b8to64(
 			CounterOfFrames<=0;
 			SwitcherState<=0;
 			DelayState<=0;
+			TLPHeader<=0;
 			DataWriteEnable<=0;
 			HeaderWriteEnable<=0;
 			TLPCounter<=0;

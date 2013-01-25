@@ -51,8 +51,6 @@
 # valid as long as it is met after place and route.
   NET "RD_CLK"  TNM_NET     = "RD_CLK";
   NET "WR_CLK"  TNM_NET     = "WR_CLK";
-  TIMESPEC "TS_RD_CLK"      = PERIOD "RD_CLK"  62 MHZ;
-  TIMESPEC "TS_WR_CLK"      = PERIOD "WR_CLK"  16 MHZ;
-  
-
+  TIMESPEC "TS_RD_CLK"      = PERIOD "RD_CLK" 50 MHZ;
+  TIMESPEC "TS_WR_CLK"      = PERIOD "WR_CLK" 50 MHZ;
 ################################################################################

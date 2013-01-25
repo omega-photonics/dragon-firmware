@@ -12,7 +12,7 @@
     <!-- Copyright (c) 1995-2012 Xilinx, Inc.  All rights reserved. -->
   </header>
 
-  <version xil_pn:ise_version="14.2" xil_pn:schema_version="2"/>
+  <version xil_pn:ise_version="14.4" xil_pn:schema_version="2"/>
 
   <files>
     <file xil_pn:name="fifo_buffer_addresses.ngc" xil_pn:type="FILE_NGC">
@@ -25,13 +25,6 @@
       <association xil_pn:name="PostMapSimulation" xil_pn:seqID="3"/>
       <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="3"/>
       <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="3"/>
-    </file>
-    <file xil_pn:name="fifo_buffer_addresses_synth.v" xil_pn:type="FILE_VERILOG">
-      <association xil_pn:name="BehavioralSimulation" xil_pn:seqID="5"/>
-      <association xil_pn:name="Implementation" xil_pn:seqID="5"/>
-      <association xil_pn:name="PostMapSimulation" xil_pn:seqID="5"/>
-      <association xil_pn:name="PostRouteSimulation" xil_pn:seqID="5"/>
-      <association xil_pn:name="PostTranslateSimulation" xil_pn:seqID="5"/>
     </file>
   </files>
 
@@ -374,8 +367,8 @@
     <property xil_pn:name="PROP_PostSynthSimTop" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="PROP_PostXlateSimTop" xil_pn:value="" xil_pn:valueState="default"/>
     <property xil_pn:name="PROP_PreSynthesis" xil_pn:value="PreSynthesis" xil_pn:valueState="default"/>
-    <property xil_pn:name="PROP_intProjectCreationTimestamp" xil_pn:value="2012-10-03T01:25:29" xil_pn:valueState="non-default"/>
-    <property xil_pn:name="PROP_intWbtProjectID" xil_pn:value="9C4A78E5074B750E2FE49D1104C734BB" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="PROP_intProjectCreationTimestamp" xil_pn:value="2013-01-24T18:08:59" xil_pn:valueState="non-default"/>
+    <property xil_pn:name="PROP_intWbtProjectID" xil_pn:value="E880164550984457AF62A9B67BB94053" xil_pn:valueState="non-default"/>
     <property xil_pn:name="PROP_intWorkingDirLocWRTProjDir" xil_pn:value="Same" xil_pn:valueState="non-default"/>
     <property xil_pn:name="PROP_intWorkingDirUsed" xil_pn:value="No" xil_pn:valueState="non-default"/>
   </properties>
