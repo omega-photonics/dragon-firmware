@@ -53,5 +53,4 @@ fifo_tlp_headers\simulation\timing\wave_isim.tcl
 fifo_tlp_headers\simulation\timing\wave_mti.do
 fifo_tlp_headers\simulation\timing\wave_ncsim.sv
 fifo_tlp_headers_flist.txt
-fifo_tlp_headers_upgrade.txt
 fifo_tlp_headers_xmdf.tcl

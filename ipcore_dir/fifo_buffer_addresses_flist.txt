@@ -53,5 +53,4 @@ fifo_buffer_addresses\simulation\timing\wave_isim.tcl
 fifo_buffer_addresses\simulation\timing\wave_mti.do
 fifo_buffer_addresses\simulation\timing\wave_ncsim.sv
 fifo_buffer_addresses_flist.txt
-fifo_buffer_addresses_upgrade.txt
 fifo_buffer_addresses_xmdf.tcl

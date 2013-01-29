@@ -375,7 +375,7 @@ module BMD_EP#
 
 `endif
 
-wire addr_ret_empty, addr_full, addr_ret_full, addr_valid;
+wire addr_ret_empty, addr_full, addr_ret_full, addr_valid, addr_valid_out;
 
 fifo_buffer_addresses DMA_BUFFERS_IN(
   .clk(clk),
@@ -398,11 +398,12 @@ fifo_buffer_addresses DMA_BUFFERS_OUT(
   .rd_en(addr_rd_enable),
   .dout(mwr_addr_return),
   .empty(addr_ret_empty),
-  .full(addr_ret_full)
+  .full(addr_ret_full),
+  .valid(addr_valid_out)
 );
 
 	assign LED[0] = addr_empty;
-	assign LED[1] = addr_full;
+	assign LED[1] = addr_valid_out;
 	assign LED[2] = addr_valid;
 
 	assign DEBUG[0] = addr_empty; //M11

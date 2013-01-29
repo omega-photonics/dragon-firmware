@@ -239,10 +239,6 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_hea
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type coregen_ip
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers_upgrade.txt
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type text
-incr fcount
-
 utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_tlp_headers_xmdf.tcl
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type AnyView
 incr fcount

@@ -97,7 +97,9 @@ ARCHITECTURE simulation_arch OF fifo_tlp_headers_synth IS
     -- FIFO interface signal declarations
     SIGNAL wr_clk_i                       :   STD_LOGIC;
     SIGNAL rd_clk_i                       :   STD_LOGIC;
+    SIGNAL valid                          :   STD_LOGIC;
     SIGNAL rst	                          :   STD_LOGIC;
+    SIGNAL prog_full                      :   STD_LOGIC;
     SIGNAL prog_empty                     :   STD_LOGIC;
     SIGNAL wr_en                          :   STD_LOGIC;
     SIGNAL rd_en                          :   STD_LOGIC;
@@ -119,6 +121,9 @@ ARCHITECTURE simulation_arch OF fifo_tlp_headers_synth IS
     SIGNAL dout_chk_i                     :   STD_LOGIC := '0';
     SIGNAL rst_int_rd                     :   STD_LOGIC := '0';
     SIGNAL rst_int_wr                     :   STD_LOGIC := '0';
+    SIGNAL rst_s_wr1                      :   STD_LOGIC := '0';
+    SIGNAL rst_s_wr2                      :   STD_LOGIC := '0';
+    SIGNAL rst_gen_rd                     :   STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '0');
     SIGNAL rst_s_wr3                      :   STD_LOGIC := '0';
     SIGNAL rst_s_rd                       :   STD_LOGIC := '0';
     SIGNAL reset_en                       :   STD_LOGIC := '0';
@@ -162,8 +167,38 @@ ARCHITECTURE simulation_arch OF fifo_tlp_headers_synth IS
        rst_async_wr3  <= rst_async_wr2;
      END IF;
    END PROCESS;
-   rst_s_wr3   <= '0';
-   rst_s_rd    <= '0';
+
+   --Soft reset for core and testbench
+   PROCESS(rd_clk_i)
+   BEGIN 
+     IF(rd_clk_i'event AND rd_clk_i='1') THEN
+       rst_gen_rd      <= rst_gen_rd + "1";
+       IF(reset_en = '1' AND AND_REDUCE(rst_gen_rd) = '1') THEN
+         rst_s_rd      <= '1';
+         assert false
+         report "Reset applied..Memory Collision checks are not valid"
+         severity note;
+       ELSE
+         IF(AND_REDUCE(rst_gen_rd)  = '1' AND rst_s_rd = '1') THEN
+           rst_s_rd    <= '0';
+         END IF;
+       END IF;
+     END IF;
+   END PROCESS;
+   
+   PROCESS(wr_clk_i)
+   BEGIN 
+       IF(wr_clk_i'event AND wr_clk_i='1') THEN
+         rst_s_wr1   <= rst_s_rd; 
+         rst_s_wr2   <= rst_s_wr1; 
+         rst_s_wr3   <= rst_s_wr2;
+         IF(rst_s_wr3 = '1' AND rst_s_wr2 = '0') THEN
+           assert false
+           report "Reset removed..Memory Collision checks are valid"
+           severity note;
+         END IF;
+       END IF;
+   END PROCESS;
    ------------------
    
    ---- Clock buffers for testbench ----
@@ -199,7 +234,7 @@ ARCHITECTURE simulation_arch OF fifo_tlp_headers_synth IS
     GENERIC MAP (  
 	       C_DOUT_WIDTH       => 40,
 	       C_DIN_WIDTH        => 40,
-	       C_USE_EMBEDDED_REG => 0,
+	       C_USE_EMBEDDED_REG => 1,
 	       TB_SEED            => TB_SEED, 
  	       C_CH_TYPE          => 0
 	        )
@@ -219,8 +254,8 @@ ARCHITECTURE simulation_arch OF fifo_tlp_headers_synth IS
               C_APPLICATION_TYPE  => 0,
 	      C_DOUT_WIDTH        => 40,
 	      C_DIN_WIDTH         => 40,
-	      C_WR_PNTR_WIDTH     => 9,
-    	      C_RD_PNTR_WIDTH     => 9,
+	      C_WR_PNTR_WIDTH     => 10,
+    	      C_RD_PNTR_WIDTH     => 10,
  	      C_CH_TYPE           => 0,
               FREEZEON_ERROR      => FREEZEON_ERROR,
 	      TB_SEED             => TB_SEED, 
@@ -253,7 +288,9 @@ ARCHITECTURE simulation_arch OF fifo_tlp_headers_synth IS
     PORT MAP (
            WR_CLK                    => wr_clk_i,
            RD_CLK                    => rd_clk_i,
+           VALID                     => valid,
            RST                       => rst,
+           PROG_FULL                 => prog_full,
            PROG_EMPTY                => prog_empty,
            WR_EN 		     => wr_en,
            RD_EN                     => rd_en,

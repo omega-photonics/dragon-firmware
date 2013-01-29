@@ -117,7 +117,7 @@ module     xilinx_pci_exp_ep
 	assign V2 = LED[0];
 	assign V1 = Bv?LED[1]:1'b0;
 	assign V3 = Bv?1'b0:LED[1];
-	assign D8 = Bv?1'b0:1'b1; //third led on red dragon
+	assign D8 = Bv?1'b0:LED[2]; //third led on red dragon
 	
 	//wire sADC_ext = Bv?J17:C16;
 
@@ -162,8 +162,8 @@ module     xilinx_pci_exp_ep
 	reg [24:0] mycnt2;
 	always @(posedge ADCc)
 		 mycnt2 <= mycnt2+1;
-	assign LED[0] = mycnt2[24];
-	assign LED[1] = ~mycnt2[24];
+	//assign LED[0] = mycnt2[24];
+	//assign LED[1] = ~mycnt2[24];
 	
 	//DAC control
 	wire [31:0] DacData;
@@ -339,7 +339,7 @@ pci_exp_64b_app app (
 		.ADCc(ADCc),
 		.ADC_type(ADC_type),
 		.Bv(Bv),
-		//.LED(LED),
+		.LED(LED),
 		.ADCc_2x(ADCc_2x),
 		.S_OUT(S_OUT),
 		.DacData(DacData),

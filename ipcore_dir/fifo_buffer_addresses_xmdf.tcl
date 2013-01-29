@@ -239,10 +239,6 @@ utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_buffer_
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type coregen_ip
 incr fcount
 
-utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_buffer_addresses_upgrade.txt
-utilities_xmdf::xmdfSetData $instance FileSet $fcount type text
-incr fcount
-
 utilities_xmdf::xmdfSetData $instance FileSet $fcount relative_path fifo_buffer_addresses_xmdf.tcl
 utilities_xmdf::xmdfSetData $instance FileSet $fcount type AnyView
 incr fcount

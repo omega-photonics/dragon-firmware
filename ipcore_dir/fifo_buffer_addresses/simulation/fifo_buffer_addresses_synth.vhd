@@ -117,6 +117,7 @@ ARCHITECTURE simulation_arch OF fifo_buffer_addresses_synth IS
     SIGNAL dout_chk_i                     :   STD_LOGIC := '0';
     SIGNAL rst_int_rd                     :   STD_LOGIC := '0';
     SIGNAL rst_int_wr                     :   STD_LOGIC := '0';
+    SIGNAL rst_gen_rd                     :   STD_LOGIC_VECTOR(7 DOWNTO 0) := (OTHERS => '0');
     SIGNAL rst_s_wr3                      :   STD_LOGIC := '0';
     SIGNAL rst_s_rd                       :   STD_LOGIC := '0';
     SIGNAL reset_en                       :   STD_LOGIC := '0';
@@ -144,8 +145,27 @@ ARCHITECTURE simulation_arch OF fifo_buffer_addresses_synth IS
        rst_async_rd3    <= rst_async_rd2;
      END IF;
    END PROCESS;
-   rst_s_wr3   <= '0';
-   rst_s_rd    <= '0';
+
+   --Soft reset for core and testbench
+   PROCESS(clk_i)
+   BEGIN 
+     IF(clk_i'event AND clk_i='1') THEN
+       rst_gen_rd      <= rst_gen_rd + "1";
+       IF(reset_en = '1' AND AND_REDUCE(rst_gen_rd) = '1') THEN
+         rst_s_rd      <= '1';
+         assert false
+         report "Reset applied..Memory Collision checks are not valid"
+         severity note;
+       ELSE
+         IF(AND_REDUCE(rst_gen_rd)  = '1' AND rst_s_rd = '1') THEN
+           rst_s_rd    <= '0';
+           assert false
+           report "Reset removed..Memory Collision checks are valid"
+           severity note;
+         END IF;
+       END IF;
+     END IF;
+   END PROCESS;
    ------------------
    
    ---- Clock buffers for testbench ----
@@ -180,7 +200,7 @@ ARCHITECTURE simulation_arch OF fifo_buffer_addresses_synth IS
     GENERIC MAP (  
 	       C_DOUT_WIDTH       => 32,
 	       C_DIN_WIDTH        => 32,
-	       C_USE_EMBEDDED_REG => 0,
+	       C_USE_EMBEDDED_REG => 1,
 	       TB_SEED            => TB_SEED, 
  	       C_CH_TYPE          => 0
 	        )
@@ -200,8 +220,8 @@ ARCHITECTURE simulation_arch OF fifo_buffer_addresses_synth IS
               C_APPLICATION_TYPE  => 0,
 	      C_DOUT_WIDTH        => 32,
 	      C_DIN_WIDTH         => 32,
-	      C_WR_PNTR_WIDTH     => 9,
-    	      C_RD_PNTR_WIDTH     => 9,
+	      C_WR_PNTR_WIDTH     => 10,
+    	      C_RD_PNTR_WIDTH     => 10,
  	      C_CH_TYPE           => 0,
               FREEZEON_ERROR      => FREEZEON_ERROR,
 	      TB_SEED             => TB_SEED, 

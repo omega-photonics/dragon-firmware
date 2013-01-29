@@ -361,13 +361,11 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
 	);
 
 
-
     always @(posedge clk ) begin
     
-        if ( !rst_n ) begin
+        if (!rst_n) begin
 
-          init_rst_o  <= 1'b0;
-			 rd_d_o <= 0;
+          rd_d_o <= 0;
 			 
 			 DacDataReg <= 32'b10000000_10000000_10000000_10000000;
 			 
@@ -472,7 +470,9 @@ assign cfg_interrupt_legacyclr = LEGACYCLR;
           
               if (wr_en_i)
                 init_rst_o  <= wr_d_i[0];
-        
+					 if(wr_d_i[0])
+						mwr_start_o <= 0;
+					 
               rd_d_o <= {fpga_family, {4'b0}, interface_type, version_number, {7'b0}, init_rst_o};
                            
             end

@@ -324,6 +324,7 @@ module BMD_TX_ENGINE (
 
 	wire FIFO_DataWriteEnable, FIFO_HeaderWriteEnable;
 	wire FIFO_empty, FIFO_full; //, FIFO_prog_empty, FIFO_prog_full;
+	wire FIFO_Header_Valid;
 	
    wire [63:0] tmp_data;
 	wire [39:0] tmp_header;
@@ -376,7 +377,9 @@ module BMD_TX_ENGINE (
 		.rd_en(read_tlp_header), 
 		.dout(TLPHeader), 
 		.full(FIFO_full), 
-		.prog_empty(FIFO_empty)); 
+		.prog_empty(FIFO_empty),
+		.valid(FIFO_Header_Valid)
+		); 
 
 	assign LED[0] = (bmd_64_tx_state==`BMD_64_TX_MWR_QW1); //V2
 	assign LED[1] = (bmd_64_tx_state==`BMD_64_TX_MWR_QWN); //V3
@@ -412,6 +415,7 @@ module BMD_TX_ENGINE (
 
         if ((!rst_n)|init_rst_i) begin
 		  
+		    trn_td <= 0;
   		    trn_tsof_n        <= 1'b1;
           trn_teof_n        <= 1'b1;
           trn_tsrc_rdy_n    <= 1'b1;
@@ -425,7 +429,7 @@ module BMD_TX_ENGINE (
  			 //read_tlp_data <= 0;
 			 //read_tlp_header <= 0; 
 			 assert_interrupt <= 0;
-			 BufferCounter_prev<=BufferCounter;
+			 BufferCounter_prev <= 0;
           bmd_64_tx_state   <= `BMD_64_TX_RST_STATE;
 			 
         end else begin 
@@ -477,7 +481,7 @@ module BMD_TX_ENGINE (
 
               end else if (mwr_start_i && 			// start write operation
 									addr_valid &&           // if have valid buffer address
-									!FIFO_empty &&          // and FIFO has at least 1 TLP
+									FIFO_Header_Valid &&    //!FIFO_empty &&          // and FIFO has at least 1 TLP
 									BufferCounter==BufferCounter_prev && //and not asserting interrupt right now
 									!assert_interrupt &&
 									!trn_tdst_rdy_n &&

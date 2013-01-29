@@ -92,6 +92,7 @@ module b8to64(
 	assign OutputSignals[3] = PhaseSwitchCounter[1];
 	
 	always @(posedge InputClock) begin
+	
 		if(rst) begin
 			CounterOfPoints<=0;
 			CounterOfOctets<=0;
@@ -107,6 +108,7 @@ module b8to64(
 			TestCounter<=0;
 			PhaseSwitchCounter<=0;
 		end else begin
+		
 			DataStorage_8b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_8b;
 			DataStorage_12b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_12b;
 			TestCounter<=TestCounter+1;

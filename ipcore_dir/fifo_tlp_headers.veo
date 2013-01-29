@@ -67,6 +67,8 @@ fifo_tlp_headers your_instance_name (
   .dout(dout), // output [39 : 0] dout
   .full(full), // output full
   .empty(empty), // output empty
+  .valid(valid), // output valid
+  .prog_full(prog_full), // output prog_full
   .prog_empty(prog_empty) // output prog_empty
 );
 // INST_TAG_END ------ End INSTANTIATION Template ---------

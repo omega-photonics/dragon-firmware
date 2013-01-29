@@ -200,7 +200,9 @@ PACKAGE fifo_tlp_headers_pkg IS
    PORT (
            WR_CLK                    : IN  std_logic;
      	   RD_CLK                    : IN  std_logic;
+           VALID                     : OUT std_logic;
            RST                       : IN  std_logic;
+           PROG_FULL                 : OUT std_logic;
            PROG_EMPTY                : OUT std_logic;
            WR_EN 		     : IN  std_logic;
            RD_EN                     : IN  std_logic;
