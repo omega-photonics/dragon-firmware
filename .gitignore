@@ -44,3 +44,11 @@ xlnx_auto_0_xdb/
 xst/
 *.html
 *.xreport
+output.txt
+_impact.cmd
+dragon_spi.cfi
+dragon_spi.prm
+impact_impact.xwbt
+spiflash.ipf
+webtalk_impact.xml
+xilinx_pci_exp_ep_bitgen.xwbt

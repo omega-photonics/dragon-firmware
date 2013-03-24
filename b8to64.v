@@ -33,7 +33,7 @@ module b8to64(
 	reg [7:0] DataStorage_8b [7:0]; //temporary 8-bit ADC data storage
 	reg [11:0] DataStorage_12b [4:0]; //temporary 12-bit ADC data storage
 
-	reg [2:0]  CounterOfPoints; // counts 0 to 7 - bytes for single packet
+	reg [2:0]  CounterOfPoints; // counts 0 to 7(4) - ADC samples for 8-byte message
 	reg [12:0] CounterOfOctets; // up to 8192 octets of bytes in 1 frame
 	reg [15:0] CounterOfFrames; 
 	
@@ -88,14 +88,21 @@ module b8to64(
 	reg HeaderWriteEnable;
 	
 	reg [1:0] PhaseSwitchCounter; //counts 0-1-2 each frame
-	assign OutputSignals[2] = PhaseSwitchCounter[0];
-	assign OutputSignals[3] = PhaseSwitchCounter[1];
+	assign OutputSignals[2] = StartPulseState & InputClock;//PhaseSwitchCounter[0];
+	assign OutputSignals[3] = StartPulseState & DoubleInputClock;//PhaseSwitchCounter[1];
+
+	reg [20:0] CounterOfTicks; // used for start pulse
+
+	wire SyncPulseCondition = HalfClockShiftEnable ? DoubleClockState : ~DoubleClockState;
 	
-	always @(posedge InputClock) begin
+	always @(posedge DoubleInputClock) begin
 	
 		if(rst) begin
+			DoubleClockState<=0;
+			StartPulseState<=0;			
 			CounterOfPoints<=0;
 			CounterOfOctets<=0;
+			CounterOfTicks<=0;
 			CounterOfFrames<=0;
 			SwitcherState<=0;
 			DelayState<=0;
@@ -109,86 +116,84 @@ module b8to64(
 			PhaseSwitchCounter<=0;
 		end else begin
 		
-			DataStorage_8b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_8b;
-			DataStorage_12b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_12b;
-			TestCounter<=TestCounter+1;
 
-			if(CounterOfPoints>=PointCounterTop) begin	
+			if(CounterOfTicks>=PulseOffset && 
+				CounterOfTicks<=PulseOffset+PulseWidth &&
+				SyncPulseCondition) 
+					StartPulseState <= 1; //start sync pulse
+			else if(CounterOfTicks>PulseOffset+PulseWidth && 
+				SyncPulseCondition)
+					StartPulseState <= 0; //finish sync pulse
+
+			DoubleClockState <= ~DoubleClockState;
+
+			if(DoubleClockState) begin
+
+				CounterOfTicks<=CounterOfTicks+1;
+
+				DataStorage_8b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_8b;
+				DataStorage_12b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_12b;
+				TestCounter<=TestCounter+1;
 			
-				if(CounterOfOctets>=FrameLength) begin
-					if(DelayState==0) begin
-						DelayState<=1;
-					end else begin
-						DelayState <= 0;
-						CounterOfOctets <= 0;
-						if(PhaseSwitchCounter==2)
-							PhaseSwitchCounter<=0;
-						else
-							PhaseSwitchCounter<=PhaseSwitchCounter+1;						
-						if(CounterOfFrames>=FrameCountToSwitch) begin
-							CounterOfFrames <= 0;
-							SwitcherState <= ~SwitcherState;
+				if(CounterOfPoints>=PointCounterTop) begin	
+			
+					if(CounterOfOctets>=FrameLength) begin
+						if(DelayState==0) begin
+							DelayState<=1;
+						end else begin
+							DelayState <= 0;
+							CounterOfOctets <= 0;
+							CounterOfTicks<=0;
+							if(PhaseSwitchCounter==2)
+								PhaseSwitchCounter<=0;
+							else
+								PhaseSwitchCounter<=PhaseSwitchCounter+1;						
+							if(CounterOfFrames>=FrameCountToSwitch) begin
+								CounterOfFrames <= 0;
+								SwitcherState <= ~SwitcherState;
+							end
+							else
+								CounterOfFrames <= CounterOfFrames+1;
 						end
-						else
-							CounterOfFrames <= CounterOfFrames+1;
-					end
-				end	
+					end	
 				
-				if(DelayState==0) begin
-					DataWriteEnable <= 1;
+					if(DelayState==0) begin
+						DataWriteEnable <= 1;
 
-					
-						if(DataForTLPCounter>=14) begin
 						
-							DataForTLPCounter<=0;
-							if(TLPCounter>=BufferLengthTLPs) begin
-								TLPCounter<=0;
-								BufferCounter<=BufferCounter+1;
-							end else
-								TLPCounter<=TLPCounter+1;
+							if(DataForTLPCounter>=14) begin
 							
-							TLPHeader <= {BufferCounter[15:0], TLPCounter[15:0], 
-												SelectedADC, HalfClockShiftEnable, SwitcherState, 5'b11111}; //5 bits reserved
-							HeaderWriteEnable<=1;
-							
-						end 
-						else begin
-							DataForTLPCounter<=DataForTLPCounter+1;
-							HeaderWriteEnable<=0;
-						end
-						
-					CounterOfPoints <= 0;
-					CounterOfOctets <= CounterOfOctets+1;
-				end
+								DataForTLPCounter<=0;
+								if(TLPCounter>=BufferLengthTLPs) begin
+									TLPCounter<=0;
+									BufferCounter<=BufferCounter+1;
+								end else
+									TLPCounter<=TLPCounter+1;
 								
+								TLPHeader <= {BufferCounter[15:0], TLPCounter[15:0], 
+													SelectedADC, HalfClockShiftEnable, SwitcherState, 5'b11111}; //5 bits reserved
+								HeaderWriteEnable<=1;
+								
+							end 
+							else begin
+								DataForTLPCounter<=DataForTLPCounter+1;
+								HeaderWriteEnable<=0;
+							end
+							
+						CounterOfPoints <= 0;
+						CounterOfOctets <= CounterOfOctets+1;
+					end
+									
+				end
+				
+				else	begin
+					CounterOfPoints <= CounterOfPoints+1;
+					DataWriteEnable <= 0;
+					HeaderWriteEnable <= 0;
+				end
 			end
-			
-			else	begin
-				CounterOfPoints <= CounterOfPoints+1;
-				DataWriteEnable <= 0;
-				HeaderWriteEnable <= 0;
-			end
-			
 		end
 	end
 	
-	wire SyncPulseCondition = HalfClockShiftEnable ? DoubleClockState : ~DoubleClockState;
-
-	always @(posedge DoubleInputClock) begin
-		if(rst) begin
-			DoubleClockState<=0;
-			StartPulseState<=0;			
-		end
-		else begin
-			DoubleClockState <= ~DoubleClockState;
-			if(CounterOfOctets>=PulseOffset && 
-				CounterOfOctets<=PulseOffset+PulseWidth &&
-				SyncPulseCondition) 
-					StartPulseState <= 1; //start sync pulse
-			else if(CounterOfOctets>PulseOffset+PulseWidth)
-					StartPulseState <= 0; //finish sync pulse
-		end
-	end
-
 	
 endmodule

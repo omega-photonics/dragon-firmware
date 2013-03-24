@@ -1,8 +1,0 @@
-INTSTYLE=impact
-INFILE=Y:\work\omega\dragon\current\dragon_firmware\impact.xsl
-OUTFILE=Y:\work\omega\dragon\current\dragon_firmware\impact.xsl
-FAMILY=Multiple
-PART=Multiple
-WORKINGDIR=Y:\work\omega\dragon\current\dragon_firmware
-LICENSE=iMPACT
-USER_INFO=iMPACT
