@@ -59,9 +59,9 @@ module     xilinx_pci_exp_ep
 	F17, F18, E17, D18, E12, D17, C17, C18,
 	G15, E14, F13, G16, G14, E16, F14, E15,
 	D15, C13, D12, C12, A18, B16, A17, A16, A14, A13, B14, B13,
-	C16, H15, H17, J17,
+	C16, U16, R16, J17,
 	J15, G18, H18, J18, L18, L17, N17, H16, J14, K15, K17, M18, M16, P18,
-	A6, P17, R16, R17,
+	A6, P17, U18, V18,
 	V1, V2, V3, D8,
 	
 								//DEBUG,
@@ -94,9 +94,9 @@ module     xilinx_pci_exp_ep
 	D15, C13, D12, C12, A18, B16, A17, A16, A14, A13, B14, B13,
 	J15, G18, H18, J18, L18, L17, N17, H16, J14, K15, K17, M18, M16, P18;
 	
-	inout H15, H17, C16, J17;
+	inout C16, J17;
 	
-	output A6, P17, R16, R17;
+	output A6, P17, R16, U18, V18, U16;
 
 	input ADCclk;
 	output V1, V2, V3, D8;
@@ -105,40 +105,40 @@ module     xilinx_pci_exp_ep
 	wire ADC_type; //1 for 12-bit, 0 for 2x8-bit
 
 	wire [3:0] S_OUT;
-	assign H15 = Bv?1'bz:S_OUT[0];
-	assign H17 = Bv?1'bz:S_OUT[1];
+	assign U16 = S_OUT[0];
+	assign R16 = S_OUT[1];
 	
-	assign A6 = Bv?S_OUT[0]:1'b0;
-	assign P17 = Bv?S_OUT[1]:1'b0;
-	assign R16 = S_OUT[2];
-	assign R17 = S_OUT[3];
+	assign A6 = 1'b0;
+	assign P17 = 1'b0;
+	assign U18 = S_OUT[2];
+	assign V18 = S_OUT[3];
 	
 	wire [2:0] LED;
 	assign V2 = LED[0];
-	assign V1 = Bv?LED[1]:1'b0;
-	assign V3 = Bv?1'b0:LED[1];
-	assign D8 = Bv?1'b0:LED[2]; //third led on red dragon
+	assign V1 = 1'b0;
+	assign V3 = LED[1];
+	assign D8 = LED[2]; //third led on red dragon
 	
 	//wire sADC_ext = Bv?J17:C16;
 
 	wire [27:0] ADC;
 
-	assign ADC[0] = Bv?H17:F17;
-	assign ADC[1] = Bv?H18:F18;
-	assign ADC[2] = Bv?G18:E17;
-	assign ADC[3] = Bv?J15:D18;
-	assign ADC[4] = Bv?K15:E12;
-	assign ADC[5] = Bv?J14:D17;
-	assign ADC[6] = Bv?H15:C17;
-	assign ADC[7] = Bv?H16:C18;
-	assign ADC[8] = Bv?P18:G15;
-	assign ADC[9] = Bv?N17:E14;
-	assign ADC[10] = Bv?M16:F13;
-	assign ADC[11] = Bv?M18:G16;
-	assign ADC[12] = Bv?L17:G14;
-	assign ADC[13] = Bv?K17:E16;
-	assign ADC[14] = Bv?L18:F14;
-	assign ADC[15] = Bv?J18:E15;
+	assign ADC[0] = F17;
+	assign ADC[1] = F18;
+	assign ADC[2] = E17;
+	assign ADC[3] = D18;
+	assign ADC[4] = E12;
+	assign ADC[5] = D17;
+	assign ADC[6] = C17;
+	assign ADC[7] = C18;
+	assign ADC[8] = G15;
+	assign ADC[9] = E14;
+	assign ADC[10] = F13;
+	assign ADC[11] = G16;
+	assign ADC[12] = G14;
+	assign ADC[13] = E16;
+	assign ADC[14] = F14;
+	assign ADC[15] = E15;
 	assign ADC[16] = D15;
 	assign ADC[17] = C13;
 	assign ADC[18] = D12;

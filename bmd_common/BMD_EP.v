@@ -312,8 +312,8 @@ module BMD_EP#
 	wire [31:0] CONFIG_REG_1;
 	wire [31:0] CONFIG_REG_2;
 
-	assign ADC_type = CONFIG_REG_2[28];
-	assign Bv = CONFIG_REG_2[29];
+	assign ADC_type = 1'd0;//CONFIG_REG_2[28];
+	assign Bv = 1'd0;//CONFIG_REG_2[29];
 
 `ifdef PCIE2_0
 

@@ -309,7 +309,7 @@ module BMD_TX_ENGINE (
 	wire [15:0] TLPNumber = TLPHeader[23:8];
 	wire [23:0] TLPAddress = {1'b0, 1'b0, TLPNumber[14:0], 7'b0}; //address relative to buffer = packet number x 128		
 
-	wire TestMode2 = CONFIG_REG_2[27];
+	wire TestMode2 = 1'd0;//CONFIG_REG_2[27];
 
 
 	//reg read_tlp_data;

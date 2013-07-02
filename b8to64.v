@@ -52,21 +52,25 @@ module b8to64(
 	
 	wire [12:0] FrameLength = CONFIG_REG_1[12:0];  //defines frame length: up to 8189
 	wire [6:0]  PulseWidth = CONFIG_REG_1[19:13]; //defines sync pulse duration: up to 127
-	wire SelectedADC = CONFIG_REG_1[20];
+		wire SelectedADC = CONFIG_REG_1[20];
 	wire AutoADCSwitching = CONFIG_REG_1[21];
 	wire HalfClockShiftEnable = CONFIG_REG_1[22];
 	wire [8:0] PulseOffset = CONFIG_REG_1[31:23]; //defines sync pulse offset
-	
-	wire [23:0] FrameCountToSwitch = CONFIG_REG_2[23:0];
-	wire AutoPolSwitching = CONFIG_REG_2[24];
-	wire ManualPolState = CONFIG_REG_2[25];
-	wire TestMode = CONFIG_REG_2[26];
+		
+	wire [23:0] FrameCountToSwitch = 32'd600;//CONFIG_REG_2[23:0];
+	wire AutoPolSwitching = 1'd1;//CONFIG_REG_2[24];
+	wire ManualPolState = 1'd0;//CONFIG_REG_2[25];
+	wire TestMode = 1'd0;//CONFIG_REG_2[26];
 	//27 - testmode2
-	wire ADC_type = CONFIG_REG_2[28];
+	wire ADC_type = 1'd0;// CONFIG_REG_2[28];
+	wire [31:0] PulseMask = CONFIG_REG_2[31:0];
+	reg   [31:0] PulseMaskCurrent;
 	
 	reg [7:0] TestCounter;
 	
-	assign OutputSignals[1] = AutoPolSwitching?SwitcherState:ManualPolState;
+	reg [0:0] SyncState;
+	assign OutputSignals[1] = SyncState;
+	//assign OutputSignals[1] = AutoPolSwitching?SwitcherState:ManualPolState;
 
 	wire ADC_AutoSelector = AutoADCSwitching?CounterOfPoints[0]:SelectedADC; //active ADC selector
 	
@@ -88,13 +92,17 @@ module b8to64(
 	reg HeaderWriteEnable;
 	
 	reg [1:0] PhaseSwitchCounter; //counts 0-1-2 each frame
-	assign OutputSignals[2] = StartPulseState & InputClock;//PhaseSwitchCounter[0];
-	assign OutputSignals[3] = StartPulseState & DoubleInputClock;//PhaseSwitchCounter[1];
+	reg [1:0] PhaseSwitchState;
+	assign OutputSignals[2] = PhaseSwitchState[0];
+	assign OutputSignals[3] = PhaseSwitchState[1];
 
 	reg [20:0] CounterOfTicks; // used for start pulse
 
 	wire SyncPulseCondition = HalfClockShiftEnable ? DoubleClockState : ~DoubleClockState;
 	
+	reg[20:0] PulseCounter;
+	reg[6:0] PulseSubCounter;
+	 	
 	always @(posedge DoubleInputClock) begin
 	
 		if(rst) begin
@@ -114,23 +122,79 @@ module b8to64(
 			BufferCounter<=0;
 			TestCounter<=0;
 			PhaseSwitchCounter<=0;
+			
+			PulseCounter<=0;
+			PulseSubCounter<=0;
+			
+			PulseMaskCurrent <= 0;
+			SyncState <= 0;
 		end else begin
 		
+			if ( PulseCounter < 21'd032 && SyncPulseCondition)
+			begin
+				if ((PulseMaskCurrent & (32'd01 << PulseCounter)) === (32'd01 << PulseCounter))
+					StartPulseState <= 1;	
+				else
+					StartPulseState <= 0;	
+			end
+			
+			if ( PulseCounter >= 21'd032 && SyncPulseCondition)
+			begin
+				StartPulseState <= 0;
+			end
+			
+			if (PulseSubCounter + 1 < PulseWidth && SyncPulseCondition)
+			begin
+				PulseSubCounter <= PulseSubCounter + 1;
+			end
+			
+			if (PulseSubCounter + 1 >= PulseWidth && SyncPulseCondition)
+			begin
+				PulseCounter <= PulseCounter+1;
+				PulseSubCounter <= 0;
+			end
+			
+			//////////////////////////////////////////////////////////
+			if (CounterOfTicks == 1 && SyncPulseCondition)
+			begin
+				SyncState <= 1;
+			end
+						
+			if (CounterOfTicks == 256*PulseWidth && SyncPulseCondition)
+			begin
+				PhaseSwitchState <= 0;
+				SyncState <= 0;
+			end
+			
+			if (CounterOfTicks == PulseWidth + PulseOffset && SyncPulseCondition)
+			begin
+				if(PhaseSwitchCounter==2)
+					PhaseSwitchCounter<=0;
+				else
+					PhaseSwitchCounter<=PhaseSwitchCounter+1;
 
-			if(CounterOfTicks>=PulseOffset && 
-				CounterOfTicks<=PulseOffset+PulseWidth &&
-				SyncPulseCondition) 
-					StartPulseState <= 1; //start sync pulse
-			else if(CounterOfTicks>PulseOffset+PulseWidth && 
-				SyncPulseCondition)
-					StartPulseState <= 0; //finish sync pulse
-
+				PhaseSwitchState <= PhaseSwitchCounter;
+			end
+			
 			DoubleClockState <= ~DoubleClockState;
 
 			if(DoubleClockState) begin
 
 				CounterOfTicks<=CounterOfTicks+1;
-
+				
+				/*
+				if(PulseSubCounter+1 >= PulseWidth)
+				begin
+						PulseCounter <= PulseCounter+1;
+						PulseSubCounter <= 0;
+				end
+				else
+				begin
+					PulseSubCounter<=PulseSubCounter+1;
+				end
+				*/
+				
+				
 				DataStorage_8b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_8b;
 				DataStorage_12b[CounterOfPoints] <= TestMode?TestCounter:ActiveADC_12b;
 				TestCounter<=TestCounter+1;
@@ -144,16 +208,23 @@ module b8to64(
 							DelayState <= 0;
 							CounterOfOctets <= 0;
 							CounterOfTicks<=0;
+							PulseCounter<=0;
+							PulseSubCounter<=0;
+							PulseMaskCurrent<=PulseMask;
+							/*
 							if(PhaseSwitchCounter==2)
 								PhaseSwitchCounter<=0;
 							else
 								PhaseSwitchCounter<=PhaseSwitchCounter+1;						
+								*/
+								
 							if(CounterOfFrames>=FrameCountToSwitch) begin
 								CounterOfFrames <= 0;
-								SwitcherState <= ~SwitcherState;
+								//SwitcherState <= ~SwitcherState;
 							end
 							else
 								CounterOfFrames <= CounterOfFrames+1;
+								
 						end
 					end	
 				
