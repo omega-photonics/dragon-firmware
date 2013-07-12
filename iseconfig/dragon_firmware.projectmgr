@@ -12,13 +12,13 @@
          <ClosedNode>/xilinx_pci_exp_ep Y:|work|omega|dragon|current|patch|dragon_firmware|xilinx_pci_exp_ep.v/ep - endpoint_blk_plus_v1_14</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem>xilinx_pci_exp_ep (C:/GIT_REP/dragon-firmware/xilinx_pci_exp_ep.v)</SelectedItem>
+         <SelectedItem>PCIe.ucf (C:/GIT_REP/dragon-firmware/PCIe.ucf)</SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff0000000000000001000000010000000000000000000000000000000002020000000100000001000000640000024d000000020000000000000000000000000200000064ffffffff0000008100000003000000020000024d0000000100000003000000000000000100000003</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >true</UserChangedColumnWidths>
-      <CurrentItem>xilinx_pci_exp_ep (C:/GIT_REP/dragon-firmware/xilinx_pci_exp_ep.v)</CurrentItem>
+      <CurrentItem>PCIe.ucf (C:/GIT_REP/dragon-firmware/PCIe.ucf)</CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="" guiview="Process" >
       <ClosedNodes>
@@ -129,7 +129,7 @@
       <SelectedItems>
          <SelectedItem>Generate Programming File</SelectedItem>
       </SelectedItems>
-      <ScrollbarPosition orientation="vertical" >7</ScrollbarPosition>
+      <ScrollbarPosition orientation="vertical" >6</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001dd000000010000000100000000000000000000000064ffffffff000000810000000000000001000001dd0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
@@ -141,13 +141,13 @@
          <ClosedNode>User Constraints</ClosedNode>
       </ClosedNodes>
       <SelectedItems>
-         <SelectedItem/>
+         <SelectedItem></SelectedItem>
       </SelectedItems>
       <ScrollbarPosition orientation="vertical" >0</ScrollbarPosition>
       <ScrollbarPosition orientation="horizontal" >0</ScrollbarPosition>
       <ViewHeaderState orientation="horizontal" >000000ff000000000000000100000001000000000000000000000000000000000000000000000001ee000000010000000100000000000000000000000064ffffffff000000810000000000000001000001ee0000000100000000</ViewHeaderState>
       <UserChangedColumnWidths orientation="horizontal" >false</UserChangedColumnWidths>
-      <CurrentItem/>
+      <CurrentItem></CurrentItem>
    </ItemView>
    <ItemView engineview="SynthesisOnly" sourcetype="DESUT_NGC" guiview="Process" >
       <ClosedNodes>

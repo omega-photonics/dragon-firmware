@@ -103,7 +103,7 @@ module b8to64(
 	reg[20:0] PulseCounter;
 	reg[6:0] PulseSubCounter;
 	 	
-	always @(posedge DoubleInputClock) begin
+	always @(posedge InputClock) begin
 	
 		if(rst) begin
 			DoubleClockState<=0;
@@ -130,7 +130,7 @@ module b8to64(
 			SyncState <= 0;
 		end else begin
 		
-			if ( PulseCounter < 21'd032 && SyncPulseCondition)
+			if ( PulseCounter < 21'd032 /*&& SyncPulseCondition*/)
 			begin
 				if ((PulseMaskCurrent & (32'd01 << PulseCounter)) === (32'd01 << PulseCounter))
 					StartPulseState <= 1;	
@@ -138,35 +138,35 @@ module b8to64(
 					StartPulseState <= 0;	
 			end
 			
-			if ( PulseCounter >= 21'd032 && SyncPulseCondition)
+			if ( PulseCounter >= 21'd032 /*&& SyncPulseCondition*/)
 			begin
 				StartPulseState <= 0;
 			end
 			
-			if (PulseSubCounter + 1 < PulseWidth && SyncPulseCondition)
+			if (PulseSubCounter + 1 < PulseWidth /*&& SyncPulseCondition*/)
 			begin
 				PulseSubCounter <= PulseSubCounter + 1;
 			end
 			
-			if (PulseSubCounter + 1 >= PulseWidth && SyncPulseCondition)
+			if (PulseSubCounter + 1 >= PulseWidth /*&& SyncPulseCondition*/)
 			begin
 				PulseCounter <= PulseCounter+1;
 				PulseSubCounter <= 0;
 			end
 			
 			//////////////////////////////////////////////////////////
-			if (CounterOfTicks == 1 && SyncPulseCondition)
+			if (CounterOfTicks == 1 /*&& SyncPulseCondition*/)
 			begin
 				SyncState <= 1;
 			end
 						
-			if (CounterOfTicks == 256*PulseWidth && SyncPulseCondition)
+			if (CounterOfTicks == 256*PulseWidth /*&& SyncPulseCondition*/)
 			begin
 				PhaseSwitchState <= 0;
 				SyncState <= 0;
 			end
 			
-			if (CounterOfTicks == PulseWidth + PulseOffset && SyncPulseCondition)
+			if (CounterOfTicks == PulseWidth + PulseOffset /*&& SyncPulseCondition*/)
 			begin
 				if(PhaseSwitchCounter==2)
 					PhaseSwitchCounter<=0;
@@ -176,9 +176,9 @@ module b8to64(
 				PhaseSwitchState <= PhaseSwitchCounter;
 			end
 			
-			DoubleClockState <= ~DoubleClockState;
+			//DoubleClockState <= ~DoubleClockState;
 
-			if(DoubleClockState) begin
+			//if(DoubleClockState) begin
 
 				CounterOfTicks<=CounterOfTicks+1;
 				
@@ -262,7 +262,7 @@ module b8to64(
 					DataWriteEnable <= 0;
 					HeaderWriteEnable <= 0;
 				end
-			end
+			//end
 		end
 	end
 	
