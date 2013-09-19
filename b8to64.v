@@ -107,7 +107,7 @@ module b8to64(
 	
 		if(rst) begin
 			DoubleClockState<=0;
-			StartPulseState<=0;			
+			StartPulseState<=1;			
 			CounterOfPoints<=0;
 			CounterOfOctets<=0;
 			CounterOfTicks<=0;
@@ -133,14 +133,14 @@ module b8to64(
 			if ( PulseCounter < 21'd032 /*&& SyncPulseCondition*/)
 			begin
 				if ((PulseMaskCurrent & (32'd01 << PulseCounter)) === (32'd01 << PulseCounter))
-					StartPulseState <= 1;	
-				else
 					StartPulseState <= 0;	
+				else
+					StartPulseState <= 1;	
 			end
 			
 			if ( PulseCounter >= 21'd032 /*&& SyncPulseCondition*/)
 			begin
-				StartPulseState <= 0;
+				StartPulseState <= 1;
 			end
 			
 			if (PulseSubCounter + 1 < PulseWidth /*&& SyncPulseCondition*/)
