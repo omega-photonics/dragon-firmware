@@ -59,7 +59,7 @@ module     xilinx_pci_exp_ep
 	F17, F18, E17, D18, E12, D17, C17, C18,
 	G15, E14, F13, G16, G14, E16, F14, E15,
 	D15, C13, D12, C12, A18, B16, A17, A16, A14, A13, B14, B13,
-	C16, U16, R16, J17,
+	C16, U16, H15, J17,
 	J15, G18, H18, J18, L18, L17, N17, H16, J14, K15, K17, M18, M16, P18,
 	A6, P17, U18, V18,
 	V1, V2, V3, D8,
@@ -96,7 +96,7 @@ module     xilinx_pci_exp_ep
 	
 	inout C16, J17;
 	
-	output A6, P17, R16, U18, V18, U16;
+	output A6, P17, H15, U18, V18, U16;
 
 	input ADCclk;
 	output V1, V2, V3, D8;
@@ -106,7 +106,7 @@ module     xilinx_pci_exp_ep
 
 	wire [3:0] S_OUT;
 	assign U16 = S_OUT[0];
-	assign R16 = S_OUT[1];
+	assign H15 = S_OUT[1];
 	
 	assign A6 = 1'b0;
 	assign P17 = 1'b0;
